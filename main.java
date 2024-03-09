@@ -14,14 +14,15 @@ import javax.swing.*;
 public class main implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
-    private JPanel menu, blank, p1, p2, p3, p4, p5;
+    private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
     private JMenu ic1, ic2, ic3, ic4, ic5;
     private JButton pg1, pg2, pg3, pg4, pg5;
-    private JTabbedPane tab;
+    private CardLayout cardlayout;
     public main(){
         ma = new JFrame("karaOkie");
         menu = new JPanel();
-        tab = new JTabbedPane();
+        cardlayout = new CardLayout();
+        tab = new JPanel(cardlayout);
         blank = new JPanel();
         pg2 = new JButton();
         pg3 = new JButton();
@@ -31,32 +32,48 @@ public class main implements ActionListener{
         p1 = new JPanel();
         p2 = new JPanel();
         p3 = new JPanel();
-        // change bg color na
+        p4 = new JPanel();
+        p5 = new JPanel();
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
         p3.setBackground(Color.decode("#535870"));
+        p4.setBackground(Color.decode("#535870"));
+        p5.setBackground(Color.decode("#535870"));
+        //set Icon Image
+        ImageIcon i1 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\Icon\\room.png");
+        Image img1 = i1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Icon icon1 = new ImageIcon(img1);
+        ImageIcon i2 = new ImageIcon("C:\\Users\\mansu\\Downloads\\create-order.png");
+        Image img2 = i2.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Icon icon2 = new ImageIcon(img2);
+        ImageIcon i3 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\Icon\\tips-2.png");
+        Image img3 = i3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Icon icon3 = new ImageIcon(img3);
+        ImageIcon i4 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\Icon\\membership-card.png");
+        Image img4 = i4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Icon icon4 = new ImageIcon(img4);
+        ImageIcon i5 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\Icon\\bar-chart.png");
+        Image img5 = i5.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        Icon icon5 = new ImageIcon(img5);
+        pg1.setIcon(icon1);
+        pg2.setIcon(icon2);
+        pg3.setIcon(icon3);
+        pg4.setIcon(icon4);
+        pg5.setIcon(icon5);
+        ma.setLayout(new BorderLayout(0, 0));
         menu.setBackground(Color.decode("#282B3A"));
         blank.setBackground(Color.decode("#282B3A"));
-        tab.setBackground(Color.decode("#535870"));
-        //change buton Icon
-        Icon i1 = new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png");
-        pg1.setIcon(i1);
-        pg2.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\create-order.png"));
-        pg3.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png"));
-        pg4.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png"));
-        pg5.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png"));
-        ma.setLayout(new BorderLayout(0, 0));
         menu.setPreferredSize(new Dimension(50, 190));
-        menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
+        menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
         ma.add(menu, BorderLayout.WEST); 
         ma.add(tab, BorderLayout.CENTER);
-        //ยัด panel ลง tab
-        tab.addTab("page1",p1);
-        tab.addTab("page2",p2);
-        tab.addTab("page3",p3);
-        tab.addTab("page4",p4);
-        tab.addTab("page5",p5);
-        // ยัดปุ่มลง menu bar
+        tab.setBackground(Color.decode("#535870"));
+        tab.add(p1, "pg1");
+        tab.add(p2, "pg2");
+        tab.add(p3, "pg3");
+        tab.add(p4, "pg4");
+        tab.add(p5, "pg5");
+        
         menu.add(blank);
         menu.add(pg1);
         menu.add(pg2);
@@ -75,12 +92,40 @@ public class main implements ActionListener{
         pg4.setBackground(Color.decode("#282B3A"));
         pg5.setBackground(Color.decode("#282B3A"));
         pg1.setBorderPainted(false);
+        pg1.setFocusPainted(false);
         pg2.setBorderPainted(false);
+        pg2.setFocusPainted(false);
         pg3.setBorderPainted(false);
+        pg3.setFocusPainted(false);
         pg4.setBorderPainted(false);
+        pg4.setFocusPainted(false);
         pg5.setBorderPainted(false);
+        pg5.setFocusPainted(false);
+        
+        JButton[] group = new JButton[]{pg1, pg2, pg3, pg4, pg5};
+        
+        for(JButton button : group){
+              button.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        // Change cursor to hand cursor when mouse enters button
+                        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                        button
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        // Reset cursor when mouse exits button
+                        button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    }
+                });
+        }
+        
+        UIManager.getLookAndFeelDefaults().put("Button.select", new Color(0, 0, 0, 0));
+        
         ma.setSize(1280, 720);
         ma.setVisible(true);
+        ma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //button action
         pg1.addActionListener(this);
@@ -89,24 +134,28 @@ public class main implements ActionListener{
         pg4.addActionListener(this);
         pg5.addActionListener(this);
     }
-    // เปลี่ยนหน้า
+
     @Override
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(pg1)){
-           tab.setSelectedIndex(0);
+           cardlayout.show(tab, "pg1");
         }
         else if(ev.getSource().equals(pg2)){
-           tab.setSelectedIndex(1);
+           cardlayout.show(tab, "pg2");
         }
         else if(ev.getSource().equals(pg3)){
-           tab.setSelectedIndex(2);
+           cardlayout.show(tab, "pg3");
         }
         else if(ev.getSource().equals(pg4)){
-           tab.setSelectedIndex(3);
+           cardlayout.show(tab, "pg4");
         }
         else if(ev.getSource().equals(pg5)){
-           tab.setSelectedIndex(4);
+           cardlayout.show(tab, "pg5");
         }
+    }
+    public static void main(String[] args) {
+        new main();
+    }
     }
     
     }
