@@ -31,9 +31,14 @@ public class main implements ActionListener{
         p1 = new JPanel();
         p2 = new JPanel();
         p3 = new JPanel();
+        // change bg color na
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
         p3.setBackground(Color.decode("#535870"));
+        menu.setBackground(Color.decode("#282B3A"));
+        blank.setBackground(Color.decode("#282B3A"));
+        tab.setBackground(Color.decode("#535870"));
+        //change buton Icon
         Icon i1 = new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png");
         pg1.setIcon(i1);
         pg2.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\create-order.png"));
@@ -41,18 +46,17 @@ public class main implements ActionListener{
         pg4.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png"));
         pg5.setIcon(new ImageIcon("C:\\Users\\mansu\\Downloads\\room.png"));
         ma.setLayout(new BorderLayout(0, 0));
-        menu.setBackground(Color.decode("#282B3A"));
-        blank.setBackground(Color.decode("#282B3A"));
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
         ma.add(menu, BorderLayout.WEST); 
         ma.add(tab, BorderLayout.CENTER);
-        tab.setBackground(Color.decode("#535870"));
+        //ยัด panel ลง tab
         tab.addTab("page1",p1);
         tab.addTab("page2",p2);
         tab.addTab("page3",p3);
         tab.addTab("page4",p4);
         tab.addTab("page5",p5);
+        // ยัดปุ่มลง menu bar
         menu.add(blank);
         menu.add(pg1);
         menu.add(pg2);
@@ -85,6 +89,7 @@ public class main implements ActionListener{
         pg4.addActionListener(this);
         pg5.addActionListener(this);
     }
+    // เปลี่ยนหน้า
     @Override
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(pg1)){
