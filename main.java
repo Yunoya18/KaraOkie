@@ -18,6 +18,7 @@ public class main implements ActionListener{
     private JMenu ic1, ic2, ic3, ic4, ic5;
     private JButton pg1, pg2, pg3, pg4, pg5;
     private CardLayout cardlayout;
+    private JLabel txt1, txt2, txt3, txt4, txt5;
     public main(){
         ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -34,11 +35,34 @@ public class main implements ActionListener{
         p3 = new JPanel();
         p4 = new JPanel();
         p5 = new JPanel();
+        txt1 = new JLabel("page1");
+        txt2 = new JLabel("page2");
+        txt3 = new JLabel("page3");
+        txt4 = new JLabel("page4");
+        txt5 = new JLabel("page5");
+        
+        //set backgroundcolor and foreground color
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
         p3.setBackground(Color.decode("#535870"));
         p4.setBackground(Color.decode("#535870"));
         p5.setBackground(Color.decode("#535870"));
+        tab.setBackground(Color.decode("#535870"));
+        menu.setBackground(Color.decode("#282B3A"));
+        blank.setBackground(Color.decode("#282B3A"));
+        txt1.setForeground(Color.WHITE);
+        txt2.setForeground(Color.WHITE);
+        txt3.setForeground(Color.WHITE);
+        txt4.setForeground(Color.WHITE);
+        txt5.setForeground(Color.WHITE);
+        
+        //test changing page
+        p1.add(txt1);
+        p2.add(txt2);
+        p3.add(txt3);
+        p4.add(txt4);
+        p5.add(txt5);
+        
         //set Icon Image
         ImageIcon i1 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\Icon\\room.png");
         Image img1 = i1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -60,20 +84,24 @@ public class main implements ActionListener{
         pg3.setIcon(icon3);
         pg4.setIcon(icon4);
         pg5.setIcon(icon5);
+        
+        //set mainframe background
         ma.setLayout(new BorderLayout(0, 0));
-        menu.setBackground(Color.decode("#282B3A"));
-        blank.setBackground(Color.decode("#282B3A"));
+        
         menu.setPreferredSize(new Dimension(50, 190));
-        menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
+        menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
+        //add components to mainframe
         ma.add(menu, BorderLayout.WEST); 
         ma.add(tab, BorderLayout.CENTER);
-        tab.setBackground(Color.decode("#535870"));
+        
+        //add panel to tab
         tab.add(p1, "pg1");
         tab.add(p2, "pg2");
         tab.add(p3, "pg3");
         tab.add(p4, "pg4");
         tab.add(p5, "pg5");
         
+        //insert button in menu bar
         menu.add(blank);
         menu.add(pg1);
         menu.add(pg2);
@@ -81,16 +109,20 @@ public class main implements ActionListener{
         menu.add(pg4);
         menu.add(pg5);
         blank.setPreferredSize(new Dimension(30, 30));
+        
+        //set button size
         pg1.setPreferredSize(new Dimension(50, 50));
         pg2.setPreferredSize(new Dimension(50, 50));
-        pg3.setPreferredSize(new Dimension(30, 30));
-        pg4.setPreferredSize(new Dimension(30, 30));
-        pg5.setPreferredSize(new Dimension(30, 30));
+        pg3.setPreferredSize(new Dimension(50, 50));
+        pg4.setPreferredSize(new Dimension(50, 50));
+        pg5.setPreferredSize(new Dimension(50, 50));
         pg1.setBackground(Color.decode("#282B3A"));
         pg2.setBackground(Color.decode("#282B3A"));
         pg3.setBackground(Color.decode("#282B3A"));
         pg4.setBackground(Color.decode("#282B3A"));
         pg5.setBackground(Color.decode("#282B3A"));
+        
+        //delete button border and focus border
         pg1.setBorderPainted(false);
         pg1.setFocusPainted(false);
         pg2.setBorderPainted(false);
@@ -102,25 +134,60 @@ public class main implements ActionListener{
         pg5.setBorderPainted(false);
         pg5.setFocusPainted(false);
         
+        //button array for configured use
         JButton[] group = new JButton[]{pg1, pg2, pg3, pg4, pg5};
         
+        //change cursor and make icon bigger when hover
         for(JButton button : group){
               button.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        // Change cursor to hand cursor when mouse enters button
+                        if(e.getSource().equals(pg1)){
+                            ImageIcon hoverIcon = new ImageIcon(i1.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+                            button.setIcon(hoverIcon);
+                        }
+                        else if(e.getSource().equals(pg2)){
+                            ImageIcon hoverIcon = new ImageIcon(i2.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+                            button.setIcon(hoverIcon);
+                        }
+                        else if(e.getSource().equals(pg3)){
+                            ImageIcon hoverIcon = new ImageIcon(i3.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+                            button.setIcon(hoverIcon);
+                        }
+                        else if(e.getSource().equals(pg4)){
+                            ImageIcon hoverIcon = new ImageIcon(i4.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+                            button.setIcon(hoverIcon);
+                        }
+                        else if(e.getSource().equals(pg5)){
+                            ImageIcon hoverIcon = new ImageIcon(i5.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+                            button.setIcon(hoverIcon);
+                        }
                         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                        button
+                       
                     }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
-                        // Reset cursor when mouse exits button
                         button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                        if(e.getSource().equals(pg1)){
+                            button.setIcon(icon1);
+                        }
+                        else if(e.getSource().equals(pg2)){
+                            button.setIcon(icon2);
+                        }
+                        else if(e.getSource().equals(pg3)){
+                            button.setIcon(icon3);
+                        }
+                        else if(e.getSource().equals(pg4)){
+                            button.setIcon(icon4);
+                        }
+                        else if(e.getSource().equals(pg5)){
+                            button.setIcon(icon5);
+                        }
                     }
                 });
         }
-        
+        //configured button not to have white filter when pressing
         UIManager.getLookAndFeelDefaults().put("Button.select", new Color(0, 0, 0, 0));
         
         ma.setSize(1280, 720);
@@ -156,7 +223,7 @@ public class main implements ActionListener{
     public static void main(String[] args) {
         new main();
     }
-    }
+    
     
     }
 
