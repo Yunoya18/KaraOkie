@@ -15,7 +15,6 @@ public class main implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
     private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
-    private JMenu ic1, ic2, ic3, ic4, ic5;
     private JButton pg1, pg2, pg3, pg4, pg5;
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
