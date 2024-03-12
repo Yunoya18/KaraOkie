@@ -40,6 +40,8 @@ public class main implements ActionListener{
         txt4 = new JLabel("page4");
         txt5 = new JLabel("page5");
         
+        roompage pm1 = new roompage();
+        
         //set backgroundcolor and foreground color
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
@@ -86,15 +88,18 @@ public class main implements ActionListener{
         
         //set mainframe background
         ma.setLayout(new BorderLayout(0, 0));
-        
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
+        
         //add components to mainframe
-        ma.add(menu, BorderLayout.WEST); 
+        ma.add(menu, BorderLayout.WEST);
         ma.add(tab, BorderLayout.CENTER);
         
+        //add other
+        
+        
         //add panel to tab
-        tab.add(p1, "pg1");
+        tab.add(pm1 ,"pg1");
         tab.add(p2, "pg2");
         tab.add(p3, "pg3");
         tab.add(p4, "pg4");
