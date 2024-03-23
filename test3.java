@@ -3,16 +3,19 @@ import java.awt.*;
 import javax.swing.*;
 
 public class test3 extends JFrame{
-    private JPanel panel_main, panel_left, panel_right, panel_r_on, panel_r_down, panel_bn_on, panel_bn_down, panel_bn1, panel_bn2, panelcal, panelcal2 
+    private JPanel panel_supermain, panel_main, panel_left, panel_right, panel_r_on, panel_r_down, panel_bn_on, panel_bn_down, panel_bn1, panel_bn2, panelcal, panelcal2 
                    ,panel_empty, panel_empty2, panel_empty3, panel_empty4, panel_empty5, panel_empty6, panel_empty7, panel_empty8, panel_bill, panel_table
                     ;
+    private JLabel panel_minimain;
     private JTextField txt_bill, txt_cash, txt_credit;
     private JTable table;
     private JButton button_search, button_member, button_close, button_cancel, button_delete, button_edit, buttonOne, buttonTow, buttonThree, buttonFour,
                     buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonTen, buttonX, buttonClear, buttonOk, buttonJud, buttonDel;
     
     public test3(){
+        panel_supermain = new JPanel(new BorderLayout());
         panel_main = new JPanel(new BorderLayout());
+
         panel_left = new JPanel(new BorderLayout());
         panel_right = new JPanel(new GridLayout(2,1));
         panel_r_on = new JPanel(new BorderLayout());
@@ -103,7 +106,27 @@ public class test3 extends JFrame{
         panel_table.add(panel_empty7, BorderLayout.WEST);
         panel_table.add(panel_empty8, BorderLayout.EAST);
         
-        add(panel_main);
+//        setBorder
+        panel_supermain.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+        
+        
+//        miport img
+        ImageIcon t1 = new ImageIcon("C:\\Users\\aompp\\OneDrive\\Documents\\NetBeansProjects\\project\\src\\Rectangle 18.png");
+        Image to1 = t1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        Icon tool1 = new ImageIcon(to1);
+        panel_minimain = new JLabel(tool1);
+        
+//        setBackground
+//        panel_supermain.setBackground(Color.decode("#535870"));
+//        panel_main.set
+//        
+////        setBackground
+//        panel_supermain.setBackground(Color.decode("#535870"));
+//        panel_main.setIcon(tool1);
+//        
+//        
+//        add(panel_supermain);
+        panel_supermain.add(panel_main, BorderLayout.CENTER);
         panel_left.add(panel_bill, BorderLayout.NORTH);
         panel_left.add(panel_table, BorderLayout.CENTER);
         panel_r_on.add(panel_bn_on, BorderLayout.CENTER);
