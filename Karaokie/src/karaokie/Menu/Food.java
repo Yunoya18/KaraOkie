@@ -1,3 +1,5 @@
+package karaokie.Menu;
+
 
 import java.awt.Image;
 
