@@ -4,15 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundedPanel extends JPanel {
-    private int arcWidth;
-    private int arcHeight;
+    private int arcWidth, arcHeight, w, h;
     private Color backgroundColor;
 
-    public RoundedPanel(int arcWidth, int arcHeight, Color backgroundColor) {
+    public RoundedPanel(int arcWidth, int arcHeight, int w, int h, Color backgroundColor) {
         this.arcWidth = arcWidth;
         this.arcHeight = arcHeight;
         this.backgroundColor = backgroundColor;
-        setOpaque(false); // Make panel transparent
+        this.h = h;
+        this.w = w;
+        setOpaque(false);
     }
 
     @Override
@@ -24,7 +25,6 @@ public class RoundedPanel extends JPanel {
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Draw background
         graphics.setColor(backgroundColor);
         graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
         graphics.drawRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
@@ -32,19 +32,6 @@ public class RoundedPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(200, 200); // Set a preferred size
-    }
-
-    // Example usage
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Rounded Panel Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 300);
-
-        // Create a rounded panel
-        RoundedPanel roundedPanel = new RoundedPanel(20, 20, Color.BLUE);
-
-        frame.add(roundedPanel);
-        frame.setVisible(true);
+        return new Dimension(w, h);
     }
 }
