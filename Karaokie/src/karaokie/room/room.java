@@ -1,6 +1,7 @@
 
 package karaokie.room;
 
+import karaokie.Menu.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
