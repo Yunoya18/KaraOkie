@@ -13,12 +13,12 @@ public class Controller{
     private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
     
     // Socket
-    public static void OpenServer(){
+    public static void InFromClient(){
         
         try(ServerSocket welcomeSocket = new ServerSocket(6789); 
             Socket connectionSocket = welcomeSocket.accept();
                 
-        ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
+            ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
                 
             ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());
             ){    
@@ -27,6 +27,30 @@ public class Controller{
             map = (HashMap<Food, Integer>) oin.readObject();
             System.out.println(map);
         }catch(IOException | ClassNotFoundException e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void OutToClient(){
+        
+        try(ServerSocket welcomeSocket = new ServerSocket(6789); 
+            Socket connectionSocket = welcomeSocket.accept();
+                             
+            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());
+            ){    
+
+            //code do something
+            File menu = new File("menu.dat");
+            if (menu.exists()){
+                try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                    
+                    oout.writeObject((HashMap<String, ArrayList<Food>>) oin.readObject());
+                } catch (IOException | ClassNotFoundException e) {
+
+                    e.printStackTrace();
+                }
+            }
+        }catch(IOException e){
             System.out.println(e);
         }
     }
@@ -120,6 +144,6 @@ public class Controller{
     }
     
     public static void main(String[] args) {
-        Controller.OpenServer();
+        Controller.InFromClient();
     }
 }
