@@ -181,6 +181,19 @@ public class roompage extends JPanel implements ActionListener{
         
         cen.setLayout(new FlowLayout());
         
+        //set room order report button img
+        ImageIcon b1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 45.png");
+        Image bt1 = b1.getImage().getScaledInstance(110, 90, Image.SCALE_SMOOTH);
+        Icon bttn1 = new ImageIcon(bt1);
+        ImageIcon b2 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 46 (1).png");
+        Image bt2 = b2.getImage().getScaledInstance(110, 90, Image.SCALE_SMOOTH);
+        Icon bttn2 = new ImageIcon(bt2);
+        ImageIcon b3 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 47.png");
+        Image bt3 = b3.getImage().getScaledInstance(110, 90, Image.SCALE_SMOOTH);
+        Icon bttn3 = new ImageIcon(bt3);
+        room.setIcon(bttn1);
+        order.setIcon(bttn2);
+        report.setIcon(bttn3);
         room.setBackground(Color.decode("#A6ADCE"));
         order.setBackground(Color.decode("#A6ADCE"));
         report.setBackground(Color.decode("#A6ADCE"));
@@ -346,10 +359,12 @@ public class roompage extends JPanel implements ActionListener{
                 });
         }
         
+        // change to room order report
         tablist.add(down1, "tab1");
         tablist.add(down2,"tab2");
         tablist.add(down3,"tab3");
         
+        //change
         down1.setLayout(new FlowLayout(FlowLayout.CENTER));
         down2.setLayout(new FlowLayout(FlowLayout.CENTER));
         down3.setLayout(new FlowLayout(FlowLayout.CENTER));
