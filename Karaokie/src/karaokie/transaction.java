@@ -116,7 +116,7 @@ public class transaction extends JPanel implements ActionListener{
 //        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
 // import local img
-        ImageIcon mini = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/image/Rectangle 18 (1).png");
+        ImageIcon mini = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 18 (1).png");
         Image min = mini.getImage().getScaledInstance(1150, 650, Image.SCALE_SMOOTH);
         Icon minimain = new ImageIcon(min);
         ImageIcon l = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 29.png");
