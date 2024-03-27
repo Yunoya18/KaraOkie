@@ -81,7 +81,7 @@ public class roompage extends JPanel implements ActionListener{
         edit.setBackground(Color.decode("#535870"));
         edit.setBorderPainted(false);
         edit.setFocusPainted(false);
-        ImageIcon i1 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Group 11.png");
+        ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 11.png");
         Image img1 = i1.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         Icon icon1 = new ImageIcon(img1);
         edit.setIcon(icon1);
@@ -134,17 +134,16 @@ public class roompage extends JPanel implements ActionListener{
         add.setBackground(Color.decode("#171925"));
         delete.setBackground(Color.decode("#171925"));
         
-        
-        ImageIcon t1 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\selection.png");
+        ImageIcon t1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/selection.png");
         Image to1 = t1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Icon tool1 = new ImageIcon(to1);
-        ImageIcon t2 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\move-selector.png");
+        ImageIcon t2 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/move-selector.png");
         Image to2 = t2.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon tool2 = new ImageIcon(to2);
-        ImageIcon t3 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\add.png");
+        ImageIcon t3 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/add.png");
         Image to3 = t3.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Icon tool3 = new ImageIcon(to3);
-        ImageIcon t4 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\delete.png");
+        ImageIcon t4 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/delete.png");
         Image to4 = t4.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Icon tool4 = new ImageIcon(to4);
         cursor.setIcon(tool1);
@@ -197,7 +196,7 @@ public class roompage extends JPanel implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e){
                if(tool.isVisible()){
-               ImageIcon sq = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Rectangle 63.png");
+               ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
                Image squ = sq.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
                ImageIcon square = new ImageIcon(squ);
                JLabel box = new JLabel(square);
@@ -207,7 +206,7 @@ public class roompage extends JPanel implements ActionListener{
                 sandbox.add(box);               
                 sandbox.revalidate();
                 sandbox.repaint();
-               ImageIcon rl = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Rectangle 35.png");
+               ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
                Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
                ImageIcon rol = new ImageIcon(r);
                down1.add(new JLabel(rol));
@@ -408,7 +407,7 @@ public class roompage extends JPanel implements ActionListener{
             if(tool.isVisible()){
             tool.setVisible(false);
             func.setVisible(true);
-            ImageIcon i1 = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Group 11.png");
+            ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 11.png");
             Image img1 = i1.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
             Icon icon1 = new ImageIcon(img1);
             edit.setIcon(icon1);
@@ -416,7 +415,7 @@ public class roompage extends JPanel implements ActionListener{
             else{
             tool.setVisible(true);
             func.setVisible(false);
-            ImageIcon b = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Group 12.png");
+            ImageIcon b = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 12.png");
             Image bc = b.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
             Icon back = new ImageIcon(bc);
             edit.setIcon(back);
@@ -462,7 +461,7 @@ public class roompage extends JPanel implements ActionListener{
 //               
 //               box1.addMouseListener(this);
 //               box1.addMouseMotionListener(this);
-//               ImageIcon sq = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Rectangle 62.png");
+//               ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 62.png");
 //               Image squ = sq.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
 //               ImageIcon square = new ImageIcon(squ);
 //               
@@ -474,14 +473,14 @@ public class roompage extends JPanel implements ActionListener{
 //               box1.setBounds(100,100,250,300);
 //               sandbox.revalidate();
 //               sandbox.repaint();
-//               ImageIcon rl = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Rectangle 35.png");
+//               ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
 //               Image r = rl.getImage().getScaledInstance(200,60,Image.SCALE_SMOOTH);
 //               ImageIcon rol = new ImageIcon(r);
 //               down1.add(new JLabel(rol));
 //        }     
 //        else if(e.getSource().equals(rect2)){
 //          
-//               ImageIcon sq = new ImageIcon("C:\\Users\\mansu\\OneDrive - KMITL\\Desktop\\karaOkie\\src\\karaokie\\Rectangle 63.png");
+//               ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
 //               Image squ = sq.getImage().getScaledInstance(200, 150, Image.SCALE_SMOOTH);
 //               ImageIcon square = new ImageIcon(squ);
 //               

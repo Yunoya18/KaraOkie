@@ -70,19 +70,19 @@ public class main implements ActionListener {
         p5.add(txt5);
         
         //set Icon Image
-        ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/room.png");
+        ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/room.png");
         Image img1 = i1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon1 = new ImageIcon(img1);
-        ImageIcon i2 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/create-order.png");
+        ImageIcon i2 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/create-order.png");
         Image img2 = i2.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon2 = new ImageIcon(img2);
-        ImageIcon i3 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/tips-2.png");
+        ImageIcon i3 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/tips-2.png");
         Image img3 = i3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon3 = new ImageIcon(img3);
-        ImageIcon i4 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/membership-card.png");
+        ImageIcon i4 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/membership-card.png");
         Image img4 = i4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon4 = new ImageIcon(img4);
-        ImageIcon i5 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/bar-chart.png");
+        ImageIcon i5 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/bar-chart.png");
         Image img5 = i5.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         Icon icon5 = new ImageIcon(img5);
         pg1.setIcon(icon1);
