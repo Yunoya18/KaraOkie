@@ -3,11 +3,18 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+/* description by noeysod 
+    - first page when u run main.java
+    - if u wanna edit purple panel, room bn, order bn, report bn & edit icon 
+      go to roompage.java instead
+    - this page just plain jframe that .add roompage.java
+*/
 public class page1 implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
     private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
-    private JButton pg1, pg2, pg3, pg4, pg5;
+    private JButton pg1, pg2, pg3, pg4, pg5; // buttom in menu
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
     public page1(){
