@@ -15,8 +15,8 @@ public class transaction extends JPanel implements ActionListener{
     private JPanel  panel_main, panel_left, panel_right, panel_r_on, panel_r_down, panel_bn_on, panel_bn_down, panel_bn1, panelcal, panelcal2 
                    ,panel_empty, panel_empty2, panel_empty3, panel_empty4, panel_empty5, panel_empty6, panel_empty7, panel_empty8, panel_bill, panel_table
                     , panelcal2_on;
-    private JLabel panel_minimain, left_pa, txt_bill, cal_img, cash_img, credit_img;
-    private JTextField  txt_cash, txt_credit;
+    private JLabel panel_minimain, left_pa, txt_bill, cal_img, cash_img, credit_img, txt_cash, txt_credit;
+//    private JTextField  txt_cash, txt_credit;
     private JTable table;
     private JComboBox bill_num;
     private JButton button_search, button_member, button_close, button_cancel, button_delete, button_edit, buttonOne, buttonTow, buttonThree, buttonFour,
@@ -60,7 +60,6 @@ public class transaction extends JPanel implements ActionListener{
         button_delete = new JButton();
         button_edit = new JButton();
         panel_bn1.add(button_search);
-        panel_bn1.add(button_member);
         panel_bn1.add(button_close);
         panel_bn1.add(button_cancel);
         panel_bn1.add(button_delete);
@@ -103,8 +102,9 @@ public class transaction extends JPanel implements ActionListener{
         
         
         
-        txt_cash = new JTextField("INPUT...");
-        txt_credit = new JTextField("OUTPUT...");
+        txt_cash = new JLabel("");
+        txt_credit = new JLabel("");
+
         
         
        
@@ -128,9 +128,6 @@ public class transaction extends JPanel implements ActionListener{
         ImageIcon sr = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 13.png");
         Image srch = sr.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon search = new ImageIcon(srch);
-        ImageIcon mm = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 19.png");
-        Image mem = mm.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
-        Icon member = new ImageIcon(mem);
         ImageIcon cl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 21.png");
         Image cls = cl.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon close = new ImageIcon(cls);
@@ -419,7 +416,6 @@ public class transaction extends JPanel implements ActionListener{
         
         //button add image
         button_search.setIcon(search);
-        button_member.setIcon(member);
         button_close.setIcon(close);
         button_cancel.setIcon(cancel);
         button_delete.setIcon(delete);
@@ -458,6 +454,16 @@ public class transaction extends JPanel implements ActionListener{
         buttonOk.setBackground(Color.decode("#171925"));
         buttonJud.setBackground(Color.decode("#171925"));
         buttonDel.setBackground(Color.decode("#171925"));
+        
+        txt_cash.setForeground(Color.WHITE);
+        txt_credit.setForeground(Color.WHITE);
+        
+        bill_num.setBackground(Color.decode("#A6ADCE"));
+        bill_num.setForeground(Color.decode("#A6ADCE"));
+        
+        
+        
+        
         
         
         //add button hover cursor
@@ -535,8 +541,8 @@ public class transaction extends JPanel implements ActionListener{
         buttonDel.addActionListener(this);
         
 
-        txt_cash.setEditable(false);
-        txt_credit.setEditable(false);
+//        txt_cash.setEditable(false);
+//        txt_credit.setEditable(false);
         panel_empty.setPreferredSize(new Dimension(100, 50));
         panel_empty2.setPreferredSize(new Dimension(100, 50));
         panel_empty3.setPreferredSize(new Dimension(100, 50));
@@ -558,35 +564,45 @@ public class transaction extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(buttonOne)){
-
-        }
-        else if(e.getSource().equals(buttonTow)){
-          
+       if(e.getSource().equals(buttonOne)){
+        txt_cash.setText(txt_cash.getText()+"1");
+       }
+       else if(e.getSource().equals(buttonTow)){
+          txt_cash.setText(txt_cash.getText()+"2");
         }
         else if(e.getSource().equals(buttonThree)){
-
+            txt_cash.setText(txt_cash.getText()+"3");
         }
         else if(e.getSource().equals(buttonFour)){
-
+            txt_cash.setText(txt_cash.getText()+"4");
         }
         else if(e.getSource().equals(buttonFive)){
-
+           txt_cash.setText(txt_cash.getText()+"5");
         }
         else if(e.getSource().equals(buttonSix)){
-
+            txt_cash.setText(txt_cash.getText()+"6");
         }
         else if(e.getSource().equals(buttonSeven)){
-
+           txt_cash.setText(txt_cash.getText()+"7");
         }
         else if(e.getSource().equals(buttonEight)){
-
+            txt_cash.setText(txt_cash.getText()+"8");
         }
         else if(e.getSource().equals(buttonNine)){
-
+            txt_cash.setText(txt_cash.getText()+"9");
         }
         else if(e.getSource().equals(buttonTen)){
-
+            txt_cash.setText(txt_cash.getText()+"0");
+        }
+        else if(e.getSource().equals(buttonClear)){
+            txt_cash.setText("");
+        }
+        else if(e.getSource().equals(buttonDel)){
+            if(!txt_cash.getText().isEmpty()){
+                txt_cash.setText(txt_cash.getText().substring(0, txt_cash.getText().length() - 1 ));
+                
+                        }
+            
         }
        
     }

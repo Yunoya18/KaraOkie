@@ -76,6 +76,7 @@ public class roompage extends JPanel implements ActionListener{
         wp.add(editpa, BorderLayout.EAST);
         wp.add(sandbox, BorderLayout.CENTER);
         
+        
         //edit button
         edit.setPreferredSize(new Dimension(80,80));
         edit.setBackground(Color.decode("#535870"));
@@ -167,12 +168,12 @@ public class roompage extends JPanel implements ActionListener{
         cen.add(order);
         cen.add(report);
         
-        // #593D62 = purple
-        down1.setBackground(Color.decode("#593D62")); // purple pane in room bn
-//        down2.setBackground(Color.decode("#ffffff"));
-        down2.setBackground(Color.decode("#593D62")); // purple pane in order bn
-        down3.setBackground(Color.decode("#593D62")); // purple pane in report bn
+        
+        down1.setBackground(Color.decode("#593D62"));
+        down2.setBackground(Color.decode("#593D62"));
+        down3.setBackground(Color.decode("#593D62"));
         cen.setBackground(Color.decode("#1C1E27"));
+        
         
         //set upper func
         up.setPreferredSize(new Dimension(200, 200));
@@ -202,120 +203,97 @@ public class roompage extends JPanel implements ActionListener{
         room.setBorderPainted(false);
         order.setBorderPainted(false);
         report.setBorderPainted(false);
+        room.setFocusPainted(false);
+        order.setFocusPainted(false);
+        report.setFocusPainted(false);
         
         //set button border in out
         
         
-        rect1.addActionListener(new ActionListener() {
+        rect1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(tool.isVisible()) { // if toolbar appears, add room available detail panel to purple panel
-                    ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
-                    Image squ = sq.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-                    ImageIcon square = new ImageIcon(squ);
-                    JLabel box = new JLabel(square);
-                    box.setVisible(true);
-                    box.setBounds(250,300,90,90);
-                    box.setBackground(Color.WHITE);
-                    sandbox.add(box);               
-                    sandbox.revalidate();
-                    sandbox.repaint();
+               if(tool.isVisible()){
+               ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
+               Image squ = sq.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+               ImageIcon square = new ImageIcon(squ);
+               JLabel box = new JLabel(square);
+               box.setVisible(true);
+               box.setBounds(250,300,90,90);
+               box.setBackground(Color.WHITE);
+                sandbox.add(box);               
+                sandbox.revalidate();
+                sandbox.repaint();
                 
-                    // add room in roompage when create box
-                    ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
-                    Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
-                    ImageIcon rol = new ImageIcon(r);
-                    
-                    //////// START this section wait for backend to edit
-                    JLabel lbrol = new JLabel(rol);
-                    lbrol.setLayout(new FlowLayout());
-//                    lbrol.setLayout(new GridLayout(1, 2));
-                    lbrol.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-//                    down1.add(new JLabel(rol));
-                    down1.add(lbrol);
-
-                    JTextField txt = new JTextField("Room1");
-                    JTextField available = new JTextField("available");
-                    
-                    txt.setFont(new Font("Helvetica", Font.BOLD, 40));
-                    txt.setForeground(Color.decode("#ffffff")); // font color
-                    txt.setBackground(Color.decode("#171925"));
-                    txt.setBorder(BorderFactory.createEmptyBorder());
-                    txt.setEditable(false);
-                    available.setFont(new Font("Helvetica", Font.BOLD, 20));
-                    available.setForeground(Color.decode("#238b41")); // font color
-                    available.setBackground(Color.decode("#171925"));
-                    available.setBorder(BorderFactory.createEmptyBorder());
-                    available.setEditable(false);
-                    
-                    lbrol.add(txt);
-                    lbrol.add(available);
-//                    down1.add(txt);
-                    //////// END this section wait for backend to edit
+               // add room in roompage when create box
+               ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
+               Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
+               ImageIcon rol = new ImageIcon(r);
+               down1.add(new JLabel(rol));
              
-                    // make box moveable
-                    box.addMouseMotionListener(new MouseAdapter() {
-                        @Override
-                        public void mousePressed(MouseEvent e){
-                            if(tool.isVisible() && movin){
-                                System.out.println("8888");
+               // make box moveable
+               box.addMouseMotionListener(new MouseAdapter(){
+                   @Override
+                   public void mousePressed(MouseEvent e){
+                       if(tool.isVisible() && movin){
+                           System.out.println("8888");
 
-                            }
+                       }
+                       
+                   }
+                   @Override
+                   public void mouseDragged(MouseEvent e){
+                       if(tool.isVisible() && movin){
 
-                        }
-                        @Override
-                        public void mouseDragged(MouseEvent e){
-                            if(tool.isVisible() && movin){
-
-                            Point newLocation = box.getLocation();
-                              newLocation.translate(e.getX()-45, e.getY()-45);
-                              box.setLocation(newLocation);
-                            }
-                        }
-                        @Override
-                        public void mouseClicked(MouseEvent e){
-                            if(tool.isVisible() && del){
-                                JOptionPane.showMessageDialog(null, "Clicked ");
-                            }
-                        }
-     //                   @Override
-     //                public void mouseDragged(MouseEvent e){
-     //                    Point locate = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
-     ////                        if(box.getParent().getBounds().contains(locate)){
-     //                                Point newlocate = box.getLocation();
-     //                                newlocate.translate(locate.x - firstp.x, locate.y - firstp.y);
-     //                                newlocate.x = Math.max(newlocate.x, 0);
-     //                                newlocate.y = Math.max(newlocate.y, 0);
-     //                                newlocate.x = Math.min(newlocate.x, box.getParent().getWidth()-box.getWidth());
-     //                                newlocate.y = Math.min(newlocate.y, box.getParent().getHeight()-box.getHeight());
-     //                                box.setLocation(newlocate);
-     //                                firstp = locate;
-     ////                            }
-     //                }
-     //                @Override
-     //                public void mousePressed(MouseEvent e) {
-     //                firstp = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
-     //                    }
-     //                @Override
-     //                public void mouseReleased(MouseEvent e) {
-     //                firstp = null;
-     //                    }
-     //              @Override
-     //                    public void mouseClicked(MouseEvent e) {
-     //                        JOptionPane.showMessageDialog(null, "Clicked ");
-     //                    }
-            });
-                } else {
+                       Point newLocation = box.getLocation();
+                         newLocation.translate(e.getX()-45, e.getY()-45);
+                         box.setLocation(newLocation);
+                       }
+                   }
+                   @Override
+                   public void mouseClicked(MouseEvent e){
+                       if(tool.isVisible() && del){
+                           JOptionPane.showMessageDialog(null, "Clicked ");
+                       }
+                   }
+//                   @Override
+//                public void mouseDragged(MouseEvent e){
+//                    Point locate = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
+////                        if(box.getParent().getBounds().contains(locate)){
+//                                Point newlocate = box.getLocation();
+//                                newlocate.translate(locate.x - firstp.x, locate.y - firstp.y);
+//                                newlocate.x = Math.max(newlocate.x, 0);
+//                                newlocate.y = Math.max(newlocate.y, 0);
+//                                newlocate.x = Math.min(newlocate.x, box.getParent().getWidth()-box.getWidth());
+//                                newlocate.y = Math.min(newlocate.y, box.getParent().getHeight()-box.getHeight());
+//                                box.setLocation(newlocate);
+//                                firstp = locate;
+////                            }
+//                }
+//                @Override
+//                public void mousePressed(MouseEvent e) {
+//                firstp = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
+//                    }
+//                @Override
+//                public void mouseReleased(MouseEvent e) {
+//                firstp = null;
+//                    }
+//              @Override
+//                    public void mouseClicked(MouseEvent e) {
+//                        JOptionPane.showMessageDialog(null, "Clicked ");
+//                    }
+            });}
+                else{
                    
-                }
+               }
             }
         });
         
-        JButton[] group = {room, order, report, edit, cursor, move, add, delete, add};
+        JButton[] group = {room, order, report,edit, cursor, move, add, delete, add};
         for(JButton button : group){
               button.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseEntered(MouseEvent e) { // pink square around button when mouse entered
+                    public void mouseEntered(MouseEvent e) {
                         if(e.getSource().equals(room)){
                             button.setBorderPainted(true);
                             button.setBorder(new LineBorder(Color.PINK,5));
@@ -584,7 +562,5 @@ public class roompage extends JPanel implements ActionListener{
 //    public void mouseExited(MouseEvent e) {
 //        
 //    }
-
-    
-}
+    }
 
