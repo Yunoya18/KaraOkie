@@ -24,7 +24,7 @@ public class Controller{
             ){    
 
             //code do something
-            map = (HashMap<Food, Integer>) oin.readObject();
+            map = (HashMap<Food, Integer>) oin.readObject();    
             System.out.println(map);
         }catch(IOException | ClassNotFoundException e){
             System.out.println(e);

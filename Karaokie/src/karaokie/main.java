@@ -250,7 +250,7 @@ public class main implements ActionListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        new main();
+        new page1();
     }
 }
 

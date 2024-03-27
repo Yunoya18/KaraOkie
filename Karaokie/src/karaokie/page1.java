@@ -40,7 +40,9 @@ public class page1 implements ActionListener{
         txt5 = new JLabel("page5");
         
         roompage pm1 = new roompage();
+        addFood pm2 = new addFood();
         page3 pm3 = new page3();
+        
         
         //set backgroundcolor and foreground color
         p1.setBackground(Color.decode("#535870"));
@@ -100,7 +102,7 @@ public class page1 implements ActionListener{
         
         //add panel to tab
         tab.add(pm1 ,"pg1");
-        tab.add(p2, "pg2");
+        tab.add(pm2, "pg2");
         tab.add(pm3, "pg3");
         tab.add(p4, "pg4");
         tab.add(p5, "pg5");

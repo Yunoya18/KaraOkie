@@ -46,7 +46,7 @@ public class fillFood extends JFrame implements ActionListener{
         b1 = new JButton("Done");
         b2 = new JButton();
         b2.setPreferredSize(new Dimension(18, 18));
-        i = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\search_3031293.png");
+        i = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/search_3031293.png");
         im = i.getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         i2 = new ImageIcon(im);
         b2.setIcon(i2);

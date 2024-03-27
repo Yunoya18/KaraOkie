@@ -34,7 +34,7 @@ public class addFood extends JPanel implements ActionListener {
         
         // button
         b = new JButton();
-        ImageIcon i = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\add.png");
+        ImageIcon i = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/add.png");
         Image im = i.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(im);
         b.setIcon(icon);
@@ -53,7 +53,7 @@ public class addFood extends JPanel implements ActionListener {
         });
         b.addActionListener(this);
         b2 = new JButton();
-        ImageIcon i2 = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\delete.png");
+        ImageIcon i2 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/delete.png");
         Image im2 = i2.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         ImageIcon icon2 = new ImageIcon(im2);
         b2.setIcon(icon2);
@@ -136,4 +136,5 @@ public class addFood extends JPanel implements ActionListener {
     public JTable getT(){
         return this.t;
     }
+    
 }
