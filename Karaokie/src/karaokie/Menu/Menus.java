@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 import org.w3c.dom.NamedNodeMap;
 
-public class Menu {
+public class Menus {
 
-    protected Map<String, ArrayList<Food>> map;
+    protected static Map<String, ArrayList<Food>> map;
 
-    public Menu() {
+    public Menus() {
         map = new HashMap<>();
         File file = new File("menu.dat");
         if (file.exists()) {
@@ -29,21 +29,21 @@ public class Menu {
                 e.printStackTrace();
             }
         } else {
-            map.put("Appetizer", new ArrayList<Food>());
-            map.put("Desert", new ArrayList<Food>());
-            map.put("Beverage", new ArrayList<Food>());
+            map.put("Food", new ArrayList<Food>());
+            map.put("Snack", new ArrayList<Food>());
+            map.put("Drinks", new ArrayList<Food>());
         }
 
     }
 
-    public Menu(HashMap<String, ArrayList<Food>> map) {
+    public Menus(HashMap<String, ArrayList<Food>> map) {
         this.map = map;
     }
 
     public void addMenu(Food food) {
         map.get(food.getType()).add(food);
         saveMap();
-
+        
     }
 
     public void removeMenu(Food food) {
@@ -60,7 +60,7 @@ public class Menu {
     }
 
     public void saveMap() {
-        try (FileOutputStream fout = new FileOutputStream("datachat.dat");
+        try (FileOutputStream fout = new FileOutputStream("menu.dat");
             ObjectOutputStream oout = new ObjectOutputStream(fout);){
             
             oout.writeObject(map);
@@ -76,15 +76,16 @@ public class Menu {
         if (file.exists()) {
             try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
-
+                System.out.println(map);
             } catch (IOException | ClassNotFoundException e) {
 
                 e.printStackTrace();
             }
         } else {
-            map.put("Appetizer", new ArrayList<Food>());
-            map.put("Desert", new ArrayList<Food>());
-            map.put("Beverage", new ArrayList<Food>());
+            map.put("Food", new ArrayList<Food>());
+            map.put("Snack", new ArrayList<Food>());
+            map.put("Drinks", new ArrayList<Food>());
         }
     }
+
 }

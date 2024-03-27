@@ -3,10 +3,12 @@ package karaokie.Menu;
 
 import java.awt.Image;
 import java.io.Serializable;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class Food implements Serializable {
     private String name;
-    private Image image;
+    private Icon image;
     private double price;
     private String type;
     public Food(){
@@ -15,7 +17,7 @@ public class Food implements Serializable {
         this.price = 0.0;
         this.type = "";
     }
-    public Food(String name, Image image, double price, String type){
+    public Food(String name, Icon image, double price, String type){
         this.name = name;
         this.image = image;
         this.price = price;
@@ -27,10 +29,10 @@ public class Food implements Serializable {
     public void setName(String name){
         this.name = name;
     }
-    public Image getImage(){
+    public Icon getImage(){
         return image;
     }
-    public void setImage(Image image){
+    public void setImage(Icon image){
         this.image = image;
         
     }

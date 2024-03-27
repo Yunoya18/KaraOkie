@@ -10,10 +10,18 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.*;
+import karaokie.Menu.Food;
 
-public class addFood extends JPanel implements ActionListener {
+public class addFood extends JPanel implements ActionListener , WindowListener {
+    private Map<String, ArrayList<Food>> map;
     private static JTable t;
     private JScrollPane sc;
     private JTableHeader h;
@@ -21,7 +29,9 @@ public class addFood extends JPanel implements ActionListener {
     private TableColumn tc;
     private JButton b, b2;
     private JPanel p1, p2;
+    private JFrame frame;
     public addFood(){
+        
         setBackground(Color.decode("#535870"));
         setLayout(new BorderLayout());
         
@@ -101,11 +111,26 @@ public class addFood extends JPanel implements ActionListener {
         add(p1, BorderLayout.NORTH);
         add(p2, BorderLayout.CENTER);
         setVisible(true);
+        
+        
+        //make jfram for addwindow
+        
+        frame = new JFrame();
+        frame.addWindowListener(this);
+        
+        
+        
+        
+        
     }
     public static void addRow(Object[] dataRow){
         DefaultTableModel model = (DefaultTableModel) t.getModel();
         model.addRow(dataRow);
+        System.out.println("e");
+        
     }
+
+    
     class ImageRenderer extends DefaultTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
@@ -135,6 +160,68 @@ public class addFood extends JPanel implements ActionListener {
     }
     public JTable getT(){
         return this.t;
+    }
+    
+    
+    //windowevent
+    
+    @Override
+    public void windowOpened(WindowEvent e) {
+        //import menu.dat
+        File file = new File("menu.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+                System.out.println(map);
+            } catch (IOException | ClassNotFoundException ex) {
+
+                ex.printStackTrace();
+            }  
+        }
+        
+        
+        //addrow from data.dat
+        for (String key : map.keySet()){
+            for(int num = 0; num < map.get(key).size()-1; num++){
+                DefaultTableModel model = (DefaultTableModel) t.getModel();
+    //            model.addRow(map.get("Food").get(num).getImage());
+                Icon icon5 = map.get(key).get(num).getImage();
+                String name = map.get(key).get(num).getName();
+                String type = map.get(key).get(num).getType();
+                double price = map.get(key).get(num).getPrice();
+                model.addRow(new Object[]{icon5, name ,type, price + " THB"});
+        }
+        }
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+       
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+      
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+       
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+       
     }
     
 }

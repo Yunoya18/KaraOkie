@@ -9,11 +9,14 @@ import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import karaokie.Menu.*;
 /**
  *
  * @author Tiraqmisu
  */
 public class fillFood extends JFrame implements ActionListener{
+    private Menus menu;
+    private Food food;
     private JPanel p, p2, p3;
     private JTextField tf1, tf2;
     private JButton b1, b2;
@@ -26,6 +29,10 @@ public class fillFood extends JFrame implements ActionListener{
     private File fuyu;
     private JComboBox cb;
     public fillFood(){
+        //menu and food
+        menu = new Menus();
+
+        
         setLayout(new FlowLayout(FlowLayout.CENTER));
         setPreferredSize(new Dimension(300, 500));
         setResizable(false);
@@ -142,8 +149,9 @@ public class fillFood extends JFrame implements ActionListener{
                 show.getIcon(),
                 tf1.getText(),
                 cb.getSelectedItem(),
-                tf2.getText()+" THB",
+                tf2.getText()+" THB",        
                 });
+                menu.addMenu(new Food(tf1.getText(), show.getIcon(), Double.parseDouble(tf2.getText()), (String) cb.getSelectedItem()));
                 dispose();
             }
             else if (tf1.getText().isEmpty() || tf2.getText().isEmpty() || l4.getText().equals("Insert Image")){
