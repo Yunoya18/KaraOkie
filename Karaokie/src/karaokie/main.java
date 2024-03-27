@@ -205,7 +205,8 @@ public class main implements ActionListener {
         
          
         
-        ma.setSize(1280, 720);
+//        ma.setSize(1280, 720);
+        ma.setPreferredSize(new Dimension(1280, 720));
         ma.setVisible(true);
         ma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ma.pack();
