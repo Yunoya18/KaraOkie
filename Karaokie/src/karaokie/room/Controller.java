@@ -8,37 +8,29 @@ import java.net.*;
 
 public class Controller{
     private static int Room_count;
+    private static Map<Food, Integer> map;
     private static ArrayList<room> room = new ArrayList<>();
     private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
     
     // Socket
-    public static void outToClient(){
+    public static void OpenServer(){
         
         try(ServerSocket welcomeSocket = new ServerSocket(6789); 
             Socket connectionSocket = welcomeSocket.accept();
-            
-            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());){
-            
-            oout.writeObject(room);
-            
-        }catch(IOException e){
+                
+        ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
+                
+            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());
+            ){    
+
+            //code do something
+            map = (HashMap<Food, Integer>) oin.readObject();
+            System.out.println(map);
+        }catch(IOException | ClassNotFoundException e){
             System.out.println(e);
         }
     }
     
-    public static void inFromClient(){
-        
-        try(ServerSocket welcomeSocket = new ServerSocket(6789); 
-            Socket connectionSocket = welcomeSocket.accept();
-            
-            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());){
-            
-            oout.writeObject(room);
-            
-        }catch(IOException e){
-            System.out.println(e);
-        }
-    }
     
     
     public Controller(){
@@ -128,6 +120,6 @@ public class Controller{
     }
     
     public static void main(String[] args) {
-        outToClient();
+        Controller.OpenServer();
     }
 }
