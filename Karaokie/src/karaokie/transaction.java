@@ -24,7 +24,7 @@ public class transaction extends JPanel implements ActionListener{
   
     public transaction(){
         
-         panel_main = new JPanel(new BorderLayout());
+        panel_main = new JPanel(new BorderLayout());
         setLayout(new BorderLayout(0,0));
         panel_left = new JPanel(new BorderLayout());
         panel_right = new JPanel(new GridLayout(2,1));

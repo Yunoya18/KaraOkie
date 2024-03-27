@@ -11,27 +11,27 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+//import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 public class roompage extends JPanel implements ActionListener{
     private CardLayout card;
     private JButton room, order, report, edit, cursor, move, add, delete;
-    private JPanel tablist, down1, down2, down3, wp, tool,cen, leftcom, func, up, editpa, sandbox;
+    private JPanel tablist, down1, down2, down3, wp, tool, cen, leftcom, func, up, editpa, sandbox;
     private JMenuItem rect1, rect2;
     private JPopupMenu create;
-    private Point firstp;
     private JComboBox type;
-    private int offsetX, offsetY;
+    private JTextField search;
+//    private Point firstp;
     private boolean movin = false;
     private boolean del = false;
     
 //    JLabel box1;
     public roompage(){
         
-        firstp = new Point();
+//        firstp = new Point();
         sandbox = new JPanel(new FlowLayout());
-        JTextField srch = new JTextField();
+        search = new JTextField();
         setLayout(new BorderLayout(0,0));
         leftcom = new JPanel(new FlowLayout(FlowLayout.LEFT,0,0));
         tool = new JPanel();
@@ -159,7 +159,7 @@ public class roompage extends JPanel implements ActionListener{
         func.setPreferredSize(new Dimension(370, 720));
         
         //add up
-        up.add(srch, BorderLayout.NORTH);
+        up.add(search, BorderLayout.NORTH);
         up.add(cen, BorderLayout.CENTER);
         
         //ad select type button
@@ -206,18 +206,20 @@ public class roompage extends JPanel implements ActionListener{
                 sandbox.add(box);               
                 sandbox.revalidate();
                 sandbox.repaint();
+                
+               // add room in roompage when create box
                ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
                Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
                ImageIcon rol = new ImageIcon(r);
                down1.add(new JLabel(rol));
              
+               // make box moveable
                box.addMouseMotionListener(new MouseAdapter(){
                    @Override
                    public void mousePressed(MouseEvent e){
                        if(tool.isVisible() && movin){
                            System.out.println("8888");
-//                            offsetX = e.getX();
-//                            offsetY = e.getY();
+
                        }
                        
                    }
@@ -370,7 +372,7 @@ public class roompage extends JPanel implements ActionListener{
         cursor.addActionListener(this);
         delete.addActionListener(this);
         
-        srch.setPreferredSize(new Dimension(180, 30));
+        search.setPreferredSize(new Dimension(180, 30));
         setVisible(true);
         
         
