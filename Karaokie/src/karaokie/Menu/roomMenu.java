@@ -11,18 +11,13 @@ import java.util.concurrent.Executors;
 
 
 public class roomMenu extends Menu{
-    protected Map<String, Integer> map = new HashMap<>();
-    Socket socket;
+    protected Map<Food, Integer> map = new HashMap<>();
+
     
-    
-    public roomMenu(Socket socket){
-        
-        this.socket = socket;
-    }
-    
+
     
     public void addMenu(Food food, int i) {
-         map.put(food.getName(), i);
+         map.put(food, i);
          
     }
 //
@@ -39,16 +34,14 @@ public class roomMenu extends Menu{
     
     
        public void tranMap() {
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(() -> {
-            try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())) {
+       
+
+            try (Socket clientSocket = new Socket("26.26.134.224", 6789);ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
                 objectOutputStream.writeObject(map);
-                objectOutputStream.flush();
+                System.out.println(map);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
-        executor.shutdown();
+        };
     }
     
-}

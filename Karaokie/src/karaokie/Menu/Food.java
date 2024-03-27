@@ -2,8 +2,9 @@ package karaokie.Menu;
 
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public class Food {
+public class Food implements Serializable {
     private String name;
     private Image image;
     private double price;
@@ -42,7 +43,7 @@ public class Food {
     public String getType (){
         return type;
     }
-    public void setPrice(String type){
+    public void setType(String type){
         this.type = type;
     }
     

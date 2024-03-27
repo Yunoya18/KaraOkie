@@ -29,9 +29,9 @@ public class Menu {
                 e.printStackTrace();
             }
         } else {
-            map.put("Appetizer", new ArrayList<Food>(null));
-            map.put("Desert", new ArrayList<Food>(null));
-            map.put("Beverage", new ArrayList<Food>(null));
+            map.put("Appetizer", new ArrayList<Food>());
+            map.put("Desert", new ArrayList<Food>());
+            map.put("Beverage", new ArrayList<Food>());
         }
 
     }
@@ -82,9 +82,9 @@ public class Menu {
                 e.printStackTrace();
             }
         } else {
-            map.put("Appetizer", new ArrayList<Food>(null));
-            map.put("Desert", new ArrayList<Food>(null));
-            map.put("Beverage", new ArrayList<Food>(null));
+            map.put("Appetizer", new ArrayList<Food>());
+            map.put("Desert", new ArrayList<Food>());
+            map.put("Beverage", new ArrayList<Food>());
         }
     }
 }
