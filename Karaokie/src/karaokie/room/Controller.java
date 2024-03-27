@@ -4,7 +4,7 @@ package karaokie.room;
 import java.util.*;
 import java.io.*;
 import karaokie.Menu.*;
-
+import java.net.*;
 
 public class Controller{
     private static int Room_count;
@@ -12,6 +12,33 @@ public class Controller{
     private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
     
     // Socket
+    public static void outToClient(){
+        
+        try(ServerSocket welcomeSocket = new ServerSocket(6789); 
+            Socket connectionSocket = welcomeSocket.accept();
+            
+            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());){
+            
+            oout.writeObject(room);
+            
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void inFromClient(){
+        
+        try(ServerSocket welcomeSocket = new ServerSocket(6789); 
+            Socket connectionSocket = welcomeSocket.accept();
+            
+            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());){
+            
+            oout.writeObject(room);
+            
+        }catch(IOException e){
+            System.out.println(e);
+        }
+    }
     
     
     public Controller(){
@@ -98,5 +125,9 @@ public class Controller{
 
             e.printStackTrace();
         }
+    }
+    
+    public static void main(String[] args) {
+        outToClient();
     }
 }

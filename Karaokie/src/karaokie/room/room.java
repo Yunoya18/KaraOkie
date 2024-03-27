@@ -5,8 +5,9 @@ import karaokie.Menu.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
-public abstract class room implements Available{
+public abstract class room implements Available, Serializable{
     protected int roomNumber;
 //    protected roomMenu roomMenu;
     protected String Type;
