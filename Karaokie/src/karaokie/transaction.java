@@ -558,35 +558,35 @@ public class transaction extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       if(e.getSource().equals(buttonOne)){
-        
-       }
-       else if(e.getSource().equals(buttonTow)){
+        if(e.getSource().equals(buttonOne)){
+
+        }
+        else if(e.getSource().equals(buttonTow)){
           
         }
         else if(e.getSource().equals(buttonThree)){
-            
+
         }
         else if(e.getSource().equals(buttonFour)){
-            
+
         }
         else if(e.getSource().equals(buttonFive)){
-           
+
         }
         else if(e.getSource().equals(buttonSix)){
-            
+
         }
         else if(e.getSource().equals(buttonSeven)){
-           
+
         }
         else if(e.getSource().equals(buttonEight)){
-            
+
         }
         else if(e.getSource().equals(buttonNine)){
-            
+
         }
         else if(e.getSource().equals(buttonTen)){
-            
+
         }
        
     }
