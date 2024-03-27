@@ -155,6 +155,7 @@ public class page1 implements ActionListener{
                         else if(e.getSource().equals(pg2)){
                             ImageIcon hoverIcon = new ImageIcon(i2.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
                             button.setIcon(hoverIcon);
+                            pm2.windowOpened(null);
                         }
                         else if(e.getSource().equals(pg3)){
                             ImageIcon hoverIcon = new ImageIcon(i3.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
