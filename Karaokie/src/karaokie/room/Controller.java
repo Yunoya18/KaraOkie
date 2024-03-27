@@ -35,14 +35,18 @@ public class Controller{
         
         try(ServerSocket welcomeSocket = new ServerSocket(6789); 
             Socket connectionSocket = welcomeSocket.accept();
-                             
+            
+            ObjectInputStream test = new ObjectInputStream(connectionSocket.getInputStream());    
+                
             ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());
             ){    
 
             //code do something
             File menu = new File("menu.dat");
             if (menu.exists()){
+                System.out.println("true");
                 try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                    
                     
                     oout.writeObject((HashMap<String, ArrayList<Food>>) oin.readObject());
                 } catch (IOException | ClassNotFoundException e) {
@@ -144,6 +148,7 @@ public class Controller{
     }
     
     public static void main(String[] args) {
-        Controller.InFromClient();
+//        Controller.saveFile();
+        Controller.OutToClient();
     }
 }

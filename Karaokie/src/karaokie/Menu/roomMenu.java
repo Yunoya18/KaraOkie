@@ -39,11 +39,11 @@ public class roomMenu extends Menu {
         }
     }
 
-    public void setMap(Map map) {
+    public void setMap(Map<Food, Integer> map) {
         this.map = map;
     }
 
-    public Map getMap() {
+    public Map<Food, Integer> getMap() {
         return map;
     }
 }
