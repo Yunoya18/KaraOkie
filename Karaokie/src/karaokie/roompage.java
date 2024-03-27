@@ -225,7 +225,33 @@ public class roompage extends JPanel implements ActionListener{
                     ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
                     Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
                     ImageIcon rol = new ImageIcon(r);
-                    down1.add(new JLabel(rol));
+                    
+                    //////// START this section wait for backend to edit
+                    JLabel lbrol = new JLabel(rol);
+                    lbrol.setLayout(new FlowLayout());
+//                    lbrol.setLayout(new GridLayout(1, 2));
+                    lbrol.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+//                    down1.add(new JLabel(rol));
+                    down1.add(lbrol);
+
+                    JTextField txt = new JTextField("Room1");
+                    JTextField available = new JTextField("available");
+                    
+                    txt.setFont(new Font("Helvetica", Font.BOLD, 40));
+                    txt.setForeground(Color.decode("#ffffff")); // font color
+                    txt.setBackground(Color.decode("#171925"));
+                    txt.setBorder(BorderFactory.createEmptyBorder());
+                    txt.setEditable(false);
+                    available.setFont(new Font("Helvetica", Font.BOLD, 20));
+                    available.setForeground(Color.decode("#238b41")); // font color
+                    available.setBackground(Color.decode("#171925"));
+                    available.setBorder(BorderFactory.createEmptyBorder());
+                    available.setEditable(false);
+                    
+                    lbrol.add(txt);
+                    lbrol.add(available);
+//                    down1.add(txt);
+                    //////// END this section wait for backend to edit
              
                     // make box moveable
                     box.addMouseMotionListener(new MouseAdapter() {
