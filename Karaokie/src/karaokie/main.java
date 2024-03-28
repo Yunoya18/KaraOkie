@@ -43,6 +43,7 @@ public class main extends JPanel implements ActionListener {
         txt4 = new JLabel("page4");
         txt5 = new JLabel("page5");
         roompage pm1 = new roompage();
+        addFood pm2 = new addFood();
         transaction pm3 = new transaction();
         
         
@@ -106,7 +107,7 @@ public class main extends JPanel implements ActionListener {
         
         //add panel to tab
         tab.add(pm1 ,"pg1");
-        tab.add(p2, "pg2");
+        tab.add(pm2, "pg2");
         tab.add(pm3, "pg3");
         tab.add(p4, "pg4");
         tab.add(p5, "pg5");
@@ -186,6 +187,9 @@ public class main extends JPanel implements ActionListener {
                         }
                         else if(e.getSource().equals(pg2)){
                             button.setIcon(icon2);
+                            pm2.reRow();
+                            pm2.windowOpened(null);
+                            
                         }
                         else if(e.getSource().equals(pg3)){
                             button.setIcon(icon3);
@@ -231,6 +235,7 @@ public class main extends JPanel implements ActionListener {
         
         else if(ev.getSource().equals(pg2)){
            cardlayout.show(tab, "pg2");
+           
         }
         else if(ev.getSource().equals(pg3)){
            cardlayout.show(tab, "pg3");

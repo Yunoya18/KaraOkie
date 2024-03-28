@@ -30,7 +30,6 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
     private TableColumn tc;
     private JButton b, b2;
     private JPanel p1, p2;
-    private JFrame frame;
 
     public addFood() {
 
@@ -116,10 +115,6 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
         add(p2, BorderLayout.CENTER);
         setVisible(true);
 
-        //make jfram for addwindow
-        frame = new JFrame();
-        frame.addWindowListener(this);
-
     }
 
     public static void addRow(Object[] dataRow) {
@@ -127,6 +122,20 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
         model.addRow(dataRow);
         System.out.println("e");
 
+    }
+    
+    public void reRow(){
+        try {
+            DefaultTableModel model = (DefaultTableModel) t.getModel();
+            int rowCount = model.getRowCount();
+            // Remove rows from the end to avoid index issues
+            for (int i = rowCount - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+        } catch (ClassCastException i){
+            i.printStackTrace();
+        }
+        
     }
 
     class ImageRenderer extends DefaultTableCellRenderer {
@@ -151,6 +160,7 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
         } else if (e.getSource().equals(b2)) {
             DefaultTableModel tm = (DefaultTableModel) t.getModel();
             int ind[] = t.getSelectedRows();
+            System.out.println(ind);
             for (int i = ind.length - 1; i >= 0; i--) {
                 tm.removeRow(ind[i]);
             }
@@ -165,12 +175,10 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
     @Override
     public void windowOpened(WindowEvent e) {
         //import menu.dat
-        System.out.println("www");
         File file = new File("menu.dat");
         if (file.exists()) {
             try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
-                System.out.println(map);
             } catch (IOException | ClassNotFoundException ex) {
 
                 ex.printStackTrace();
