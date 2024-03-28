@@ -212,7 +212,7 @@ public class roompage extends JPanel implements ActionListener {
                 for (room rm : Controller.getArrayRoom()) {
                     if (rm != null) {
                         sandbox.add(rm);
-                        
+
 //                        ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
 //                        Image r = rl.getImage().getScaledInstance(300, 100, Image.SCALE_SMOOTH);
 //                        ImageIcon rol = new ImageIcon(r);
@@ -223,7 +223,7 @@ public class roompage extends JPanel implements ActionListener {
                 }
             }
         });
-        
+
         rect2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -231,23 +231,22 @@ public class roompage extends JPanel implements ActionListener {
                 for (room rm : Controller.getArrayRoom()) {
                     if (rm != null) {
                         sandbox.add(rm);
-                        
+
                         loadRoomData((String) type.getSelectedItem());
                     }
 
                 }
             }
         });
-
         
+
         type.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadRoomData((String) type.getSelectedItem());
             }
         });
-        
-        
+
         JButton[] group = {room, order, report, edit, cursor, move, add, delete, add};
         for (JButton button : group) {
             button.addMouseListener(new MouseAdapter() {
@@ -355,9 +354,9 @@ public class roompage extends JPanel implements ActionListener {
         for (room rm : Controller.getArrayRoom()) {
             if (rm != null) {
                 sandbox.add(rm);
-                
+
                 down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
-                
+
             }
 
         }
@@ -408,36 +407,36 @@ public class roompage extends JPanel implements ActionListener {
         } else if (e.getSource().equals(cursor)) {
             if (movin == true) {
                 movin = false;
-            } else if (del == true) {
+            }if (del == true) {
                 del = false;
             }
         } else if (e.getSource().equals(delete)) {
             if (del) {
-
+                Controller.delRoom(2);
             } else {
                 del = true;
-                System.out.println(del);
+                System.out.println("del");
             }
         }
     }
 
-    
     public void loadRoomData(String s) {
 
         down1.removeAll();
+        down1.repaint();
         for (room rm : Controller.getArrayRoom()) {
-            if (s.equals("All")) {
-                
-                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
-            }else if(s.equals("Small") && rm.getType().equals("Small")) {
-                
-                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
-            }
-            else if(s.equals("Big") && rm.getType().equals("Big")) {
-                
-                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+            if (rm != null) {
+                if (s.equals("All")) {
+
+                    down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                } else if (s.equals("Small") && rm.getType().equals("Small")) {
+
+                    down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                } else if (s.equals("Big") && rm.getType().equals("Big")) {
+
+                    down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                }
             }
         }
     }
-
 }

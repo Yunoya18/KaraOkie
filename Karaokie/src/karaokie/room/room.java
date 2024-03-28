@@ -89,7 +89,7 @@ public abstract class room extends JInternalFrame implements Available, Serializ
     public int getPosition_y(){
         return position_y;
     }
-
+    
     @Override
     public void componentResized(ComponentEvent e) {
     }
