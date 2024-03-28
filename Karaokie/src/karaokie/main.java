@@ -166,6 +166,10 @@ public class main extends JPanel implements ActionListener{
                         else if(e.getSource().equals(pg2)){
                             ImageIcon hoverIcon = new ImageIcon(i2.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
                             button.setIcon(hoverIcon);
+                            
+                            pm2.reRow();
+                            pm2.windowOpened(null);
+                            
                         }
                         else if(e.getSource().equals(pg3)){
                             ImageIcon hoverIcon = new ImageIcon(i3.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
@@ -192,9 +196,6 @@ public class main extends JPanel implements ActionListener{
                         }
                         else if(e.getSource().equals(pg2)){
                             button.setIcon(icon2);
-                            pm2.reRow();
-                            pm2.windowOpened(null);
-                            
                         }
                         else if(e.getSource().equals(pg3)){
                             button.setIcon(icon3);
@@ -263,8 +264,12 @@ public class main extends JPanel implements ActionListener{
 //        new main();
 //    }
 
+    public void sentOpen(){
+        pm1.loadRoomData("All");
+    }
+    
     public void sentClosing(){
-        pm1.Closing();
+        
     }
 }
 

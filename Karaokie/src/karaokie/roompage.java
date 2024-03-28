@@ -26,6 +26,7 @@ public class roompage extends JPanel implements ActionListener {
     private JComboBox type;
     private JTextField search;
     private Controller con = new Controller();
+    private showroom shr;
     ;
 //    private Point firstp;
     private boolean movin = false;
@@ -47,7 +48,7 @@ public class roompage extends JPanel implements ActionListener {
         order = new JButton();
         report = new JButton();
         cen = new JPanel(new GridLayout(3, 1));
-        String[] roomcat = {"Big", "Small"};
+        String[] roomcat = {"All", "Big", "Small"};
         type = new JComboBox(roomcat);
         down1 = new JPanel();
         down2 = new JPanel();
@@ -207,23 +208,46 @@ public class roompage extends JPanel implements ActionListener {
         rect1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("test");
                 Controller.CreateSmallRoom();
                 for (room rm : Controller.getArrayRoom()) {
                     if (rm != null) {
                         sandbox.add(rm);
+                        
+//                        ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
+//                        Image r = rl.getImage().getScaledInstance(300, 100, Image.SCALE_SMOOTH);
+//                        ImageIcon rol = new ImageIcon(r);
+//                        down1.add(new JLabel(rl));
+                        loadRoomData((String) type.getSelectedItem());
                     }
 
-                    // add room in roompage when create box
-                    ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
-                    Image r = rl.getImage().getScaledInstance(300, 100, Image.SCALE_SMOOTH);
-                    ImageIcon rol = new ImageIcon(r);
-                    down1.add(new JLabel(rol));
+                }
+            }
+        });
+        
+        rect2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller.CreateBigRoom();
+                for (room rm : Controller.getArrayRoom()) {
+                    if (rm != null) {
+                        sandbox.add(rm);
+                        
+                        loadRoomData((String) type.getSelectedItem());
+                    }
 
                 }
             }
         });
 
+        
+        type.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadRoomData((String) type.getSelectedItem());
+            }
+        });
+        
+        
         JButton[] group = {room, order, report, edit, cursor, move, add, delete, add};
         for (JButton button : group) {
             button.addMouseListener(new MouseAdapter() {
@@ -331,6 +355,9 @@ public class roompage extends JPanel implements ActionListener {
         for (room rm : Controller.getArrayRoom()) {
             if (rm != null) {
                 sandbox.add(rm);
+                
+                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                
             }
 
         }
@@ -393,13 +420,24 @@ public class roompage extends JPanel implements ActionListener {
             }
         }
     }
-    public void Closing(){
-        System.out.println("heyyy it closing");
-        for (room rm : Controller.getArrayRoom()) {
-            if (rm != null) {
-                
-            }
 
+    
+    public void loadRoomData(String s) {
+
+        down1.removeAll();
+        for (room rm : Controller.getArrayRoom()) {
+            if (s.equals("All")) {
+                
+                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+            }else if(s.equals("Small") && rm.getType().equals("Small")) {
+                
+                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+            }
+            else if(s.equals("Big") && rm.getType().equals("Big")) {
+                
+                down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+            }
         }
     }
+
 }
