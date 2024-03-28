@@ -15,7 +15,7 @@ import java.util.*;
 public class ClientJFrameDemo implements ActionListener {
     private JFrame fr;
     private JButton bn_alert;
-    private ServerJFrameDemo x;
+//    private ServerJFrameDemo x;
     
     private String testtxt = "c";
     
@@ -71,6 +71,9 @@ public class ClientJFrameDemo implements ActionListener {
                 
                 outToServer.writeBytes(testtxt);
 //                System.out.println(inFromServer.readLine() + "client");
+
+//                System.out.println(inFromServer.readLine());
+//                outToServer.flush();
 
             } catch (Exception ex) {
                 ex.printStackTrace();
