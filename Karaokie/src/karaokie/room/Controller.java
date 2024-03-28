@@ -88,13 +88,11 @@ public class Controller {
             }
         }
 
-        room.add(null);
     }
 
     // Room Zone
     public static void addRoom(room r) {
-        room.set(Room_count, r);
-        room.add(null);
+        room.add(r);
         Room_count++;
     }
 

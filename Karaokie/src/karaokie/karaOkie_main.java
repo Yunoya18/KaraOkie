@@ -68,6 +68,7 @@ public class karaOkie_main implements WindowListener{
     public void windowClosing(WindowEvent e) {
         System.out.println("Closing");
         mp.sentClosing();
+        Controller.saveFile();
     }
 
     @Override

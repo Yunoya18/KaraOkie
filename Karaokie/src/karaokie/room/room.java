@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 
-public abstract class room extends JInternalFrame implements Available, Serializable{
+public abstract class room extends JInternalFrame implements Available, Serializable, ComponentListener{
     private static final long serialVersionUID = 1L;
     protected int roomNumber;
 //    protected roomMenu roomMenu;
@@ -28,6 +30,9 @@ public abstract class room extends JInternalFrame implements Available, Serializ
         this.Type = Type;
         this.Price = Price;
         this.Avaliable = Avaliable;
+        
+        addComponentListener(this);
+        System.out.println("check");
     }
     
     
@@ -83,5 +88,23 @@ public abstract class room extends JInternalFrame implements Available, Serializ
     
     public int getPosition_y(){
         return position_y;
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        Point position = this.getLocation();
+        System.out.println(position);
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
     }
 }

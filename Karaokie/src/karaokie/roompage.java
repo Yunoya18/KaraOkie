@@ -209,9 +209,9 @@ public class roompage extends JPanel implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("test");
                 Controller.CreateSmallRoom();
-                for (room room : Controller.getArrayRoom()) {
-                    if (room != null) {
-                        sandbox.add(room);
+                for (room rm : Controller.getArrayRoom()) {
+                    if (rm != null) {
+                        sandbox.add(rm);
                     }
 
                     // add room in roompage when create box
@@ -328,9 +328,9 @@ public class roompage extends JPanel implements ActionListener {
 
         // LoadData
         Controller.openFile();
-        for (room room : Controller.getArrayRoom()) {
-            if (room != null) {
-                sandbox.add(room);
+        for (room rm : Controller.getArrayRoom()) {
+            if (rm != null) {
+                sandbox.add(rm);
             }
 
         }
@@ -395,9 +395,9 @@ public class roompage extends JPanel implements ActionListener {
     }
     public void Closing(){
         System.out.println("heyyy it closing");
-        for (room room : Controller.getArrayRoom()) {
-            if (room != null) {
-                sandbox.add(room);
+        for (room rm : Controller.getArrayRoom()) {
+            if (rm != null) {
+                
             }
 
         }
