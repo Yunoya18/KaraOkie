@@ -11,7 +11,9 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class karaOkie_main {
+import karaokie.room.*;
+
+public class karaOkie_main implements WindowListener{
     private JFrame ma;
     private CardLayout cd;
     private JPanel main_panel;
@@ -39,6 +41,14 @@ public class karaOkie_main {
         ma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ma.pack();
         
+        
+        //controller
+        
+        Controller.openFile();
+        
+        // Listener
+        ma.addWindowListener(this);
+        
     }
     public static void main(String[] args) {
         try {
@@ -48,5 +58,35 @@ public class karaOkie_main {
             e.printStackTrace();
         }
         new karaOkie_main();
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.out.println("Closing");
+        mp.sentClosing();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
     }
 }

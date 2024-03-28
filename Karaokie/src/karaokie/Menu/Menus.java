@@ -87,5 +87,9 @@ public class Menus {
             map.put("Drinks", new ArrayList<Food>());
         }
     }
-
+//    public static void main(String[] args) {
+//        Menus m = new Menus();
+//        m.loadMap();
+//        m.saveMap();
+//    }
 }

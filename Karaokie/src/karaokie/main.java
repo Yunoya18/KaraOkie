@@ -14,13 +14,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class main extends JPanel implements ActionListener {
+public class main extends JPanel implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
     private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
     private JButton pg1, pg2, pg3, pg4, pg5;
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
+    private roompage pm1;
+    private addFood pm2;
+    private transaction pm3;
     public main(){
 //        ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -42,9 +45,11 @@ public class main extends JPanel implements ActionListener {
         txt3 = new JLabel("page3");
         txt4 = new JLabel("page4");
         txt5 = new JLabel("page5");
-        roompage pm1 = new roompage();
-        addFood pm2 = new addFood();
-        transaction pm3 = new transaction();
+        
+        //set page
+        pm1 = new roompage();
+        pm2 = new addFood();
+        pm3 = new transaction();
         
         
         
@@ -257,6 +262,10 @@ public class main extends JPanel implements ActionListener {
 //        }
 //        new main();
 //    }
+
+    public void sentClosing(){
+        pm1.Closing();
+    }
 }
 
  

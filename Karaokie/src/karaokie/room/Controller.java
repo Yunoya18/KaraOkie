@@ -154,6 +154,33 @@ public class Controller {
             e.printStackTrace();
         }
     }
+    
+    public static void openFile() {
+
+        // File
+        File file_room = new File("room.dat");
+        File file_roomMenu = new File("roomMenu.dat");
+        if (file_room.exists()) {
+            try (FileInputStream fin = new FileInputStream("room.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+
+                room = (ArrayList<room>) oin.readObject();
+                Room_count = room.size();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+        }
+        if (file_roomMenu.exists()) {
+            try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                roomMenu = (ArrayList<roomMenu>) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static void main(String[] args) {
 

@@ -14,6 +14,8 @@ public abstract class room extends JInternalFrame implements Available, Serializ
     protected String Type;
     protected int Price;
     protected boolean Avaliable;
+    protected int position_x;
+    protected int position_y;
     
     
     public room(){
@@ -21,6 +23,7 @@ public abstract class room extends JInternalFrame implements Available, Serializ
     }   
 
     public room(int roomNumber, String Type, int Price, boolean Avaliable) {
+        super("Room" + roomNumber, false ,false ,false ,false);
         this.roomNumber = roomNumber;
         this.Type = Type;
         this.Price = Price;
@@ -66,4 +69,19 @@ public abstract class room extends JInternalFrame implements Available, Serializ
         return Type;
     }
 
+    public void setPosition_x(int position_x){
+        this.position_x = position_x;
+    }
+    
+    public void setPosition_y(int position_y){
+        this.position_y = position_y;
+    }
+    
+    public int getPosition_x(){
+        return position_x;
+    }
+    
+    public int getPosition_y(){
+        return position_y;
+    }
 }
