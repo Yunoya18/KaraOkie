@@ -16,6 +16,7 @@ public class testsocketobject {
        f.setType("water");
        room.addMenu(f, 5);
        room.tranMap();
+       
 
 
        
