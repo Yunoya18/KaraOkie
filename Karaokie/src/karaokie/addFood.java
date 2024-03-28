@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.table.*;
 import karaokie.Menu.Food;
+import karaokie.Menu.Menus;
 
 public class addFood extends JPanel implements ActionListener, WindowListener {
 
@@ -30,8 +31,11 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
     private TableColumn tc;
     private JButton b, b2;
     private JPanel p1, p2;
+    private Menus menu;
 
     public addFood() {
+        //menu and food
+        menu = new Menus();
 
         setBackground(Color.decode("#535870"));
         setLayout(new BorderLayout());
@@ -160,10 +164,20 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
         } else if (e.getSource().equals(b2)) {
             DefaultTableModel tm = (DefaultTableModel) t.getModel();
             int ind[] = t.getSelectedRows();
+            
+            //removeMenu
+            Icon icon = (Icon) tm.getValueAt(ind[0], 0);
+            String name =  (String) tm.getValueAt(ind[0], 1);
+            String type =(String) tm.getValueAt(ind[0], 2);
+            String price =  (String) tm.getValueAt(ind[0], 3);
+            String value = price;
+            String[] parts = value.split("\\s+");
+            double amount = Double.parseDouble(parts[0]);
+            menu.removeMenu(new Food(name, icon, amount, type));
+            
+            tm.removeRow(ind[0]);
             System.out.println(ind);
-            for (int i = ind.length - 1; i >= 0; i--) {
-                tm.removeRow(ind[i]);
-            }
+
         }
     }
 
