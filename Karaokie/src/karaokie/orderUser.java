@@ -160,12 +160,12 @@ public class orderUser extends JPanel implements ActionListener{
         pic.setPreferredSize(new Dimension(300, 300));
         pic.setBorder(BorderFactory.createLineBorder(Color.decode("#535870")));
         
-        name = new JLabel("hi");
+        name = new JLabel();
         name.setText(n);
         name.setFont(new Font("", Font.PLAIN, 30));
         name.setForeground(Color.white);
         
-        price = new JLabel("12THB");
+        price = new JLabel();
         price.setText(p);
         price.setFont(new Font("", Font.PLAIN, 30));
         price.setForeground(Color.white);
@@ -182,7 +182,16 @@ public class orderUser extends JPanel implements ActionListener{
         menu.add(pprice);
         menu.add(pbut);
         j.add(menu);
-        
+        menub.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {                        
+                menub.setCursor(new Cursor(Cursor.HAND_CURSOR));                       
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                menub.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));                        
+            }
+        });
     }
     @Override
     public void actionPerformed(ActionEvent ev){
