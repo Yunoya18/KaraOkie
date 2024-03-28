@@ -213,77 +213,74 @@ public class roompage extends JPanel implements ActionListener{
         rect1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-               if(tool.isVisible()){
-               ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
-               Image squ = sq.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-               ImageIcon square = new ImageIcon(squ);
-               JLabel box = new JLabel(square);
-               box.setVisible(true);
-               box.setBounds(250,300,90,90);
-               box.setBackground(Color.WHITE);
-                sandbox.add(box);               
-                sandbox.revalidate();
-                sandbox.repaint();
-                
-               // add room in roompage when create box
-               ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
-               Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
-               ImageIcon rol = new ImageIcon(r);
-               down1.add(new JLabel(rol));
-             
-               // make box moveable
-               box.addMouseMotionListener(new MouseAdapter(){
-                   @Override
-                   public void mousePressed(MouseEvent e){
-                       if(tool.isVisible() && movin){
-                           System.out.println("8888");
+                if(tool.isVisible()){
+                    ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
+                    Image squ = sq.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+                    ImageIcon square = new ImageIcon(squ);
+                    JLabel box = new JLabel(square);
+                    box.setVisible(true);
+                    box.setBounds(250,300,90,90);
+                    box.setBackground(Color.WHITE);
+                     sandbox.add(box);               
+                     sandbox.revalidate();
+                     sandbox.repaint();
 
-                       }
-                       
-                   }
-                   @Override
-                   public void mouseDragged(MouseEvent e){
-                       if(tool.isVisible() && movin){
+                    // add room in roompage when create box
+                    ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
+                    Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
+                    ImageIcon rol = new ImageIcon(r);
+                    down1.add(new JLabel(rol));
 
-                       Point newLocation = box.getLocation();
-                         newLocation.translate(e.getX()-45, e.getY()-45);
-                         box.setLocation(newLocation);
-                       }
-                   }
-                   @Override
-                   public void mouseClicked(MouseEvent e){
-                       if(tool.isVisible() && del){
-                           JOptionPane.showMessageDialog(null, "Clicked ");
-                       }
-                   }
-//                   @Override
-//                public void mouseDragged(MouseEvent e){
-//                    Point locate = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
-////                        if(box.getParent().getBounds().contains(locate)){
-//                                Point newlocate = box.getLocation();
-//                                newlocate.translate(locate.x - firstp.x, locate.y - firstp.y);
-//                                newlocate.x = Math.max(newlocate.x, 0);
-//                                newlocate.y = Math.max(newlocate.y, 0);
-//                                newlocate.x = Math.min(newlocate.x, box.getParent().getWidth()-box.getWidth());
-//                                newlocate.y = Math.min(newlocate.y, box.getParent().getHeight()-box.getHeight());
-//                                box.setLocation(newlocate);
-//                                firstp = locate;
-////                            }
-//                }
-//                @Override
-//                public void mousePressed(MouseEvent e) {
-//                firstp = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
-//                    }
-//                @Override
-//                public void mouseReleased(MouseEvent e) {
-//                firstp = null;
-//                    }
-//              @Override
-//                    public void mouseClicked(MouseEvent e) {
-//                        JOptionPane.showMessageDialog(null, "Clicked ");
-//                    }
-            });}
-                else{
+                    // make box moveable
+                    box.addMouseMotionListener(new MouseAdapter(){
+                        @Override
+                        public void mousePressed(MouseEvent e){
+                            if(tool.isVisible() && movin){
+                                System.out.println("8888");
+                            }
+                        }
+                        @Override
+                        public void mouseDragged(MouseEvent e){
+                            if(tool.isVisible() && movin){
+
+                            Point newLocation = box.getLocation();
+                              newLocation.translate(e.getX()-45, e.getY()-45);
+                              box.setLocation(newLocation);
+                            }
+                        }
+                        @Override
+                        public void mouseClicked(MouseEvent e){
+                            if(tool.isVisible() && del){
+                                JOptionPane.showMessageDialog(null, "Clicked ");
+                            }
+                        }
+     //                   @Override
+     //                public void mouseDragged(MouseEvent e){
+     //                    Point locate = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
+     ////                        if(box.getParent().getBounds().contains(locate)){
+     //                                Point newlocate = box.getLocation();
+     //                                newlocate.translate(locate.x - firstp.x, locate.y - firstp.y);
+     //                                newlocate.x = Math.max(newlocate.x, 0);
+     //                                newlocate.y = Math.max(newlocate.y, 0);
+     //                                newlocate.x = Math.min(newlocate.x, box.getParent().getWidth()-box.getWidth());
+     //                                newlocate.y = Math.min(newlocate.y, box.getParent().getHeight()-box.getHeight());
+     //                                box.setLocation(newlocate);
+     //                                firstp = locate;
+     ////                            }
+     //                }
+     //                @Override
+     //                public void mousePressed(MouseEvent e) {
+     //                firstp = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
+     //                    }
+     //                @Override
+     //                public void mouseReleased(MouseEvent e) {
+     //                firstp = null;
+     //                    }
+     //              @Override
+     //                    public void mouseClicked(MouseEvent e) {
+     //                        JOptionPane.showMessageDialog(null, "Clicked ");
+     //                    }
+            });} else {
                    
                }
             }
@@ -291,77 +288,77 @@ public class roompage extends JPanel implements ActionListener{
         
         JButton[] group = {room, order, report,edit, cursor, move, add, delete, add};
         for(JButton button : group){
-              button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        if(e.getSource().equals(room)){
-                            button.setBorderPainted(true);
-                            button.setBorder(new LineBorder(Color.PINK,5));
-                        }
-                        else if(e.getSource().equals(order)){
-                            button.setBorderPainted(true);
-                            button.setBorder(new LineBorder(Color.PINK,5));
-                        }
-                        else if(e.getSource().equals(report)){
-                            button.setBorderPainted(true);
-                            button.setBorder(new LineBorder(Color.PINK, 5));
-                        }
-                       
-                        else if(e.getSource().equals(cursor)){
-                            ImageIcon hoverIcon = new ImageIcon(t1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-                            button.setIcon(hoverIcon);
-                        }
-                        else if(e.getSource().equals(move)){
-                            ImageIcon hoverIcon = new ImageIcon(t2.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-                            button.setIcon(hoverIcon);
-                        }
-                        else if(e.getSource().equals(add)){
-                            ImageIcon hoverIcon = new ImageIcon(t3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-                            button.setIcon(hoverIcon);
-                            
-                        }
-                        else if(e.getSource().equals(delete)){
-                            ImageIcon hoverIcon = new ImageIcon(t4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-                            button.setIcon(hoverIcon);
-                        }
-                        
-                        
-                        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                       
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    if(e.getSource().equals(room)){
+                        button.setBorderPainted(true);
+                        button.setBorder(new LineBorder(Color.PINK,5));
                     }
-                    @Override
-                    public void mouseClicked(MouseEvent e){
-                        
+                    else if(e.getSource().equals(order)){
+                        button.setBorderPainted(true);
+                        button.setBorder(new LineBorder(Color.PINK,5));
+                    }
+                    else if(e.getSource().equals(report)){
+                        button.setBorderPainted(true);
+                        button.setBorder(new LineBorder(Color.PINK, 5));
                     }
 
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                        if(e.getSource().equals(room)){
-                            button.setBorderPainted(false);
-                        }
-                        else if(e.getSource().equals(order)){
-                            button.setBorderPainted(false);
-                        }
-                        else if(e.getSource().equals(report)){
-                            button.setBorderPainted(false);
-                        }
-                        
-                        else if(e.getSource().equals(cursor)){
-                            button.setIcon(tool1);
-                        }
-                        else if(e.getSource().equals(move)){
-                            button.setIcon(tool2);
-                        }
-                        else if(e.getSource().equals(add)){
-                            button.setIcon(tool3);
-                            
-                        }
-                        else if(e.getSource().equals(delete)){
-                            button.setIcon(tool4);
-                        }
+                    else if(e.getSource().equals(cursor)){
+                        ImageIcon hoverIcon = new ImageIcon(t1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+                        button.setIcon(hoverIcon);
                     }
-                });
+                    else if(e.getSource().equals(move)){
+                        ImageIcon hoverIcon = new ImageIcon(t2.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+                        button.setIcon(hoverIcon);
+                    }
+                    else if(e.getSource().equals(add)){
+                        ImageIcon hoverIcon = new ImageIcon(t3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+                        button.setIcon(hoverIcon);
+
+                    }
+                    else if(e.getSource().equals(delete)){
+                        ImageIcon hoverIcon = new ImageIcon(t4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+                        button.setIcon(hoverIcon);
+                    }
+
+
+                    button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                }
+                @Override
+                public void mouseClicked(MouseEvent e){
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    if(e.getSource().equals(room)){
+                        button.setBorderPainted(false);
+                    }
+                    else if(e.getSource().equals(order)){
+                        button.setBorderPainted(false);
+                    }
+                    else if(e.getSource().equals(report)){
+                        button.setBorderPainted(false);
+                    }
+
+                    else if(e.getSource().equals(cursor)){
+                        button.setIcon(tool1);
+                    }
+                    else if(e.getSource().equals(move)){
+                        button.setIcon(tool2);
+                    }
+                    else if(e.getSource().equals(add)){
+                        button.setIcon(tool3);
+
+                    }
+                    else if(e.getSource().equals(delete)){
+                        button.setIcon(tool4);
+                    }
+                }
+            });
         }
         
         // change to room order report

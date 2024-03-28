@@ -11,6 +11,7 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import karaokie.alert.SendAlertToStaff;
 public class mainUser implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
@@ -50,13 +51,13 @@ public class mainUser implements ActionListener{
         p2.add(txt2);
         
         //set Icon Image
-        ImageIcon i1 = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\menu.png");
+        ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/menu.png");
         Image img1 = i1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon1 = new ImageIcon(img1);
-        ImageIcon i2 = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\grocery-store.png");
+        ImageIcon i2 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/grocery-store.png");
         Image img2 = i2.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon2 = new ImageIcon(img2);
-        ImageIcon i3 = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\user.png");
+        ImageIcon i3 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/user.png");
         Image img3 = i3.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Icon icon3 = new ImageIcon(img3);
         pg1.setIcon(icon1);
@@ -169,9 +170,13 @@ public class mainUser implements ActionListener{
            int resp = JOptionPane.showConfirmDialog(ma, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
                // alert the staff
+
            }
         }
     }
+//    public void sendAlertToStaff() {
+//        
+//    }
     public static void main(String[] args) {
         new mainUser();
     }
