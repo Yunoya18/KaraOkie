@@ -15,7 +15,7 @@ import org.w3c.dom.NamedNodeMap;
 
 public class Menus {
 
-    protected static Map<String, ArrayList<Food>> map;
+    public static Map<String, ArrayList<Food>> map;
 
     public Menus() {
         map = new HashMap<>();

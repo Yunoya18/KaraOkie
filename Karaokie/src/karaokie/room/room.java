@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
-public abstract class room implements Available, Serializable{
+public abstract class room extends JInternalFrame implements Available, Serializable{
+    private static final long serialVersionUID = 1L;
     protected int roomNumber;
 //    protected roomMenu roomMenu;
     protected String Type;

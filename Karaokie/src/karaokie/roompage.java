@@ -14,6 +14,8 @@ import javax.swing.*;
 //import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 //import java.util.ArrayList;
+import karaokie.room.*;
+
 public class roompage extends JPanel implements ActionListener{
     private CardLayout card;
     private JButton room, order, report, edit, cursor, move, add, delete;
@@ -22,12 +24,16 @@ public class roompage extends JPanel implements ActionListener{
     private JPopupMenu create;
     private JComboBox type;
     private JTextField search;
+    private Controller con = new Controller();;
 //    private Point firstp;
     private boolean movin = false;
     private boolean del = false;
     
+    
 //    JLabel box1;
     public roompage(){
+        // set up
+        
         
 //        firstp = new Point();
         sandbox = new JPanel(new FlowLayout());
@@ -210,77 +216,26 @@ public class roompage extends JPanel implements ActionListener{
         //set button border in out
         
         
+        
         rect1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 if(tool.isVisible()){
-                    ImageIcon sq = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 63.png");
-                    Image squ = sq.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-                    ImageIcon square = new ImageIcon(squ);
-                    JLabel box = new JLabel(square);
-                    box.setVisible(true);
-                    box.setBounds(250,300,90,90);
-                    box.setBackground(Color.WHITE);
-                     sandbox.add(box);               
-                     sandbox.revalidate();
-                     sandbox.repaint();
-
+                    System.out.println("test");
+                    Controller.CreateSmallRoom();
+                    for (room room : Controller.getArrayRoom()){
+                        if (room != null)
+                        sandbox.add(room);
+                    }
+                    
+                    
                     // add room in roompage when create box
                     ImageIcon rl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 35.png");
                     Image r = rl.getImage().getScaledInstance(300,100,Image.SCALE_SMOOTH);
                     ImageIcon rol = new ImageIcon(r);
                     down1.add(new JLabel(rol));
 
-                    // make box moveable
-                    box.addMouseMotionListener(new MouseAdapter(){
-                        @Override
-                        public void mousePressed(MouseEvent e){
-                            if(tool.isVisible() && movin){
-                                System.out.println("8888");
-                            }
-                        }
-                        @Override
-                        public void mouseDragged(MouseEvent e){
-                            if(tool.isVisible() && movin){
-
-                            Point newLocation = box.getLocation();
-                              newLocation.translate(e.getX()-45, e.getY()-45);
-                              box.setLocation(newLocation);
-                            }
-                        }
-                        @Override
-                        public void mouseClicked(MouseEvent e){
-                            if(tool.isVisible() && del){
-                                JOptionPane.showMessageDialog(null, "Clicked ");
-                            }
-                        }
-     //                   @Override
-     //                public void mouseDragged(MouseEvent e){
-     //                    Point locate = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
-     ////                        if(box.getParent().getBounds().contains(locate)){
-     //                                Point newlocate = box.getLocation();
-     //                                newlocate.translate(locate.x - firstp.x, locate.y - firstp.y);
-     //                                newlocate.x = Math.max(newlocate.x, 0);
-     //                                newlocate.y = Math.max(newlocate.y, 0);
-     //                                newlocate.x = Math.min(newlocate.x, box.getParent().getWidth()-box.getWidth());
-     //                                newlocate.y = Math.min(newlocate.y, box.getParent().getHeight()-box.getHeight());
-     //                                box.setLocation(newlocate);
-     //                                firstp = locate;
-     ////                            }
-     //                }
-     //                @Override
-     //                public void mousePressed(MouseEvent e) {
-     //                firstp = SwingUtilities.convertPoint(box, e.getPoint(), box.getParent());
-     //                    }
-     //                @Override
-     //                public void mouseReleased(MouseEvent e) {
-     //                firstp = null;
-     //                    }
-     //              @Override
-     //                    public void mouseClicked(MouseEvent e) {
-     //                        JOptionPane.showMessageDialog(null, "Clicked ");
-     //                    }
-            });} else {
+                    } else {
                    
                }
             }

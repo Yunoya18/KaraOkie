@@ -7,7 +7,7 @@ import karaokie.Menu.*;
 import java.net.*;
 
 public class Controller{
-    private static int Room_count;
+    private static int Room_count = 0;
     private static Map<Food, Integer> map;
     private static ArrayList<room> room = new ArrayList<>();
     private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
@@ -38,22 +38,18 @@ public class Controller{
             
             ObjectInputStream test = new ObjectInputStream(connectionSocket.getInputStream());    
                 
-            ObjectOutputStream oout = new ObjectOutputStream(connectionSocket.getOutputStream());
+            FileInputStream fileInputStream = new FileInputStream("menu.dat");
+            OutputStream outputStream = connectionSocket.getOutputStream();
             ){    
 
             //code do something
-            File menu = new File("menu.dat");
-            if (menu.exists()){
-                System.out.println("true");
-                try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-                    
-                    
-                    oout.writeObject((HashMap<String, ArrayList<Food>>) oin.readObject());
-                } catch (IOException | ClassNotFoundException e) {
-
-                    e.printStackTrace();
+            byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
                 }
-            }
+            
+            
         }catch(IOException e){
             System.out.println(e);
         }
@@ -82,13 +78,16 @@ public class Controller{
 
                 e.printStackTrace();
             }
-        } 
+        }
+        
+        room.add(null);
     }
 
     
     // Room Zone
     public static void addRoom(room r){
         room.set(Room_count, r);
+        room.add(null);
         Room_count++;
     }
     
@@ -98,6 +97,10 @@ public class Controller{
     
     public static room getRoom(int index){
         return room.get(index);
+    }
+    
+    public static ArrayList<room> getArrayRoom(){
+        return room;
     }
     
     public static void CreateSmallRoom(){

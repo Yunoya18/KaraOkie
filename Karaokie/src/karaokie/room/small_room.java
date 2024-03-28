@@ -4,11 +4,24 @@
  */
 package karaokie.room;
 
+import java.awt.*;
+import javax.swing.*;
+
 
 public class small_room extends room{
+    private JPanel panel = new JPanel();
     
     public small_room(int roomNumber){
         super(roomNumber, "Small", 200, false); 
+    
+        panel.add(new JLabel(new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 62.png")));
+        
+        panel.setBackground(Color.BLACK);
+        add(panel);
+        pack();
+        //setSize(500, 500);
+        setVisible(true);
+    
     }
     
 }
