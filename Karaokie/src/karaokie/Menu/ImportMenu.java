@@ -3,23 +3,35 @@ package karaokie.Menu;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import karaokie.room.Controller;
 
 public class ImportMenu {
 
     public static void main(String argv[]) {
-        try (Socket clientSocket = new Socket("localhost", 6789);
-             ObjectOutputStream outToServer = new ObjectOutputStream(clientSocket.getOutputStream());
-             ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream())) {
 
-            outToServer.writeObject("sendMenu");
-            outToServer.flush();
-
-            Map<Food, Integer> map = (Map<Food, Integer>) inFromServer.readObject();
-
+         try {
+            Socket socket = new Socket("26.26.134.224",6789);
             
-
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+            InputStream inputStream = socket.getInputStream();
+            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream("received_file.dat"));
+            
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, bytesRead);
+            }
+            
+            fileOutputStream.close();
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ImportMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-}
+           
+           
+
+   
+        }
+    
