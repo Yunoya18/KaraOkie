@@ -4,19 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundedPanel extends JPanel {
-    private int arcWidth, arcHeight, w, h;
+    private int arcWidth, arcHeight, w, h, c;
     private Color backgroundColor;
     private float oppa;
 
-    public RoundedPanel(int arcWidth, int arcHeight, int w, int h, Color backgroundColor, float oppa) {
+    public RoundedPanel(int arcWidth, int arcHeight, int w, int h, Color backgroundColor, float oppa, int c) {
         this.arcWidth = arcWidth;
         this.arcHeight = arcHeight;
         this.backgroundColor = backgroundColor;
         this.h = h;
         this.w = w;
         this.oppa = oppa;
+        this.c = c;
         setOpaque(false);
-        setLayout(new FlowLayout(FlowLayout.CENTER, 21, 21));
+        setLayout(new FlowLayout(FlowLayout.CENTER, c, c));
     }
 
     @Override

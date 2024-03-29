@@ -24,10 +24,10 @@ public class cartUser extends JPanel implements ActionListener{
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
         
 //      outside box
-        out = new RoundedPanel(20, 20, 1000, 600, Color.decode("#282B3A"), 1.0f);
+        out = new RoundedPanel(20, 20, 1000, 600, Color.decode("#282B3A"), 1.0f, 21);
         
 //      inside box
-        in = new RoundedPanel(20, 20, 950, 510, Color.decode("#A6ADCE"), 1.0f);
+        in = new RoundedPanel(20, 20, 950, 510, Color.decode("#A6ADCE"), 1.0f, 21);
         
 //      button
         co = new JButton("Confirm Order");

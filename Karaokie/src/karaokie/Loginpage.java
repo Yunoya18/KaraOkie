@@ -12,25 +12,78 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class Loginpage extends JPanel implements ActionListener{
-    private RoundedPanel pa;
+    private RoundedPanel pa, u, p, b, userl, passl, signinb;
     private JTextField username, password;
     private JButton signin;
-    private JLabel bg;
+    private JLabel bg, user, pass;
     
     Loginpage(CardLayout cardLayout, Container cardPanel){
-        username = new JTextField();
-        password = new JTextField();
-        signin = new JButton();
         
         setLayout(new BorderLayout());
         
-        //set panel size
+        ImageIcon bgimtemp = new ImageIcon(System.getProperty("user.dir") + "/src/karaokie/image/bg.png");
+        Image temp = bgimtemp.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+        ImageIcon bgim = new ImageIcon(temp);
+        bg = new JLabel(bgim);
+        bg.setPreferredSize(new Dimension(1280, 720));
+        bg.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
         
-        //import img
-        ImageIcon s = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 48.png");
-        Image si = s.getImage().getScaledInstance(140, 50, Image.SCALE_SMOOTH);
-        Icon sign = new ImageIcon(si);
-        signin.setIcon(sign);
+        pa = new RoundedPanel(20, 20, 500, 330, Color.decode("#11003B"), 0.7f, 20);
+        
+        userl = new RoundedPanel(20, 20, 450, 30, Color.decode("#11003B"), 0.0f, 0);
+        passl = new RoundedPanel(20, 20, 450, 30, Color.decode("#11003B"), 0.0f, 0);
+        signinb = new RoundedPanel(20, 20, 450, 50, Color.decode("#11003B"), 0.0f, 0);
+        
+        user = new JLabel("Username");
+        user.setForeground(Color.white);
+        user.setFont(new Font("Montserrat", Font.BOLD, 20));
+        userl.add(user);
+        
+        username = new JTextField();
+        username.setBackground(Color.decode("#11003B"));
+        username.setPreferredSize(new Dimension(200, 48));
+        username.setBorder(null);
+        username.setForeground(Color.WHITE);
+        username.setFont(new Font("Montserrat", Font.BOLD, 15));
+        
+        u = new RoundedPanel(20, 20, 210, 50, Color.decode("#11003B"), 1.0f, 0);
+        u.add(username);
+        
+        pass = new JLabel("Password");
+        pass.setForeground(Color.white);
+        pass.setFont(new Font("Montserrat", Font.BOLD, 20));
+        passl.add(pass);
+        
+        password = new JTextField();
+        password.setBackground(Color.decode("#11003B"));
+        password.setPreferredSize(new Dimension(200, 48));
+        password.setBorder(null);
+        password.setForeground(Color.WHITE);
+        password.setFont(new Font("Montserrat", Font.BOLD, 15));
+        
+        p = new RoundedPanel(20, 20, 210, 50, Color.decode("#11003B"), 1.0f, 0);
+        p.add(password);
+        
+        signin = new JButton("Done");
+        signin.setPreferredSize(new Dimension(100, 45));
+        signin.setBackground(Color.decode("#11003B"));
+        signin.setBorderPainted(false);
+        signin.setFocusPainted(false);
+        signin.setForeground(Color.white);
+        signin.setFont(new Font("Montserrat", Font.BOLD, 15));
+        
+        b = new RoundedPanel(20, 20, 110, 50, Color.decode("#11003B"), 1.0f, 2);
+        b.add(signin);
+        
+        signinb.add(b);
+        
+        pa.add(userl);
+        pa.add(u);
+        pa.add(passl);
+        pa.add(p);
+        pa.add(signinb);
+        bg.add(pa);
+        add(bg);
         
         signin.addMouseListener(new MouseAdapter(){
             @Override
@@ -51,45 +104,7 @@ public class Loginpage extends JPanel implements ActionListener{
                 }
              }
         });
-        
-        //add user pass to right
-        
-        
-        //set app_name width height nad layout
-        username.setPreferredSize(new Dimension(320,30));
-        password.setPreferredSize(new Dimension(320,30));
-        signin.setPreferredSize(new Dimension(140,60));
-        
-        signin.setBorderPainted(false);
-        signin.setFocusPainted(false);
-        username.setBorder(null);
-        password.setBorder(null);
-        username.setForeground(Color.WHITE);
-        password.setForeground(Color.WHITE);
-        
-        //setBackground
-        signin.setBackground(Color.decode("#A6ADCE"));
-        username.setBackground(Color.decode("#3D4465"));
-        password.setBackground(Color.decode("#3D4465"));
-        
-        ImageIcon bgimtemp = new ImageIcon(System.getProperty("user.dir") + "/src/karaokie/image/bg.png");
-        Image temp = bgimtemp.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
-        ImageIcon bgim = new ImageIcon(temp);
-        bg = new JLabel(bgim);
-        bg.setPreferredSize(new Dimension(1280, 720));
-        bg.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
-        
-        
-        pa = new RoundedPanel(20, 20, 500, 330, Color.decode("#11003B"), 0.7f);
-        
-        
-        
-        
-        bg.add(pa);
-        add(bg);
     }
-
-    
     
     @Override
     public void actionPerformed(ActionEvent e) {
