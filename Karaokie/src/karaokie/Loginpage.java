@@ -12,7 +12,7 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class Loginpage extends JPanel implements ActionListener{
+public class Loginpage extends JPanel{
     private RoundedPanel pa, u, p, b, userl, passl, signinb;
     private JTextField username, password;
     private JButton signin;
@@ -113,12 +113,5 @@ public class Loginpage extends JPanel implements ActionListener{
                 //}
              }
         });
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       if(e.getSource().equals(signin)){
-        
-        }
     }
 }
