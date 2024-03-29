@@ -14,8 +14,8 @@ public class Controller {
 
     private static int Room_count = 0;
     private static Map<String, ArrayList<Food>> map;
+    private static Map<String, Map<Food, Integer>> roomMenu = new HashMap<>();
     private static ArrayList<room> room = new ArrayList<>();
-    private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
     public static JPanel p = new JPanel();
     public static main main = new main();
     public static boolean del;
@@ -85,7 +85,7 @@ public class Controller {
         }
         if (file_roomMenu.exists()) {
             try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-                roomMenu = (ArrayList<roomMenu>) oin.readObject();
+                roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {
 
@@ -133,18 +133,18 @@ public class Controller {
     }
     
     // Menu Zone
-    public static void setMenu(int index, roomMenu rm) {
-        roomMenu.set(index, rm);
+    public static void setMenu(String room, Food f, int i) {
+        HashMap<Food, Integer> food = new HashMap<>();
+        food.put(f, i);
+        
+        roomMenu.remove(room);
+        roomMenu.put(room, food);
     }
 
-    public static roomMenu getMenu(int index) {
-        return roomMenu.get(index);
+    public static HashMap<Food, Integer> getMenu(String key) {
+        return (HashMap<Food, Integer>) roomMenu.get(key);
     }
 
-    public static void delMenu(int index) {
-        setMenu(index, null);
-    }
-   
     // File Save
     public static void saveFile() {
 
@@ -187,7 +187,7 @@ public class Controller {
         }
         if (file_roomMenu.exists()) {
             try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-                roomMenu = (ArrayList<roomMenu>) oin.readObject();
+                roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {
 
@@ -197,7 +197,7 @@ public class Controller {
     }
     
     public static void resetFile(){
-        roomMenu = new ArrayList<>();
+        roomMenu = new HashMap<>();
         File file = new File("room.dat");
         file.delete();
     }

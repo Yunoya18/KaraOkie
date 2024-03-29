@@ -329,8 +329,12 @@ public class roompage extends JPanel implements ActionListener {
         down1sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down1sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
+        down2sc = new JScrollPane(down2);
+        down2sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        down2sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
         tablist.add(down1sc, "tab1");
-        tablist.add(down2, "tab2");
+        tablist.add(down2sc, "tab2");
         tablist.add(down3, "tab3");
 
         //change
@@ -339,9 +343,11 @@ public class roompage extends JPanel implements ActionListener {
         down3.setLayout(new FlowLayout(FlowLayout.CENTER));
         
         int height = 120 * Controller.getRoomSize();
+        int height2 = 450 * 2;
         
         down1.setPreferredSize(new Dimension(370, height));
-
+        down2.setPreferredSize(new Dimension(370, height2));
+        down3.setPreferredSize(new Dimension(370, 1000));
         
         
         room.setPreferredSize(new Dimension(100, 100));
@@ -388,6 +394,8 @@ public class roompage extends JPanel implements ActionListener {
 
         }
 
+        down2.add(new showorder("1", 15));
+        down2.add(new showorder("1", 15));
         Controller.p = sandbox;
     }
 
