@@ -18,9 +18,30 @@ public class roomMenu extends Menus {
     private String roomNumber;
     protected Map<String, Integer> map ;
     protected Map<String, Map<String, Integer>> map2;
+    
+    public roomMenu(){
+        map = new HashMap<>();
+        map2 = new HashMap<>();
+        
+        File file = new File("roommenu.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("roommenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+       
+        }
+        else{
+            map.put("s", 0);
+        }
+    }
 
     public void addMenu(String name, int i) {
         map.put(name, i);
+        this.saveMap();
 
     }
 //
@@ -67,8 +88,10 @@ public class roomMenu extends Menus {
 
                 e.printStackTrace();
             }
-        
-
+       
+        }
+        else{
+            map.put("s", 0);
         }
     }
 
