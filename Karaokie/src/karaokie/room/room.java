@@ -3,6 +3,7 @@ package karaokie.room;
 
 import karaokie.Menu.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -32,9 +33,11 @@ public abstract class room extends JInternalFrame implements Available, Serializ
         this.Price = Price;
         this.Avaliable = Avaliable;
         
+        
         addComponentListener(this);
         addMouseListener(this);
         System.out.println("check");
+//        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
     }
     
     
