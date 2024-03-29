@@ -56,11 +56,13 @@ public class roomMenu extends Menus {
 //        }
 //    }
 
-    public void tranMap() {
-
-        try (Socket clientSocket = new Socket("26.26.134.224", 6789); ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
-            objectOutputStream.writeObject(map);
-            System.out.println(map);
+    public void tranMap(String nameroom) {
+        this.loadMap();
+        map2.put(nameroom, map);
+        
+        try (Socket clientSocket = new Socket("localhost", 1234); ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
+            objectOutputStream.writeObject(map2);
+            System.out.println(map2);
         } catch (IOException e) {
             e.printStackTrace();
         }
