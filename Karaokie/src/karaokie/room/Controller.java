@@ -191,6 +191,12 @@ public class Controller {
             }
         }
     }
+    
+    public static void resetFile(){
+        roomMenu = new ArrayList<>();
+        File file = new File("room.dat");
+        file.delete();
+    }
 
     public static void main(String[] args) {
 

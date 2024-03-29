@@ -132,7 +132,7 @@ public class roompage extends JPanel implements ActionListener {
         add.setFocusPainted(false);
         delete.setBorderPainted(false);
         delete.setFocusPainted(false);
-        refresh.setFocusPainted(false);
+        refresh.setBorderPainted(false);
         refresh.setFocusPainted(false);
 
         cursor.setBackground(Color.decode("#171925"));
@@ -441,6 +441,7 @@ public class roompage extends JPanel implements ActionListener {
             }
         } else if (e.getSource().equals(refresh)) {
             System.out.println("refresh");
+            Controller.resetFile();
 
         }
     }

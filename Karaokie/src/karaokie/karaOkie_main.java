@@ -63,6 +63,7 @@ public class karaOkie_main implements WindowListener{
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Open");
+        Controller.openFile();
         mp.sentOpen();
     }
 
