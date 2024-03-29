@@ -140,7 +140,7 @@ public class orderUser extends JPanel implements ActionListener{
 //  need to check the categories before add to panel
 //  fo is Food, sn is Snack and dr is Drinks 
     public void newMenu(ImageIcon i, String n, String p, JPanel j){
-        menu = new RoundedPanel(20, 20, 350, 550, Color.decode("#282B3A"));
+        menu = new RoundedPanel(20, 20, 350, 550, Color.decode("#282B3A"), 1.0f);
         
         ppic = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pprice = new JPanel(new FlowLayout(FlowLayout.CENTER));
