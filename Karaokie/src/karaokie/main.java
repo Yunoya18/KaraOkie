@@ -15,7 +15,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import karaokie.room.Controller;
 
-public class main extends JPanel implements ActionListener{
+public class main implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
     private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
@@ -26,7 +26,7 @@ public class main extends JPanel implements ActionListener{
     private addFood pm2;
     private transaction pm3;
     public main(){
-//        ma = new JFrame("karaOkie");
+        ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();
         tab = new JPanel(cardlayout);
@@ -100,14 +100,14 @@ public class main extends JPanel implements ActionListener{
         pg5.setIcon(icon5);
         
         //set mainframe background
-        setLayout(new BorderLayout(0, 0));
+        ma.setLayout(new BorderLayout(0, 0));
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
         
         
         //add components to mainframe
-        add(menu, BorderLayout.WEST);
-        add(tab, BorderLayout.CENTER);
+        ma.add(menu, BorderLayout.WEST);
+        ma.add(tab, BorderLayout.CENTER);
         
         //add other
         
@@ -218,8 +218,8 @@ public class main extends JPanel implements ActionListener{
          
         
 //        ma.setSize(1280, 720);
-        setPreferredSize(new Dimension(1280, 720));
-        setVisible(true);
+        ma.setPreferredSize(new Dimension(1280, 720));
+        ma.setVisible(true);
 //        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        pack();
         
@@ -278,6 +278,10 @@ public class main extends JPanel implements ActionListener{
     public void renew(String name){
         cardlayout.show(tab, "pg4");
         cardlayout.show(tab, name);
+    }
+    
+    public static void main(String[] args) {
+        new main();
     }
 }
 
