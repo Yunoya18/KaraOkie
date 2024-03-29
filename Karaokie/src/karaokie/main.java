@@ -25,6 +25,7 @@ public class main extends JPanel implements ActionListener{
     private roompage pm1;
     private addFood pm2;
     private transaction pm3;
+    private stat pm5;
     public main(){
         ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -52,6 +53,7 @@ public class main extends JPanel implements ActionListener{
         pm1 = new roompage();
         pm2 = new addFood();
         pm3 = new transaction();
+        pm5 = new stat();
         
         
         
@@ -117,7 +119,7 @@ public class main extends JPanel implements ActionListener{
         tab.add(pm2, "pg2");
         tab.add(pm3, "pg3");
         tab.add(p4, "pg4");
-        tab.add(p5, "pg5");
+        tab.add(pm5, "pg5");
         
         //insert button in menu bar
         menu.add(blank);
