@@ -128,6 +128,10 @@ public class Controller {
         main.renew(name);
     }
     
+    public static int getRoomSize(){
+        return room.size();
+    }
+    
     // Menu Zone
     public static void setMenu(int index, roomMenu rm) {
         roomMenu.set(index, rm);
