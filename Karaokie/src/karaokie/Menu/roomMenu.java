@@ -23,9 +23,9 @@ public class roomMenu extends Menus {
         map = new HashMap<>();
         map2 = new HashMap<>();
         
-        File file = new File("roommenu.dat");
+        File file = new File("ro.dat");
         if (file.exists()) {
-            try (FileInputStream fin = new FileInputStream("roommenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {
@@ -56,18 +56,20 @@ public class roomMenu extends Menus {
 //        }
 //    }
 
-    public void tranMap() {
-
-        try (Socket clientSocket = new Socket("26.26.134.224", 6789); ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
-            objectOutputStream.writeObject(map);
-            System.out.println(map);
+    public void tranMap(String nameroom) {
+        this.loadMap();
+        map2.put(nameroom, map);
+        
+        try (Socket clientSocket = new Socket("localhost", 1234); ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
+            objectOutputStream.writeObject(map2);
+            System.out.println(map2);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     @Override
     public void saveMap() {
-        try (FileOutputStream fout = new FileOutputStream("roommenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+        try (FileOutputStream fout = new FileOutputStream("ro.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
 
             oout.writeObject(map);
 
@@ -79,9 +81,9 @@ public class roomMenu extends Menus {
     @Override
     public void loadMap(){
          map = new HashMap<>();
-        File file = new File("roommenu.dat");
+        File file = new File("ro.dat");
         if (file.exists()) {
-            try (FileInputStream fin = new FileInputStream("roommenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {

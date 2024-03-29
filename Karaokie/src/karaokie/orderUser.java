@@ -20,6 +20,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 import karaokie.Menu.Food;
+import karaokie.Menu.roomMenu;
 public class orderUser extends JPanel implements ActionListener{
     private JButton b1, b2, b3, b4;
     private JScrollPane sc, sc2, sc3, sc4;
@@ -31,7 +32,9 @@ public class orderUser extends JPanel implements ActionListener{
     private fillFood ff;
     private String ty;
     private Map<String, ArrayList<Food>> map;
+    private roomMenu room;
     public orderUser(){
+        room = new roomMenu();
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER));
         b1 = new JButton("All");
@@ -179,7 +182,27 @@ public class orderUser extends JPanel implements ActionListener{
         price.setForeground(Color.white);
         
         JButton menub = new JButton("Add");
-        menub.addActionListener(this);
+        menub.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String input = JOptionPane.showInputDialog( "How many would you like?", JOptionPane.PLAIN_MESSAGE);
+            if (input != null && !input.isEmpty()) {
+                try {
+                    int quantity = Integer.parseInt(input);
+                    
+                    room.addMenu(n, quantity);
+                    System.out.println(quantity);
+                    System.out.println(n);
+                    
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(pname, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(pname, "Please enter a quantity.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            }
+        });
         ppic.add(pic);
         pname.add(name);
         pprice.add(price);
