@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 
 public class roomMenu extends Menus {
 
+    private String roomNumber;
     protected Map<Food, Integer> map = new HashMap<>();
 
     public void addMenu(Food food, int i) {
@@ -45,5 +46,13 @@ public class roomMenu extends Menus {
 
     public Map<Food, Integer> getMap() {
         return map;
+    }
+    
+    public void setroomNumber(String s){
+        roomNumber = s;
+    }
+    
+    public String getroomNumber(){
+        return roomNumber;
     }
 }
