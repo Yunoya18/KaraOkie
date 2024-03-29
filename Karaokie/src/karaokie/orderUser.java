@@ -10,9 +10,16 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
+import karaokie.Menu.Food;
 public class orderUser extends JPanel implements ActionListener{
     private JButton b1, b2, b3, b4;
     private JScrollPane sc, sc2, sc3, sc4;
@@ -23,6 +30,7 @@ public class orderUser extends JPanel implements ActionListener{
     private CardLayout cl;
     private fillFood ff;
     private String ty;
+    private Map<String, ArrayList<Food>> map;
     public orderUser(){
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -196,21 +204,73 @@ public class orderUser extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(b1)){
+            all.removeAll();
+
+            this.loadMap();
+            for (String key : map.keySet()) {
+                for (int num = 0; num <= map.get(key).size() - 1; num++) {
+                    Icon icon = (Icon) map.get(key).get(num).getImage();
+                    String name = (String) map.get(key).get(num).getName();
+                    double price = (double) map.get(key).get(num).getPrice();
+                    this.newMenu((ImageIcon) icon, name, String.valueOf(price), all);
+                }
+            }
+
             cl.show(p1, "all");
         }
         else if(ev.getSource().equals(b2)){
+            fo.removeAll();
+          
+            this.loadMap();
+            for (int num = 0; num <= map.get("Food").size() - 1; num++) {
+                Icon icon = (Icon) map.get("Food").get(num).getImage();
+                String name = (String) map.get("Food").get(num).getName();
+                double price = (double) map.get("Food").get(num).getPrice();
+                this.newMenu((ImageIcon) icon, name, String.valueOf(price), fo);
+            }
             cl.show(p1, "food");
         }
         else if(ev.getSource().equals(b3)){
+            sn.removeAll();
+ 
+            this.loadMap();
+            for (int num = 0; num <= map.get("Snack").size() - 1; num++) {
+                Icon icon = (Icon) map.get("Snack").get(num).getImage();
+                String name = (String) map.get("Snack").get(num).getName();
+                double price = (double) map.get("Snack").get(num).getPrice();
+                this.newMenu((ImageIcon) icon, name, String.valueOf(price), sn);
+            }
             cl.show(p1, "snack");
         }
         else if(ev.getSource().equals(b4)){
+            dr.removeAll();
+           
+            this.loadMap();
+            for (int num = 0; num <= map.get("Drinks").size() - 1; num++) {
+                Icon icon = (Icon) map.get("Drinks").get(num).getImage();
+                String name = (String) map.get("Drinks").get(num).getName();
+                double price = (double) map.get("Drinks").get(num).getPrice();
+                this.newMenu((ImageIcon) icon, name, String.valueOf(price), dr);
+            }
             cl.show(p1, "drinks");
         }
         else if(ev.getActionCommand().equals("Add")){
             JOptionPane.showInputDialog(this, "", "How many would you like?", JOptionPane.PLAIN_MESSAGE);
         }
     }
+        public void loadMap() {
+        File file = new File("menu.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         new mainUser();
     }

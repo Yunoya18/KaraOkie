@@ -12,10 +12,10 @@ public class ImportMenu {
     public static void main(String argv[]) {
 
          try {
-            Socket socket = new Socket("26.26.134.224",6789);
+            Socket socket = new Socket("localhost",6789);
             
             InputStream inputStream = socket.getInputStream();
-            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream("received_file.dat"));
+            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream("menu.dat"));
             
             byte[] buffer = new byte[1024];
             int bytesRead;

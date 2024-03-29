@@ -25,6 +25,7 @@ public class roompage extends JPanel implements ActionListener {
     private JPopupMenu create;
     private JComboBox type;
     private JTextField search;
+    private JScrollPane down1sc, down2sc, down3sc;
     private Controller con = new Controller();
     private showroom shr;
     ;
@@ -324,7 +325,11 @@ public class roompage extends JPanel implements ActionListener {
         }
 
         // change to room order report
-        tablist.add(down1, "tab1");
+        down1sc = new JScrollPane(down1);
+        down1sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        down1sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        
+        tablist.add(down1sc, "tab1");
         tablist.add(down2, "tab2");
         tablist.add(down3, "tab3");
 
@@ -332,7 +337,13 @@ public class roompage extends JPanel implements ActionListener {
         down1.setLayout(new FlowLayout(FlowLayout.CENTER));
         down2.setLayout(new FlowLayout(FlowLayout.CENTER));
         down3.setLayout(new FlowLayout(FlowLayout.CENTER));
+        
+        int height = 120 * Controller.getRoomSize();
+        
+        down1.setPreferredSize(new Dimension(370, height));
 
+        
+        
         room.setPreferredSize(new Dimension(100, 100));
         order.setPreferredSize(new Dimension(100, 100));
         report.setPreferredSize(new Dimension(100, 100));
@@ -450,20 +461,26 @@ public class roompage extends JPanel implements ActionListener {
 
         down1.removeAll();
         repaint();
+        int count = 0;
         for (room rm : Controller.getArrayRoom()) {
-            if (rm != null) {
+            if (rm != null) {           
                 if (s.equals("All")) {
-
-                    down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                    
+                    count++;
+                    down1.add(new showroom("Room " + rm.getRoomNumber(), rm.checkAvailable()));
                 } else if (s.equals("Small") && rm.getType().equals("Small")) {
 
-                    down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                    count++;
+                    down1.add(new showroom("Room " + rm.getRoomNumber(), rm.checkAvailable()));
                 } else if (s.equals("Big") && rm.getType().equals("Big")) {
 
-                    down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
+                    count++;
+                    down1.add(new showroom("Room " + rm.getRoomNumber(), rm.checkAvailable()));
                 }
             }
         }
+        int height = 120 * count;
+        down1.setPreferredSize(new Dimension(100, height));
         Controller.renew("pg1");
     }
 
