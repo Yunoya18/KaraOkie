@@ -32,7 +32,7 @@ public class karaOkie_main implements WindowListener{
         mu = new mainUser();
         main_panel.add(lg, "pg1");
         main_panel.add(mp, "pg2");
-//        main_panel.add(mu, "pg3");
+        main_panel.add(mu, "pg3");
         
         
         ma.add(main_panel);

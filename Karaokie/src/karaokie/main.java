@@ -15,7 +15,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import karaokie.room.Controller;
 
-public class main implements ActionListener{
+public class main extends JPanel implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
     private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
@@ -100,14 +100,14 @@ public class main implements ActionListener{
         pg5.setIcon(icon5);
         
         //set mainframe background
-        ma.setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
         
         
         //add components to mainframe
-        ma.add(menu, BorderLayout.WEST);
-        ma.add(tab, BorderLayout.CENTER);
+        add(menu, BorderLayout.WEST);
+        add(tab, BorderLayout.CENTER);
         
         //add other
         
@@ -218,8 +218,8 @@ public class main implements ActionListener{
          
         
 //        ma.setSize(1280, 720);
-        ma.setPreferredSize(new Dimension(1280, 720));
-        ma.setVisible(true);
+        setPreferredSize(new Dimension(1280, 720));
+        setVisible(true);
 //        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        pack();
         

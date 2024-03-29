@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import karaokie.alert.SendAlertToStaff;
-public class mainUser implements ActionListener{
+public class mainUser extends JPanel implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
     private JInternalFrame inf;
@@ -22,7 +22,7 @@ public class mainUser implements ActionListener{
     private JLabel txt1, txt2;
     private cartUser cu;
     public mainUser(){
-        ma = new JFrame("karaOkie");
+        //ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();
         tab = new JPanel(cardlayout);
@@ -67,13 +67,13 @@ public class mainUser implements ActionListener{
         pg3.setIcon(icon3);
         
         //set mainframe background
-        ma.setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
         
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
         //add components to mainframe
-        ma.add(menu, BorderLayout.WEST); 
-        ma.add(tab, BorderLayout.CENTER);
+        add(menu, BorderLayout.WEST); 
+        add(tab, BorderLayout.CENTER);
         
         //add panel to tab
         tab.add(pm, "pg1");
@@ -144,9 +144,9 @@ public class mainUser implements ActionListener{
         //configured button not to have white filter when pressing
         UIManager.getLookAndFeelDefaults().put("Button.select", new Color(0, 0, 0, 0));
         
-        ma.setSize(1280, 720);
-        ma.setVisible(true);
-        ma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1280, 720);
+        setVisible(true);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //button action
         pg1.addActionListener(this);
