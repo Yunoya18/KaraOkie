@@ -23,20 +23,20 @@ public class roomMenu extends Menus {
         map = new HashMap<>();
         map2 = new HashMap<>();
         
-//        File file = new File("roommenu.dat");
-//        if (file.exists()) {
-//            try (FileInputStream fin = new FileInputStream("roommenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-//                map = (Map) oin.readObject();
-//
-//            } catch (IOException | ClassNotFoundException e) {
-//
-//                e.printStackTrace();
-//            }
-//       
-//        }
-//        else{
-//            map.put("s", 0);
-//        }
+        File file = new File("ro.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+       
+        }
+        else{
+            map.put("s", 0);
+        }
     }
 
     public void addMenu(String name, int i) {
@@ -69,7 +69,7 @@ public class roomMenu extends Menus {
     }
     @Override
     public void saveMap() {
-        try (FileOutputStream fout = new FileOutputStream("roommenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+        try (FileOutputStream fout = new FileOutputStream("ro.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
 
             oout.writeObject(map);
 
@@ -81,9 +81,9 @@ public class roomMenu extends Menus {
     @Override
     public void loadMap(){
          map = new HashMap<>();
-        File file = new File("roommenu.dat");
+        File file = new File("ro.dat");
         if (file.exists()) {
-            try (FileInputStream fin = new FileInputStream("roommenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {
