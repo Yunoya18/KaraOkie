@@ -6,6 +6,7 @@ import karaokie.Menu.*;
 import java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.*;
 import static karaokie.Menu.Menus.map;
 
 public class Controller {
@@ -14,6 +15,8 @@ public class Controller {
     private static Map<String, ArrayList<Food>> map;
     private static ArrayList<room> room = new ArrayList<>();
     private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
+    public static JPanel p = new JPanel();
+    public static boolean del;
 
     // Socket
     public static void InFromClient() {
@@ -96,9 +99,11 @@ public class Controller {
         Room_count++;
     }
 
-    public static void delRoom(int index) {
+    public static void delRoom(int index, room r) {
+        p.remove(r);
         room.set(index, null);
     }
+    
 
     public static room getRoom(int index) {
         return room.get(index);
@@ -128,7 +133,7 @@ public class Controller {
     public static void delMenu(int index) {
         setMenu(index, null);
     }
-
+   
     // File Save
     public static void saveFile() {
 

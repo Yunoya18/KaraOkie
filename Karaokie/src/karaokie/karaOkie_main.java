@@ -48,8 +48,8 @@ public class karaOkie_main implements WindowListener{
         
         // Listener
         ma.addWindowListener(this);
-        
     }
+
     public static void main(String[] args) {
         try {
             String systemLookAndFeelClassName = UIManager.getSystemLookAndFeelClassName();

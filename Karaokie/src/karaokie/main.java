@@ -266,11 +266,13 @@ public class main extends JPanel implements ActionListener{
 
     public void sentOpen(){
         pm1.loadRoomData("All");
+        
     }
     
     public void sentClosing(){
         
     }
+
 }
 
  

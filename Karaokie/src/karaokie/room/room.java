@@ -9,7 +9,7 @@ import java.io.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
-public abstract class room extends JInternalFrame implements Available, Serializable, ComponentListener{
+public abstract class room extends JInternalFrame implements Available, Serializable, ComponentListener, MouseListener{
     private static final long serialVersionUID = 1L;
     protected int roomNumber;
 //    protected roomMenu roomMenu;
@@ -32,6 +32,7 @@ public abstract class room extends JInternalFrame implements Available, Serializ
         this.Avaliable = Avaliable;
         
         addComponentListener(this);
+        addMouseListener(this);
         System.out.println("check");
     }
     
@@ -106,5 +107,35 @@ public abstract class room extends JInternalFrame implements Available, Serializ
 
     @Override
     public void componentHidden(ComponentEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("Click");
+        if (e.getClickCount() == 2 && Controller.del){
+            System.out.println("Double");
+            int choice = JOptionPane.showConfirmDialog(this, "Do you want to Delete this Room?", "Delete", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                Controller.delRoom(roomNumber, this);
+            } else {
+                
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }

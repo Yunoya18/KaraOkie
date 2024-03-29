@@ -19,7 +19,7 @@ import karaokie.room.*;
 public class roompage extends JPanel implements ActionListener {
 
     private CardLayout card;
-    private JButton room, order, report, edit, cursor, move, add, delete;
+    private JButton room, order, report, edit, cursor, move, add, delete, refresh;
     private JPanel tablist, down1, down2, down3, wp, tool, cen, leftcom, func, up, editpa, sandbox;
     private JMenuItem rect1, rect2;
     private JPopupMenu create;
@@ -37,7 +37,7 @@ public class roompage extends JPanel implements ActionListener {
         // set up
 
 //        firstp = new Point();
-        sandbox = new JPanel(new FlowLayout());
+        sandbox = new JPanel();
         search = new JTextField();
         setLayout(new BorderLayout(0, 0));
         leftcom = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -60,6 +60,7 @@ public class roompage extends JPanel implements ActionListener {
         move = new JButton();
         add = new JButton();
         delete = new JButton();
+        refresh = new JButton();
         create = new JPopupMenu();
         rect1 = new JMenuItem("rect1");
         rect2 = new JMenuItem("rect2");
@@ -114,12 +115,14 @@ public class roompage extends JPanel implements ActionListener {
         tool.add(move);
         tool.add(add);
         tool.add(delete);
+        tool.add(refresh);
         tool.setVisible(false);
 
         cursor.setPreferredSize(new Dimension(50, 50));
         move.setPreferredSize(new Dimension(50, 50));
         add.setPreferredSize(new Dimension(50, 50));
         delete.setPreferredSize(new Dimension(50, 50));
+        refresh.setPreferredSize(new Dimension(50, 50));
 
         cursor.setBorderPainted(false);
         cursor.setFocusPainted(false);
@@ -129,12 +132,15 @@ public class roompage extends JPanel implements ActionListener {
         add.setFocusPainted(false);
         delete.setBorderPainted(false);
         delete.setFocusPainted(false);
+        refresh.setFocusPainted(false);
+        refresh.setFocusPainted(false);
 
         cursor.setBackground(Color.decode("#171925"));
         move.setBackground(Color.decode("#171925"));
         add.setBackground(Color.decode("#171925"));
         delete.setBackground(Color.decode("#171925"));
-
+        refresh.setBackground(Color.decode("#171925"));
+        
         ImageIcon t1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/selection.png");
         Image to1 = t1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Icon tool1 = new ImageIcon(to1);
@@ -147,10 +153,14 @@ public class roompage extends JPanel implements ActionListener {
         ImageIcon t4 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/delete.png");
         Image to4 = t4.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Icon tool4 = new ImageIcon(to4);
+        ImageIcon t5 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/delete.png");
+        Image to5 = t5.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        Icon tool5 = new ImageIcon(to5);
         cursor.setIcon(tool1);
         move.setIcon(tool2);
         add.setIcon(tool3);
         delete.setIcon(tool4);
+        refresh.setIcon(tool5);
 
         func.setBackground(Color.decode("#282B3A"));
         func.setLayout(new BorderLayout(0, 0));
@@ -232,6 +242,7 @@ public class roompage extends JPanel implements ActionListener {
                     if (rm != null) {
                         sandbox.add(rm);
 
+                        sandbox.repaint();
                         loadRoomData((String) type.getSelectedItem());
                     }
 
@@ -247,7 +258,7 @@ public class roompage extends JPanel implements ActionListener {
             }
         });
 
-        JButton[] group = {room, order, report, edit, cursor, move, add, delete, add};
+        JButton[] group = {room, order, report, edit, cursor, move, add, delete, refresh,  add};
         for (JButton button : group) {
             button.addMouseListener(new MouseAdapter() {
                 @Override
@@ -272,6 +283,9 @@ public class roompage extends JPanel implements ActionListener {
                         button.setIcon(hoverIcon);
 
                     } else if (e.getSource().equals(delete)) {
+                        ImageIcon hoverIcon = new ImageIcon(t4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+                        button.setIcon(hoverIcon);
+                    } else if (e.getSource().equals(refresh)){
                         ImageIcon hoverIcon = new ImageIcon(t4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
                         button.setIcon(hoverIcon);
                     }
@@ -303,6 +317,8 @@ public class roompage extends JPanel implements ActionListener {
 
                     } else if (e.getSource().equals(delete)) {
                         button.setIcon(tool4);
+                    } else if (e.getSource().equals(refresh)) {
+                        button.setIcon(tool5);
                     }
                 }
             });
@@ -333,6 +349,7 @@ public class roompage extends JPanel implements ActionListener {
         move.addActionListener(this);
         cursor.addActionListener(this);
         delete.addActionListener(this);
+        refresh.addActionListener(this);
 
         search.setPreferredSize(new Dimension(180, 30));
         setVisible(true);
@@ -360,6 +377,8 @@ public class roompage extends JPanel implements ActionListener {
             }
 
         }
+        
+        Controller.p = sandbox;
     }
 
     @Override
@@ -409,21 +428,27 @@ public class roompage extends JPanel implements ActionListener {
                 movin = false;
             }if (del == true) {
                 del = false;
+                Controller.del = false;
             }
         } else if (e.getSource().equals(delete)) {
             if (del) {
-                Controller.delRoom(2);
+                
             } else {
                 del = true;
+                Controller.del = true;
                 System.out.println("del");
             }
+        } else if (e.getSource().equals(refresh)) {
+            System.out.println("refresh");
+            
+            loadRoom();
         }
     }
 
     public void loadRoomData(String s) {
 
         down1.removeAll();
-        down1.repaint();
+        repaint();
         for (room rm : Controller.getArrayRoom()) {
             if (rm != null) {
                 if (s.equals("All")) {
@@ -433,10 +458,19 @@ public class roompage extends JPanel implements ActionListener {
 
                     down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
                 } else if (s.equals("Big") && rm.getType().equals("Big")) {
-
+                    
                     down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
                 }
             }
+        }
+        this.repaint();
+    }
+    
+    public void loadRoom(){
+        for (room rm : Controller.getArrayRoom()) {
+            if (rm == null) {
+                sandbox.remove(rm);
+            }   
         }
     }
 }
