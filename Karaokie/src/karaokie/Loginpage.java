@@ -8,10 +8,10 @@ package karaokie;
  *
  * @author mansu
  */
+//import database.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import database.*;
 public class Loginpage extends JPanel implements ActionListener{
     private RoundedPanel pa, u, p, b, userl, passl, signinb;
     private JTextField username, password;
@@ -97,14 +97,20 @@ public class Loginpage extends JPanel implements ActionListener{
             }
              @Override
              public void mouseClicked(MouseEvent e){
-                String role = getConnection.getRole(username.getText(), password.getText());
-                if (role == null) {
-                    JOptionPane.showMessageDialog(null, "Error");
-                } else if (role.equals("user")){
+                if(username.getText().equals("1")){
                     cardLayout.show(cardPanel,"pg3");
-                } else if (role.equals("admin")){
+                }
+                else{
                     cardLayout.show(cardPanel, "pg2");
                 }
+                //String role = getConnection.getRole(username.getText(), password.getText());
+                //if (role == null) {
+                //    JOptionPane.showMessageDialog(null, "Error");
+                //} else if (role.equals("user")){
+                //    cardLayout.show(cardPanel,"pg3");
+                //} else if (role.equals("admin")){
+                //   cardLayout.show(cardPanel, "pg2");
+                //}
              }
         });
     }
