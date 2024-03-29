@@ -20,6 +20,7 @@ public class mainUser implements ActionListener{
     private JButton pg1, pg2, pg3;
     private CardLayout cardlayout;
     private JLabel txt1, txt2;
+    private cartUser cu;
     public mainUser(){
         ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -34,6 +35,7 @@ public class mainUser implements ActionListener{
         p2 = new JPanel();
         txt1 = new JLabel("page1");
         txt2 = new JLabel("page2");
+        cu = new cartUser();
         orderUser pm = new orderUser();
 
         //set backgroundcolor and foreground color
@@ -75,7 +77,7 @@ public class mainUser implements ActionListener{
         
         //add panel to tab
         tab.add(pm, "pg1");
-        tab.add(p2, "pg2");
+        tab.add(cu, "pg2");
         
         //insert button in menu bar
         menu.add(blank);
