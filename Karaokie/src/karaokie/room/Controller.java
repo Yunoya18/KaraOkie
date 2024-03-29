@@ -41,7 +41,7 @@ public class Controller {
     }
 
     public static void OutToClient() {
-        try (ServerSocket serverSocket = new ServerSocket(1234)) {
+        try (ServerSocket serverSocket = new ServerSocket(6789)) {
             Socket socket = serverSocket.accept();
 
             OutputStream ops = socket.getOutputStream();
