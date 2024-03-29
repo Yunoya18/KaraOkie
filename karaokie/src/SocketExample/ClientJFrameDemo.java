@@ -12,6 +12,10 @@ import java.util.*;
  * @author noey
  */
 
+/**
+ * use localhost, 9999
+*/
+
 public class ClientJFrameDemo implements ActionListener {
     private JFrame fr;
     private JButton bn_alert;

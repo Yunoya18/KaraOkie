@@ -10,6 +10,11 @@ import javax.swing.*;
  *
  * @author noey
  */
+
+/**
+ * localhost, 9999
+*/
+
 public class ServerJFrameDemo implements ActionListener {
     private JFrame fr;
     private JTextField tf;
