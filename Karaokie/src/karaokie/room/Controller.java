@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import static karaokie.Menu.Menus.map;
+import karaokie.main;
 
 public class Controller {
 
@@ -16,6 +17,7 @@ public class Controller {
     private static ArrayList<room> room = new ArrayList<>();
     private static ArrayList<roomMenu> roomMenu = new ArrayList<>();
     public static JPanel p = new JPanel();
+    public static main main = new main();
     public static boolean del;
 
     // Socket
@@ -102,6 +104,7 @@ public class Controller {
     public static void delRoom(int index, room r) {
         p.remove(r);
         room.set(index, null);
+        Controller.renew("pg1");
     }
     
 
@@ -121,6 +124,10 @@ public class Controller {
         addRoom(new big_room(Room_count));
     }
 
+    public static void renew(String name){
+        main.renew(name);
+    }
+    
     // Menu Zone
     public static void setMenu(int index, roomMenu rm) {
         roomMenu.set(index, rm);

@@ -13,6 +13,7 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import karaokie.room.Controller;
 
 public class main extends JPanel implements ActionListener{
     private JFrame ma;
@@ -47,6 +48,7 @@ public class main extends JPanel implements ActionListener{
         txt5 = new JLabel("page5");
         
         //set page
+        Controller.main = this;
         pm1 = new roompage();
         pm2 = new addFood();
         pm3 = new transaction();
@@ -273,6 +275,10 @@ public class main extends JPanel implements ActionListener{
         
     }
 
+    public void renew(String name){
+        cardlayout.show(tab, "pg4");
+        cardlayout.show(tab, name);
+    }
 }
 
  

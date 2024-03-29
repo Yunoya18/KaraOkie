@@ -140,7 +140,7 @@ public class roompage extends JPanel implements ActionListener {
         add.setBackground(Color.decode("#171925"));
         delete.setBackground(Color.decode("#171925"));
         refresh.setBackground(Color.decode("#171925"));
-        
+
         ImageIcon t1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/selection.png");
         Image to1 = t1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Icon tool1 = new ImageIcon(to1);
@@ -249,7 +249,6 @@ public class roompage extends JPanel implements ActionListener {
                 }
             }
         });
-        
 
         type.addActionListener(new ActionListener() {
             @Override
@@ -258,7 +257,7 @@ public class roompage extends JPanel implements ActionListener {
             }
         });
 
-        JButton[] group = {room, order, report, edit, cursor, move, add, delete, refresh,  add};
+        JButton[] group = {room, order, report, edit, cursor, move, add, delete, refresh, add};
         for (JButton button : group) {
             button.addMouseListener(new MouseAdapter() {
                 @Override
@@ -285,7 +284,7 @@ public class roompage extends JPanel implements ActionListener {
                     } else if (e.getSource().equals(delete)) {
                         ImageIcon hoverIcon = new ImageIcon(t4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
                         button.setIcon(hoverIcon);
-                    } else if (e.getSource().equals(refresh)){
+                    } else if (e.getSource().equals(refresh)) {
                         ImageIcon hoverIcon = new ImageIcon(t4.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
                         button.setIcon(hoverIcon);
                     }
@@ -377,7 +376,7 @@ public class roompage extends JPanel implements ActionListener {
             }
 
         }
-        
+
         Controller.p = sandbox;
     }
 
@@ -426,22 +425,23 @@ public class roompage extends JPanel implements ActionListener {
         } else if (e.getSource().equals(cursor)) {
             if (movin == true) {
                 movin = false;
-            }if (del == true) {
+            }
+            if (del == true) {
                 del = false;
                 Controller.del = false;
             }
         } else if (e.getSource().equals(delete)) {
             if (del) {
-                
+
             } else {
                 del = true;
                 Controller.del = true;
+                JOptionPane.showMessageDialog(this, "Double Clicked on Room to Delete", "Delete", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("del");
             }
         } else if (e.getSource().equals(refresh)) {
             System.out.println("refresh");
-            
-            loadRoom();
+
         }
     }
 
@@ -458,19 +458,12 @@ public class roompage extends JPanel implements ActionListener {
 
                     down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
                 } else if (s.equals("Big") && rm.getType().equals("Big")) {
-                    
+
                     down1.add(new showroom("Room" + rm.getRoomNumber(), rm.checkAvailable()));
                 }
             }
         }
-        this.repaint();
+        Controller.renew("pg1");
     }
-    
-    public void loadRoom(){
-        for (room rm : Controller.getArrayRoom()) {
-            if (rm == null) {
-                sandbox.remove(rm);
-            }   
-        }
-    }
+
 }
