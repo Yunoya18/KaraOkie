@@ -18,6 +18,7 @@ public abstract class room extends JInternalFrame implements Available, Serializ
     protected boolean Avaliable;
     protected int position_x;
     protected int position_y;
+    protected Point position = new Point();
     
     
     public room(){
@@ -91,14 +92,18 @@ public abstract class room extends JInternalFrame implements Available, Serializ
         return position_y;
     }
     
+    public Point getPosition(){
+        return position;
+    }
+    
     @Override
     public void componentResized(ComponentEvent e) {
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        Point position = this.getLocation();
-        System.out.println(position);
+        position = this.getLocation();
+//        System.out.println(position);
     }
 
     @Override
