@@ -25,7 +25,7 @@ public class orderUser extends JPanel implements ActionListener{
     private JButton b1, b2, b3, b4;
     private JScrollPane sc, sc2, sc3, sc4;
     private JPanel p1, but, all, fo, sn, dr, ppic, pname, pprice, pbut;
-    private RoundedPanel menu;
+    private RoundedPanel menu, menubrp;
     private JLabel pic, name, price;
     private addFood af;
     private CardLayout cl;
@@ -58,6 +58,10 @@ public class orderUser extends JPanel implements ActionListener{
         b2.setForeground(Color.decode("#A6ADCE"));
         b3.setForeground(Color.decode("#A6ADCE"));
         b4.setForeground(Color.decode("#A6ADCE"));
+        b1.setFont(new Font("Montserrat", Font.BOLD, 12));
+        b2.setFont(new Font("Montserrat", Font.BOLD, 12));
+        b3.setFont(new Font("Montserrat", Font.BOLD, 12));
+        b4.setFont(new Font("Montserrat", Font.BOLD, 12));
         JButton[] group = new JButton[]{b1, b2, b3, b4};
         for(JButton button : group){
             button.addMouseListener(new MouseAdapter(){
@@ -173,15 +177,24 @@ public class orderUser extends JPanel implements ActionListener{
         
         name = new JLabel();
         name.setText(n);
-        name.setFont(new Font("", Font.PLAIN, 30));
+        name.setFont(new Font("Montserrat", Font.BOLD, 30));
         name.setForeground(Color.white);
-        
         price = new JLabel();
         price.setText(p);
-        price.setFont(new Font("", Font.PLAIN, 30));
+        price.setFont(new Font("Montserrat", Font.BOLD, 30));
         price.setForeground(Color.white);
         
         JButton menub = new JButton("Add");
+        menub.setFont(new Font("Montserrat", Font.BOLD, 12));
+        menub.setBackground(Color.decode("#A6ADCE"));
+        menub.setForeground(Color.decode("#282B3A"));
+        menub.setBorderPainted(false);
+        menub.setFocusPainted(false);
+        menub.setPreferredSize(new Dimension(60, 25));
+        
+        menubrp = new RoundedPanel(20, 20, 70, 35, Color.decode("#A6ADCE"), 1.0f, 3);
+        menubrp.add(menub);
+        
         menub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -206,7 +219,7 @@ public class orderUser extends JPanel implements ActionListener{
         ppic.add(pic);
         pname.add(name);
         pprice.add(price);
-        pbut.add(menub);
+        pbut.add(menubrp);
         
         menu.add(ppic);
         menu.add(pname);

@@ -28,6 +28,7 @@ public class roompage extends JPanel implements ActionListener {
     private JScrollPane down1sc, down2sc, down3sc;
     private Controller con = new Controller();
     private showroom shr;
+    private RoundedPanel d1, d2, d3;
     ;
 //    private Point firstp;
     private boolean movin = false;
@@ -40,6 +41,7 @@ public class roompage extends JPanel implements ActionListener {
 //        firstp = new Point();
         sandbox = new JPanel();
         search = new JTextField();
+        search.setFont(new Font("Montserrat", Font.BOLD, 12));
         setLayout(new BorderLayout(0, 0));
         leftcom = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         tool = new JPanel();
@@ -51,6 +53,7 @@ public class roompage extends JPanel implements ActionListener {
         cen = new JPanel(new GridLayout(3, 1));
         String[] roomcat = {"All", "Big", "Small"};
         type = new JComboBox(roomcat);
+        type.setFont(new Font("Montserrat", Font.BOLD, 12));
         down1 = new JPanel();
         down2 = new JPanel();
         down3 = new JPanel();
@@ -64,8 +67,11 @@ public class roompage extends JPanel implements ActionListener {
         refresh = new JButton();
         create = new JPopupMenu();
         rect1 = new JMenuItem("Small");
+        rect1.setFont(new Font("Montserrat", Font.BOLD, 12));
         rect2 = new JMenuItem("Big |");
+        rect2.setFont(new Font("Montserrat", Font.BOLD, 12));
         rect3 = new JMenuItem("Big -");
+        rect3.setFont(new Font("Montserrat", Font.BOLD, 12));
         editpa = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5));
 
         editpa.add(edit);
@@ -187,9 +193,9 @@ public class roompage extends JPanel implements ActionListener {
         cen.add(order);
         cen.add(report);
 
-        down1.setBackground(Color.decode("#593D62"));
-        down2.setBackground(Color.decode("#593D62"));
-        down3.setBackground(Color.decode("#593D62"));
+        down1.setBackground(Color.decode("#1C1E27"));
+        down2.setBackground(Color.decode("#1C1E27"));
+        down3.setBackground(Color.decode("#1C1E27"));
         cen.setBackground(Color.decode("#1C1E27"));
 
         //set upper func
@@ -290,13 +296,13 @@ public class roompage extends JPanel implements ActionListener {
                 public void mouseEntered(MouseEvent e) {
                     if (e.getSource().equals(room)) {
                         button.setBorderPainted(true);
-                        button.setBorder(new LineBorder(Color.PINK, 5));
+                        button.setBorder(new LineBorder(Color.decode("#DD62C6"), 5));
                     } else if (e.getSource().equals(order)) {
                         button.setBorderPainted(true);
-                        button.setBorder(new LineBorder(Color.PINK, 5));
+                        button.setBorder(new LineBorder(Color.decode("#DD62C6"), 5));
                     } else if (e.getSource().equals(report)) {
                         button.setBorderPainted(true);
-                        button.setBorder(new LineBorder(Color.PINK, 5));
+                        button.setBorder(new LineBorder(Color.decode("#DD62C6"), 5));
                     } else if (e.getSource().equals(cursor)) {
                         ImageIcon hoverIcon = new ImageIcon(t1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
                         button.setIcon(hoverIcon);
@@ -351,16 +357,16 @@ public class roompage extends JPanel implements ActionListener {
 
         // change to room order report
         down1sc = new JScrollPane(down1);
-        down1sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down1sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        down1sc.setBorder(BorderFactory.createEmptyBorder());
         
         down2sc = new JScrollPane(down2);
-        down2sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down2sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        down2sc.setBorder(BorderFactory.createEmptyBorder());
         
         down3sc = new JScrollPane(down3);
-        down3sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down3sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        down3sc.setBorder(BorderFactory.createEmptyBorder());
         
         tablist.add(down1sc, "tab1");
         tablist.add(down2sc, "tab2");
@@ -521,7 +527,7 @@ public class roompage extends JPanel implements ActionListener {
                 }
             }
         }
-        int height = 120 * count;
+        int height = 123 * count;
         down1.setPreferredSize(new Dimension(100, height));
         Controller.renew("pg1");
     }

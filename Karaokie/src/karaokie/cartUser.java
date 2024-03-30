@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class cartUser extends JPanel implements ActionListener{
-    private RoundedPanel out, in;
+    private RoundedPanel out, in, corp;
     private JPanel top, bot, order, blank, blank2;
     private JLabel id, room, lis, epr, etot, total;
     private JTextField count;
@@ -31,7 +31,17 @@ public class cartUser extends JPanel implements ActionListener{
         
 //      button
         co = new JButton("Confirm Order");
+        co.setFont(new Font("Montserrat", Font.BOLD, 12));
+        co.setBackground(Color.decode("#A6ADCE"));
+        co.setForeground(Color.decode("#282B3A"));
+        co.setBorderPainted(false);
+        co.setFocusPainted(false);
+        co.setPreferredSize(new Dimension(125, 25));
         
+//      button panel
+        corp = new RoundedPanel(20, 20, 135, 30, Color.decode("#A6ADCE"), 1.0f, 2);
+        corp.add(co);
+                
 //      top panel
         top = new JPanel();
         top.setPreferredSize(new Dimension(930, 30));
@@ -42,6 +52,7 @@ public class cartUser extends JPanel implements ActionListener{
         topgrid.setBackground(Color.decode("#A6ADCE"));
         
         id = new JLabel("Order ID : ");
+        id.setFont(new Font("Montserrat", Font.BOLD, 12));
         id.setForeground(Color.decode("#282B3A"));
         id.setBackground(Color.decode("#A6ADCE"));
         
@@ -51,6 +62,7 @@ public class cartUser extends JPanel implements ActionListener{
         proom.setBackground(Color.decode("#A6ADCE"));
         
         room = new JLabel("Room : ");
+        room.setFont(new Font("Montserrat", Font.BOLD, 12));
         room.setForeground(Color.decode("#282B3A"));
         room.setBackground(Color.decode("#A6ADCE"));
         
@@ -90,13 +102,14 @@ public class cartUser extends JPanel implements ActionListener{
         bot.setBackground(Color.decode("#A6ADCE"));
         bot.setLayout(new FlowLayout(FlowLayout.RIGHT));
         total = new JLabel("Total : ");
+        total.setFont(new Font("Montserrat", Font.BOLD, 12));
         bot.add(total);
         
         in.add(top);
         in.add(sc);
         in.add(bot);
         out.add(in);
-        out.add(co);
+        out.add(corp);
         add(out);
         
         co.addActionListener(this);
@@ -113,6 +126,7 @@ public class cartUser extends JPanel implements ActionListener{
         del.setBackground(Color.decode("#A6ADCE"));
         
         lis = new JLabel("you you you");
+        lis.setFont(new Font("Montserrat", Font.BOLD, 12));
         lis.setForeground(Color.decode("#282B3A"));
         lis.setBackground(Color.decode("#A6ADCE"));
         
@@ -121,11 +135,13 @@ public class cartUser extends JPanel implements ActionListener{
         blank.setBackground(Color.decode("#A6ADCE"));
         
         epr = new JLabel("Price x ");
+        epr.setFont(new Font("Montserrat", Font.BOLD, 12));
         epr.setForeground(Color.decode("#282B3A"));
         epr.setBackground(Color.decode("#A6ADCE"));
         
 //      number of order that can edit
         count = new JTextField();
+        count.setFont(new Font("Montserrat", Font.BOLD, 12));
         count.setPreferredSize(new Dimension(30, 20));
         count.setForeground(Color.decode("#282B3A"));
         count.setBackground(Color.decode("#CFD7FA"));
@@ -136,6 +152,7 @@ public class cartUser extends JPanel implements ActionListener{
         blank2.setBackground(Color.decode("#A6ADCE"));
         
         etot = new JLabel(" THB");
+        etot.setFont(new Font("Montserrat", Font.BOLD, 12));
         etot.setForeground(Color.decode("#282B3A"));
         etot.setBackground(Color.decode("#A6ADCE"));
         
@@ -187,9 +204,5 @@ public class cartUser extends JPanel implements ActionListener{
         if(e.getSource().equals(co)){
             
         }
-    }
-    
-    public static void main(String[] args) {
-        new mainUser();
     }
 }

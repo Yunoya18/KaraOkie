@@ -97,7 +97,7 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
             }
         };
         t = new JTable(m);
-
+        t.setFont(new Font("Montserrat", Font.BOLD, 12));
         // Set custom cell renderer for the image column
         t.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
 
@@ -110,6 +110,12 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
 
 //        t.setEnabled(false);
         t.getTableHeader().setEnabled(false);
+        t.getTableHeader().setFont(new Font("Montserrat", Font.BOLD, 12));
+        t.getTableHeader().setForeground(Color.decode("#A6ADCE"));
+        
+        t.setForeground(Color.decode("#535870"));
+        t.setGridColor(Color.decode("#E5E5E5"));
+        
         sc = new JScrollPane(t);
         sc.setPreferredSize(new Dimension(1000, 600));
         p1.add(b);
