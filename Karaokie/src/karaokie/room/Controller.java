@@ -55,13 +55,29 @@ public class Controller implements Runnable {
             System.out.println("openserver");
             while (true) {
                 Socket socket = serverSocket.accept();
+                
+                //loadmap
+                File file = new File("menu.dat");
+            if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+                System.out.println(map);
+            } catch (IOException | ClassNotFoundException e) {
 
+                e.printStackTrace();
+            }
+        } else {
+            map.put("Food", new ArrayList<Food>());
+            map.put("Snack", new ArrayList<Food>());
+            map.put("Drinks", new ArrayList<Food>());
+        }
+                //loadmap
                 OutputStream ops = socket.getOutputStream();
                 BufferedOutputStream bof = new BufferedOutputStream(ops);
                 ObjectOutputStream oos = new ObjectOutputStream(bof);
 
                 oos.writeObject(map);
-
+                System.out.println("menustran");
                 oos.close();
                 socket.close();
                 System.out.println("close server");
@@ -72,7 +88,7 @@ public class Controller implements Runnable {
     }
 
     public Controller() {
-        this.loadMap();
+        
         // File
         File file_room = new File("room.dat");
         File file_roomMenu = new File("roomMenu.dat");
