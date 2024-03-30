@@ -10,8 +10,11 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import javax.swing.*;
-import karaokie.alert.SendAlertToStaff;
+
+
 public class mainUser extends JPanel implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
@@ -21,8 +24,16 @@ public class mainUser extends JPanel implements ActionListener{
     private CardLayout cardlayout;
     private JLabel txt1, txt2;
     private cartUser cu;
+    
+    // socketalert ssaan
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int SERVER_PORT = 5000;
+    
+    private Socket socket;
+    private DataOutputStream out;  
+    
     public mainUser(){
-        //ma = new JFrame("karaOkie");
+        ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();
         tab = new JPanel(cardlayout);
@@ -35,7 +46,7 @@ public class mainUser extends JPanel implements ActionListener{
         p2 = new JPanel();
         txt1 = new JLabel("page1");
         txt2 = new JLabel("page2");
-        cu = new cartUser();
+        
         orderUser pm = new orderUser();
 
         //set backgroundcolor and foreground color
@@ -72,12 +83,12 @@ public class mainUser extends JPanel implements ActionListener{
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
         //add components to mainframe
-        add(menu, BorderLayout.WEST); 
-        add(tab, BorderLayout.CENTER);
+        ma.add(menu, BorderLayout.WEST); 
+        ma.add(tab, BorderLayout.CENTER);
         
         //add panel to tab
         tab.add(pm, "pg1");
-        tab.add(cu, "pg2");
+        
         
         //insert button in menu bar
         menu.add(blank);
@@ -144,14 +155,17 @@ public class mainUser extends JPanel implements ActionListener{
         //configured button not to have white filter when pressing
         UIManager.getLookAndFeelDefaults().put("Button.select", new Color(0, 0, 0, 0));
         
-        setSize(1280, 720);
-        setVisible(true);
+        ma.setSize(1280, 720);
+        ma.setVisible(true);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //button action
         pg1.addActionListener(this);
         pg2.addActionListener(this);
         pg3.addActionListener(this);
+        
+        // socketalert ssaan 0000
+        socketClientFirstSetupConnection();
         
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -166,12 +180,17 @@ public class mainUser extends JPanel implements ActionListener{
            cardlayout.show(tab, "pg1");
         }
         else if(ev.getSource().equals(pg2)){
+            cu = new cartUser();
+            tab.add(cu, "pg2");
            cardlayout.show(tab, "pg2");
+            System.out.println("2");
         }
         else if(ev.getSource().equals(pg3)){
            int resp = JOptionPane.showConfirmDialog(ma, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
                // alert the staff
+               // ssaan 0000
+                socketSendAlertToStaff(SERVER_ADDRESS);               
 
            }
         }
@@ -179,6 +198,36 @@ public class mainUser extends JPanel implements ActionListener{
 //    public void sendAlertToStaff() {
 //        
 //    }
+    
+    //== socket alert the staff ssaan 0000 ========================================================================================= \\
+    public void socketClientFirstSetupConnection() {
+        try {
+            socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+            out = new DataOutputStream(socket.getOutputStream());
+            System.out.println("Connected to server.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    
+    }
+    
+    public void socketSendAlertToStaff(String message) { // use with option pane on noeysodbookmark1
+        if (socket != null && socket.isConnected()) {
+            try {
+                // Send the message to the server
+                out.writeUTF(message);
+                out.flush(); // Ensure the message is sent immediately
+                System.out.println("Message sent to server: " + message);
+            } catch (IOException e) {
+                System.out.println("Error sending message to client: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Client socket is closed or not connected.");
+        }        
+    }
+    
+    //========================================================================================= \\
+    
     public static void main(String[] args) {
         new mainUser();
     }

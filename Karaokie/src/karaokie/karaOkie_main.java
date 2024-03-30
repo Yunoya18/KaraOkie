@@ -10,6 +10,8 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import javax.swing.*;
 import karaokie.room.*;
 
@@ -21,6 +23,12 @@ public class karaOkie_main implements WindowListener{
     private main mp;
     private mainUser mu;
     
+    // socketalert ssaan
+    private ServerSocket server;
+    private Socket clientSocket;
+    private DataInputStream input;
+    private DataOutputStream output;        
+
     karaOkie_main(){
         ma = new JFrame();
         cd = new CardLayout();
@@ -44,11 +52,54 @@ public class karaOkie_main implements WindowListener{
         
         //controller
         
-        Controller.openFile();
+//        Controller.openFile();
         
         // Listener
         ma.addWindowListener(this);
+        
+////////////////////////////////socket ssaan
+        // socketalert ssaan 0000
+        socketServerFirstSetupConnection();
+////////////////////////////////        
     }
+    
+    // socketalert ssaan 0000
+    public void socketServerFirstSetupConnection(/*int port*/) {
+        try {
+            server = new ServerSocket(/*port*/5000);
+            System.out.println("Server started. Waiting for a client...");
+
+            clientSocket = server.accept();
+            System.out.println("Client connected.");
+
+            input = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+            output = new DataOutputStream(clientSocket.getOutputStream());
+
+            while (true) {
+                try {
+                    String message = input.readUTF();
+                    System.out.println("Received from client: " + message);
+//                    tf.setText("need staff"); //noeysodbookmark --> tf ssaa
+//                    down3.add(new showroom("Room", false));
+                    mp.addDown(); // !!!
+
+
+
+                    // Process the message (e.g., call staff, update UI, etc.)
+                    // Implement your logic here
+                } catch (EOFException e) {
+                    System.out.println("End of stream reached. Client may have disconnected.");
+                    break; // Exit the loop if EOFException is caught
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+    }    
+////////////////////////////////    
 
     public static void main(String[] args) {
         try {
@@ -58,13 +109,19 @@ public class karaOkie_main implements WindowListener{
             e.printStackTrace();
         }
         new karaOkie_main();
+        
     }
 
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Open");
+       Controller controller = new Controller();
+        Thread controllerThread = new Thread(controller);
+        controllerThread.start();
+    
         Controller.openFile();
         mp.sentOpen();
+
     }
 
     @Override

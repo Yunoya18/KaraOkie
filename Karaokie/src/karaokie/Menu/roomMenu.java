@@ -16,8 +16,8 @@ import java.util.concurrent.Executors;
 public class roomMenu extends Menus {
 
     private String roomNumber;
-    protected Map<String, Integer> map ;
-    protected Map<String, Map<String, Integer>> map2;
+    protected Map<Food, Integer> map ;
+    protected Map<String, Map<Food, Integer>> map2;
     
     public roomMenu(){
         map = new HashMap<>();
@@ -35,13 +35,15 @@ public class roomMenu extends Menus {
        
         }
         else{
-            map.put("s", 0);
+            map.put(new Food("",null,0.0,""), 0);
         }
     }
 
-    public void addMenu(String name, int i) {
-        map.put(name, i);
+     public void addMenu(Food food, int i) {
+        map.put(food, i);
+         
         this.saveMap();
+        System.out.println("save");
 
     }
 //
@@ -93,15 +95,15 @@ public class roomMenu extends Menus {
        
         }
         else{
-            map.put("s", 0);
+            map.put(new Food("",null,0.0,""), 0);
         }
     }
 
-    public void setMap(Map<String, Integer> map) {
+    public void setMap(Map<Food, Integer> map) {
         this.map = map;
     }
 
-    public Map<String, Integer> getMap() {
+    public Map<Food, Integer> getMap() {
         return map;
     }
     

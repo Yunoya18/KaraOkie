@@ -20,6 +20,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 import karaokie.Menu.Food;
+import karaokie.Menu.ImportMenu;
 import karaokie.Menu.roomMenu;
 public class orderUser extends JPanel implements ActionListener{
     private JButton b1, b2, b3, b4;
@@ -154,7 +155,7 @@ public class orderUser extends JPanel implements ActionListener{
 //  for create a new menu
 //  need to check the categories before add to panel
 //  fo is Food, sn is Snack and dr is Drinks 
-    public void newMenu(ImageIcon i, String n, String p, JPanel j){
+    public void newMenu(ImageIcon i, String n, String p, JPanel j,String type){
         menu = new RoundedPanel(20, 20, 350, 550, Color.decode("#282B3A"), 1.0f, 21);
         
         ppic = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -203,7 +204,7 @@ public class orderUser extends JPanel implements ActionListener{
                 try {
                     int quantity = Integer.parseInt(input);
                     
-                    room.addMenu(n, quantity);
+                    room.addMenu(new Food(n,i,Double.parseDouble(p),type),quantity);
                     System.out.println(quantity);
                     System.out.println(n);
                     
@@ -242,13 +243,17 @@ public class orderUser extends JPanel implements ActionListener{
         if(ev.getSource().equals(b1)){
             all.removeAll();
 
+            ImportMenu.imp();
+
+            
             this.loadMap();
             for (String key : map.keySet()) {
                 for (int num = 0; num <= map.get(key).size() - 1; num++) {
                     Icon icon = (Icon) map.get(key).get(num).getImage();
                     String name = (String) map.get(key).get(num).getName();
                     double price = (double) map.get(key).get(num).getPrice();
-                    this.newMenu((ImageIcon) icon, name, String.valueOf(price), all);
+                    String type = (String) map.get(key).get(num).getType();
+                    this.newMenu((ImageIcon) icon, name, String.valueOf(price), all,type);
                 }
             }
 
@@ -262,7 +267,8 @@ public class orderUser extends JPanel implements ActionListener{
                 Icon icon = (Icon) map.get("Food").get(num).getImage();
                 String name = (String) map.get("Food").get(num).getName();
                 double price = (double) map.get("Food").get(num).getPrice();
-                this.newMenu((ImageIcon) icon, name, String.valueOf(price), fo);
+                String type = (String) map.get("Food").get(num).getType();
+                this.newMenu((ImageIcon) icon, name, String.valueOf(price), fo,type);
             }
             cl.show(p1, "food");
         }
@@ -274,7 +280,9 @@ public class orderUser extends JPanel implements ActionListener{
                 Icon icon = (Icon) map.get("Snack").get(num).getImage();
                 String name = (String) map.get("Snack").get(num).getName();
                 double price = (double) map.get("Snack").get(num).getPrice();
-                this.newMenu((ImageIcon) icon, name, String.valueOf(price), sn);
+                String type = (String) map.get("Snack").get(num).getType();
+                this.newMenu((ImageIcon) icon, name, String.valueOf(price), sn,type);
+                
             }
             cl.show(p1, "snack");
         }
@@ -286,7 +294,8 @@ public class orderUser extends JPanel implements ActionListener{
                 Icon icon = (Icon) map.get("Drinks").get(num).getImage();
                 String name = (String) map.get("Drinks").get(num).getName();
                 double price = (double) map.get("Drinks").get(num).getPrice();
-                this.newMenu((ImageIcon) icon, name, String.valueOf(price), dr);
+                String type = (String) map.get("Drinks").get(num).getType();
+                this.newMenu((ImageIcon) icon, name, String.valueOf(price), dr,type);
             }
             cl.show(p1, "drinks");
         }
