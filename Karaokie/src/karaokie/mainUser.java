@@ -22,7 +22,7 @@ public class mainUser extends JPanel implements ActionListener{
     private JLabel txt1, txt2;
     private cartUser cu;
     public mainUser(){
-        //ma = new JFrame("karaOkie");
+        ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();
         tab = new JPanel(cardlayout);
@@ -72,8 +72,8 @@ public class mainUser extends JPanel implements ActionListener{
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
         //add components to mainframe
-        add(menu, BorderLayout.WEST); 
-        add(tab, BorderLayout.CENTER);
+        ma.add(menu, BorderLayout.WEST); 
+        ma.add(tab, BorderLayout.CENTER);
         
         //add panel to tab
         tab.add(pm, "pg1");
@@ -144,8 +144,8 @@ public class mainUser extends JPanel implements ActionListener{
         //configured button not to have white filter when pressing
         UIManager.getLookAndFeelDefaults().put("Button.select", new Color(0, 0, 0, 0));
         
-        setSize(1280, 720);
-        setVisible(true);
+        ma.setSize(1280, 720);
+        ma.setVisible(true);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //button action
