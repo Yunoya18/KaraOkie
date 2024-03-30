@@ -12,8 +12,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -74,8 +76,11 @@ public class cartUser extends JPanel implements ActionListener{
         top.add(topgrid);
         
 //      mid panel
+//        mid.removeAll();
         mid = Box.createVerticalBox();
+        mid.removeAll();
         mid.setBackground(Color.decode("#A6ADCE"));
+        
         
         sc = new JScrollPane(mid);
         sc.setPreferredSize(new Dimension(930, 370));
@@ -219,9 +224,20 @@ public class cartUser extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(co)){
             rom = new roomMenu();
-            rom.tranMap("001");
+//            rom.tranMap("001");
+            mid.removeAll();
+            try (FileOutputStream fout = new FileOutputStream("ro.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+//                Map<Food, Integer> mapremove = new HashMap<>();
+                map.clear();
+            oout.writeObject(map);
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
         }
     }
+        }
+    
     
     public static void main(String[] args) {
         new mainUser();
