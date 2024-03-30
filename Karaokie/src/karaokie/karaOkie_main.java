@@ -44,7 +44,7 @@ public class karaOkie_main implements WindowListener{
         
         //controller
         
-        Controller.openFile();
+//        Controller.openFile();
         
         // Listener
         ma.addWindowListener(this);
@@ -58,13 +58,19 @@ public class karaOkie_main implements WindowListener{
             e.printStackTrace();
         }
         new karaOkie_main();
+        
     }
 
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Open");
+       Controller controller = new Controller();
+        Thread controllerThread = new Thread(controller);
+        controllerThread.start();
+    
         Controller.openFile();
         mp.sentOpen();
+
     }
 
     @Override

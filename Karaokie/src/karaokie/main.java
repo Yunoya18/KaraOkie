@@ -15,7 +15,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import karaokie.room.Controller;
 
-public class main extends JPanel implements ActionListener{
+public class main extends JPanel implements ActionListener, WindowListener{
     private JFrame ma;
     private JDesktopPane side;
     private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
@@ -284,6 +284,41 @@ public class main extends JPanel implements ActionListener{
     
     public static void main(String[] args) {
         new main();
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+       
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+       
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+       
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        
     }
 }
 
