@@ -122,6 +122,9 @@ public class cartUser extends JPanel implements ActionListener{
         add(out);
         
         co.addActionListener(this);
+        
+        // 0000
+//        rom.getroomNumber();
     }
     public void loadMap(){
          map = new HashMap<>();
@@ -293,6 +296,11 @@ public class cartUser extends JPanel implements ActionListener{
             ex.printStackTrace();
         }
     }
+    
+    // 0000 wait for final dont delete
+//    public String getRoomFromCart() {
+//        return rom.getroomNumber();
+//    }
 
            
             

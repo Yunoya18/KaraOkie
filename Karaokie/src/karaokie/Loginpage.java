@@ -18,6 +18,8 @@ public class Loginpage extends JPanel{
     private JButton signin;
     private JLabel bg, user, pass;
     
+    private String usernameString; // 0000
+    
     Loginpage(CardLayout cardLayout, Container cardPanel){
         
         setLayout(new BorderLayout());

@@ -31,7 +31,7 @@ public class mainUser extends JPanel implements ActionListener{
     
     private Socket socket;
     private DataOutputStream out;  
-    
+     
     public mainUser(){
         ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -172,8 +172,14 @@ public class mainUser extends JPanel implements ActionListener{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        // 1111
+//        System.out.println(cu.getRoomFromCart());
+        /** wait for final dont delete - get room from cartUser.java that there is roomMenu.java that contains roomNumber
+         * now its null
+         */       
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent ev){
         if(ev.getSource().equals(pg1)){
@@ -183,7 +189,7 @@ public class mainUser extends JPanel implements ActionListener{
             cu = new cartUser();
             tab.add(cu, "pg2");
            cardlayout.show(tab, "pg2");
-            System.out.println("2");
+            System.out.println("2"); 
         }
         else if(ev.getSource().equals(pg3)){
            int resp = JOptionPane.showConfirmDialog(ma, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
@@ -229,6 +235,6 @@ public class mainUser extends JPanel implements ActionListener{
     //========================================================================================= \\
     
     public static void main(String[] args) {
-        new mainUser();
+        new mainUser();   
     }
 }
