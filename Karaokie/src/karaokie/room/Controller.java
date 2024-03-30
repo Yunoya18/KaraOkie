@@ -153,6 +153,10 @@ public class Controller implements Runnable {
         return room.size();
     }
 
+    public static void reCard(String s1, String s2){
+        rp.reCard(s1, s2);
+    }
+    
     // Menu Zone
     public static void setMenu(Map<String, Map<Food, Integer>> temp) {
 //        HashMap<Food, Integer> food = new HashMap<>();

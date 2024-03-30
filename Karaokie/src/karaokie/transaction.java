@@ -11,6 +11,7 @@ package karaokie;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.HashSet;
 import java.util.Map;
 import javax.swing.table.*;
 import karaokie.Menu.Food;
@@ -28,6 +29,7 @@ public class transaction extends JPanel implements ActionListener {
             buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonTen, buttonX, buttonClear, buttonOk, buttonJud, buttonDel;
     private DefaultTableModel m;
     private JScrollPane sc;
+    private String keyRoom;
 
     public transaction() {
         //Set up
@@ -527,6 +529,7 @@ public class transaction extends JPanel implements ActionListener {
         //button add image
         button_search.setIcon(search);
 
+        // close
         button_close.setIcon(close);
 
         button_cancel.setIcon(cancel);
@@ -617,11 +620,29 @@ public class transaction extends JPanel implements ActionListener {
 //                            button.setIcon(hoverIcon);
 //                        }
 //                        else if(e.getSource().equals( button_close)){
-//                            ImageIcon hoverIcon = new ImageIcon(i5.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+//                            ImageIcon hoverIcon = new ImageIcon(cl.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
 //                            button.setIcon(hoverIcon);
 //                        }
                     button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+                    // button lis
+                    button_close.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            System.out.println("Button Close clicked!"); // For demonstration, print message to console
+
+                            Map<String, Map<Food, Integer>> roomMenu = Controller.getRoomMenuMap();
+                            roomMenu.remove(keyRoom);
+                            Controller.setMenu(null);
+
+                            Controller.reCard("tab2", "tab1");
+                            DefaultTableModel model = (DefaultTableModel) table.getModel();
+                            int rowCount = model.getRowCount();
+                            for (int i = rowCount - 1; i >= 0; i--) {
+                                model.removeRow(i);
+                            }
+                        }
+                    });
                 }
 
                 @Override
@@ -722,6 +743,7 @@ public class transaction extends JPanel implements ActionListener {
                         System.out.println("Selected item: Order Room : " + key);
                         System.out.println(selectedItem);
                         if (("Order Room : " + key).equals(selectedItem)) {
+                            keyRoom = key;
                             reRow();
                             DefaultTableModel model = (DefaultTableModel) table.getModel();
                             Map<Food, Integer> temp2 = (Map<Food, Integer>) temp.get(key);
@@ -801,8 +823,8 @@ public class transaction extends JPanel implements ActionListener {
         System.out.println("e");
 
     }
-    
-    public void reRow(){
+
+    public void reRow() {
         try {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int rowCount = model.getRowCount();
@@ -810,10 +832,10 @@ public class transaction extends JPanel implements ActionListener {
             for (int i = rowCount - 1; i >= 0; i--) {
                 model.removeRow(i);
             }
-        } catch (ClassCastException i){
+        } catch (ClassCastException i) {
             i.printStackTrace();
         }
-        
+
     }
 
     public void addOrder(String name) {

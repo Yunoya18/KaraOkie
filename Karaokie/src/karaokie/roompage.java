@@ -573,7 +573,10 @@ public class roompage extends JPanel implements ActionListener {
         down2.setPreferredSize(new Dimension(100, height2));
     }
     
-    
+    public void reCard(String s, String s2){
+        card.show(tablist, s);
+        card.show(tablist, s2);
+    }
     
     
     
