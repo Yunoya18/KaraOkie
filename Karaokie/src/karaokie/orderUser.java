@@ -262,7 +262,7 @@ public class orderUser extends JPanel implements ActionListener{
         }
         else if(ev.getSource().equals(b2)){
             fo.removeAll();
-          
+          ImportMenu.imp();
             this.loadMap();
             for (int num = 0; num <= map.get("Food").size() - 1; num++) {
                 Icon icon = (Icon) map.get("Food").get(num).getImage();
@@ -275,7 +275,7 @@ public class orderUser extends JPanel implements ActionListener{
         }
         else if(ev.getSource().equals(b3)){
             sn.removeAll();
- 
+ ImportMenu.imp();
             this.loadMap();
             for (int num = 0; num <= map.get("Snack").size() - 1; num++) {
                 Icon icon = (Icon) map.get("Snack").get(num).getImage();
@@ -289,7 +289,7 @@ public class orderUser extends JPanel implements ActionListener{
         }
         else if(ev.getSource().equals(b4)){
             dr.removeAll();
-           
+           ImportMenu.imp();
             this.loadMap();
             for (int num = 0; num <= map.get("Drinks").size() - 1; num++) {
                 Icon icon = (Icon) map.get("Drinks").get(num).getImage();
@@ -305,9 +305,10 @@ public class orderUser extends JPanel implements ActionListener{
         }
     }
         public void loadMap() {
-        File file = new File("menu.dat");
+            ImportMenu.imp();
+        File file = new File("recave.dat");
         if (file.exists()) {
-            try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+            try (FileInputStream fin = new FileInputStream("recave.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {
