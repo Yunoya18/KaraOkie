@@ -36,9 +36,9 @@ public class getConnection {
         return null;
     }
     
-    public static void addData() {
+    public static void addData(double cost) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        sql = String.format("INSERT INTO stat (time, cost) VALUES ('%s', 500);", dtf.format(LocalDateTime.now()));
+        sql = String.format("INSERT INTO stat (time, cost) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(URL, USER, PASSWORD);
