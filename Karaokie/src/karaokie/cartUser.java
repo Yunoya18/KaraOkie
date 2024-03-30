@@ -261,9 +261,21 @@ public class cartUser extends JPanel implements ActionListener{
                System.out.println(mapfortran);
         rom.tranMap("1");
         
-        mid.removeAll();
+        
         mapfortran.clear();
+        map.clear();
+        try (FileOutputStream fout = new FileOutputStream("ro.dat");
+            ObjectOutputStream oout = new ObjectOutputStream(fout);){
+            
+            oout.writeObject(map);
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
         this.saveTranMap();
+        mid.removeAll();
+        mid.repaint();
         
     }
     }
