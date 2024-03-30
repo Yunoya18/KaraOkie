@@ -10,7 +10,15 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.*;
+import karaokie.Menu.Food;
 public class cartUser extends JPanel implements ActionListener{
     private RoundedPanel out, in;
     private JPanel top, bot, order, blank, blank2;
@@ -19,6 +27,7 @@ public class cartUser extends JPanel implements ActionListener{
     private JButton co;
     private JScrollPane sc;
     private Box mid;
+    protected Map<Food, Integer> map ;
     public cartUser(){
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
@@ -71,18 +80,20 @@ public class cartUser extends JPanel implements ActionListener{
         sc.setBackground(Color.decode("#A6ADCE"));
         sc.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.decode("#282B3A")));
         
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
+        this.loadMap();
+        Set<Food> foodSet = map.keySet(); 
+        for (Food food : foodSet){
+            if(food.getName().equals("")){
+                System.out.println("e");
+            }
+            else{
+            String name = food.getName();
+            String price = String.valueOf(food.getPrice());
+            String piece = String.valueOf(map.get(food.getName()));
+                System.out.println(map.get(food.getName()));
+            this.addOrder(name, price, piece);
+        }
+        }
         
 //      bottom panel
         bot = new JPanel();
@@ -101,8 +112,26 @@ public class cartUser extends JPanel implements ActionListener{
         
         co.addActionListener(this);
     }
+    public void loadMap(){
+         map = new HashMap<>();
+        File file = new File("ro.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+                System.out.println(map);
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+       
+        }
+        else{
+            map.put(new Food("",null,0.0,""), 0);
+        }
+    }
 //    String order, String price, String piece, String total
-    public void addOrder(){
+    public void addOrder(String name, String price, String piece){
         JButton del = new JButton();
         ImageIcon i = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\minus.png");
         Image im = i.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -112,7 +141,7 @@ public class cartUser extends JPanel implements ActionListener{
         del.setFocusPainted(false);
         del.setBackground(Color.decode("#A6ADCE"));
         
-        lis = new JLabel("you you you");
+        lis = new JLabel(name);
         lis.setForeground(Color.decode("#282B3A"));
         lis.setBackground(Color.decode("#A6ADCE"));
         
@@ -120,12 +149,13 @@ public class cartUser extends JPanel implements ActionListener{
         blank.setPreferredSize(new Dimension(570, 5));
         blank.setBackground(Color.decode("#A6ADCE"));
         
-        epr = new JLabel("Price x ");
+        epr = new JLabel(price+" x");
         epr.setForeground(Color.decode("#282B3A"));
         epr.setBackground(Color.decode("#A6ADCE"));
         
 //      number of order that can edit
         count = new JTextField();
+        count.setText(piece);
         count.setPreferredSize(new Dimension(30, 20));
         count.setForeground(Color.decode("#282B3A"));
         count.setBackground(Color.decode("#CFD7FA"));

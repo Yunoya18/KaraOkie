@@ -35,7 +35,7 @@ public class roomMenu extends Menus {
        
         }
         else{
-            map.put(null, 0);
+            map.put(new Food("",null,0.0,""), 0);
         }
     }
 
@@ -95,7 +95,7 @@ public class roomMenu extends Menus {
        
         }
         else{
-            map.put(null, 0);
+            map.put(new Food("",null,0.0,""), 0);
         }
     }
 
