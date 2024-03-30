@@ -10,15 +10,29 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.*;
+import karaokie.Menu.Food;
+import karaokie.Menu.roomMenu;
 public class cartUser extends JPanel implements ActionListener{
-    private RoundedPanel out, in, corp;
+    private RoundedPanel out, in;
     private JPanel top, bot, order, blank, blank2;
     private JLabel id, room, lis, epr, etot, total;
     private JTextField count;
     private JButton co;
     private JScrollPane sc;
     private Box mid;
+    protected Map<Food, Integer> map ;
+    private double totalmoney;
+    private roomMenu rom;
     public cartUser(){
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
@@ -31,17 +45,7 @@ public class cartUser extends JPanel implements ActionListener{
         
 //      button
         co = new JButton("Confirm Order");
-        co.setFont(new Font("Montserrat", Font.BOLD, 12));
-        co.setBackground(Color.decode("#A6ADCE"));
-        co.setForeground(Color.decode("#282B3A"));
-        co.setBorderPainted(false);
-        co.setFocusPainted(false);
-        co.setPreferredSize(new Dimension(125, 25));
         
-//      button panel
-        corp = new RoundedPanel(20, 20, 135, 30, Color.decode("#A6ADCE"), 1.0f, 2);
-        corp.add(co);
-                
 //      top panel
         top = new JPanel();
         top.setPreferredSize(new Dimension(930, 30));
@@ -52,7 +56,6 @@ public class cartUser extends JPanel implements ActionListener{
         topgrid.setBackground(Color.decode("#A6ADCE"));
         
         id = new JLabel("Order ID : ");
-        id.setFont(new Font("Montserrat", Font.BOLD, 12));
         id.setForeground(Color.decode("#282B3A"));
         id.setBackground(Color.decode("#A6ADCE"));
         
@@ -62,7 +65,6 @@ public class cartUser extends JPanel implements ActionListener{
         proom.setBackground(Color.decode("#A6ADCE"));
         
         room = new JLabel("Room : ");
-        room.setFont(new Font("Montserrat", Font.BOLD, 12));
         room.setForeground(Color.decode("#282B3A"));
         room.setBackground(Color.decode("#A6ADCE"));
         
@@ -74,8 +76,11 @@ public class cartUser extends JPanel implements ActionListener{
         top.add(topgrid);
         
 //      mid panel
+//        mid.removeAll();
         mid = Box.createVerticalBox();
+        mid.removeAll();
         mid.setBackground(Color.decode("#A6ADCE"));
+        
         
         sc = new JScrollPane(mid);
         sc.setPreferredSize(new Dimension(930, 370));
@@ -83,39 +88,58 @@ public class cartUser extends JPanel implements ActionListener{
         sc.setBackground(Color.decode("#A6ADCE"));
         sc.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.decode("#282B3A")));
         
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
-        this.addOrder();
+        this.loadMap();
+        Set<Food> foodSet = map.keySet(); 
+        for (Food food : foodSet){
+            if(food.getName().equals("")){
+                System.out.println("e");
+            }
+            else{
+            String name = food.getName();
+            String price = String.valueOf(food.getPrice());
+            String piece = String.valueOf(map.get(food));
+                System.out.println(name);
+            this.addOrder(name, price, piece);
+        }
+        }
         
 //      bottom panel
         bot = new JPanel();
         bot.setPreferredSize(new Dimension(930, 50));
         bot.setBackground(Color.decode("#A6ADCE"));
         bot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        total = new JLabel("Total : ");
-        total.setFont(new Font("Montserrat", Font.BOLD, 12));
+        total = new JLabel("Total : "+totalmoney);
         bot.add(total);
         
         in.add(top);
         in.add(sc);
         in.add(bot);
         out.add(in);
-        out.add(corp);
+        out.add(co);
         add(out);
         
         co.addActionListener(this);
     }
+    public void loadMap(){
+         map = new HashMap<>();
+        File file = new File("ro.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+                System.out.println(map);
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+       
+        }
+        else{
+            map.put(new Food("",null,0.0,""), 0);
+        }
+    }
 //    String order, String price, String piece, String total
-    public void addOrder(){
+    public void addOrder(String name, String price, String piece){
         JButton del = new JButton();
         ImageIcon i = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\minus.png");
         Image im = i.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -125,8 +149,7 @@ public class cartUser extends JPanel implements ActionListener{
         del.setFocusPainted(false);
         del.setBackground(Color.decode("#A6ADCE"));
         
-        lis = new JLabel("you you you");
-        lis.setFont(new Font("Montserrat", Font.BOLD, 12));
+        lis = new JLabel(name);
         lis.setForeground(Color.decode("#282B3A"));
         lis.setBackground(Color.decode("#A6ADCE"));
         
@@ -134,14 +157,13 @@ public class cartUser extends JPanel implements ActionListener{
         blank.setPreferredSize(new Dimension(570, 5));
         blank.setBackground(Color.decode("#A6ADCE"));
         
-        epr = new JLabel("Price x ");
-        epr.setFont(new Font("Montserrat", Font.BOLD, 12));
+        epr = new JLabel(price+" x");
         epr.setForeground(Color.decode("#282B3A"));
         epr.setBackground(Color.decode("#A6ADCE"));
         
 //      number of order that can edit
         count = new JTextField();
-        count.setFont(new Font("Montserrat", Font.BOLD, 12));
+        count.setText(piece);
         count.setPreferredSize(new Dimension(30, 20));
         count.setForeground(Color.decode("#282B3A"));
         count.setBackground(Color.decode("#CFD7FA"));
@@ -152,7 +174,6 @@ public class cartUser extends JPanel implements ActionListener{
         blank2.setBackground(Color.decode("#A6ADCE"));
         
         etot = new JLabel(" THB");
-        etot.setFont(new Font("Montserrat", Font.BOLD, 12));
         etot.setForeground(Color.decode("#282B3A"));
         etot.setBackground(Color.decode("#A6ADCE"));
         
@@ -165,7 +186,7 @@ public class cartUser extends JPanel implements ActionListener{
         order.add(count);
         order.add(blank2);
         order.add(etot);
-        
+        totalmoney += Double.parseDouble(price) * Integer.parseInt(piece);
         mid.add(order);
         
         JButton g[] = new JButton[]{del, co};
@@ -202,7 +223,29 @@ public class cartUser extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(co)){
+            int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
+           if(resp == JOptionPane.YES_OPTION){
+               rom = new roomMenu();
+//            rom.tranMap("001");
+            mid.removeAll();
+            try (FileOutputStream fout = new FileOutputStream("ro.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+//                Map<Food, Integer> mapremove = new HashMap<>();
+                map.clear();
+            oout.writeObject(map);
+
+        } catch (IOException ex) {
+
+            ex.printStackTrace();
+        }
+           
+    }
+
+           }
             
         }
+    
+    
+    public static void main(String[] args) {
+        new mainUser();
     }
 }

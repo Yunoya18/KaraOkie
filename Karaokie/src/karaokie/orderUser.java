@@ -180,6 +180,7 @@ public class orderUser extends JPanel implements ActionListener{
         name.setText(n);
         name.setFont(new Font("Montserrat", Font.BOLD, 30));
         name.setForeground(Color.white);
+        
         price = new JLabel();
         price.setText(p);
         price.setFont(new Font("Montserrat", Font.BOLD, 30));
@@ -192,10 +193,10 @@ public class orderUser extends JPanel implements ActionListener{
         menub.setBorderPainted(false);
         menub.setFocusPainted(false);
         menub.setPreferredSize(new Dimension(60, 25));
-        
+
         menubrp = new RoundedPanel(20, 20, 70, 35, Color.decode("#A6ADCE"), 1.0f, 3);
         menubrp.add(menub);
-        
+
         menub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -220,7 +221,7 @@ public class orderUser extends JPanel implements ActionListener{
         ppic.add(pic);
         pname.add(name);
         pprice.add(price);
-        pbut.add(menubrp);
+        pbut.add(menub);
         
         menu.add(ppic);
         menu.add(pname);

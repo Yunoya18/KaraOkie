@@ -29,7 +29,6 @@ public class stat extends JPanel implements ActionListener{
     private JButton pg1, pg2, pg3, pg4, pg5;
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
-    private RoundedPanel w, m, y;
     public stat(){
         //ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -138,12 +137,15 @@ public class stat extends JPanel implements ActionListener{
         p5.setLayout(new BoxLayout(p5, BoxLayout.Y_AXIS));
 
         JComboBox<String> dropdown = new JComboBox<>();
-        dropdown.setFont(new Font("Montserrat", Font.BOLD, 12));
-        dropdown.setForeground(Color.decode("#282B3A"));
+        dropdown.setBackground(Color.decode("#434759"));
+        dropdown.setForeground(Color.WHITE);
         dropdown.addItem("Weekly");
         dropdown.addItem("Monthly");
         dropdown.addItem("Yearly");
         dropdown.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dropdown.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // width 100 height 50
+        dropdown.setPreferredSize(new Dimension(100, 50));
 
 
         // panel for dropdown
@@ -167,36 +169,51 @@ public class stat extends JPanel implements ActionListener{
 
 
         // panel weekly total
-        w = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
-        JLabel weeklyTotal = new JLabel("Weekly Total : ");
+        JPanel panelWeeklyTotal = new JPanel();
+        panelWeeklyTotal.setBackground(Color.decode("#434759"));
+        // width 200 height 250
+        panelWeeklyTotal.setPreferredSize(new Dimension(200, 150));
+        // border padding
+        panelWeeklyTotal.setBorder(BorderFactory.createEmptyBorder(10, 50, 50, 50));
+        JLabel weeklyTotal = new JLabel("Weekly Total: ");
         // font size 15
-        weeklyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
-        weeklyTotal.setForeground(Color.decode("#A6ADCE"));
+        weeklyTotal.setFont(new Font("Arial", Font.PLAIN, 15));
+        weeklyTotal.setForeground(Color.WHITE);
         weeklyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
         // panel for monthly total
-        m = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
-        JLabel monthlyTotal = new JLabel("Monthly Total : ");
+        JPanel panelMonthlyTotal = new JPanel();
+        panelMonthlyTotal.setBackground(Color.decode("#434759"));
+        // width 200 height 250
+        panelMonthlyTotal.setPreferredSize(new Dimension(200, 150));
+        // border padding
+        panelMonthlyTotal.setBorder(BorderFactory.createEmptyBorder(10, 50, 50, 50));
+        JLabel monthlyTotal = new JLabel("Monthly Total: ");
         // font size 15
-        monthlyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
-        monthlyTotal.setForeground(Color.decode("#A6ADCE"));
+        monthlyTotal.setFont(new Font("Arial", Font.PLAIN, 15));
+        monthlyTotal.setForeground(Color.WHITE);
         monthlyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // panel for yearly total
-        y = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
-        JLabel yearlyTotal = new JLabel("Yearly Total : ");
+        JPanel panelYearlyTotal = new JPanel();
+        panelYearlyTotal.setBackground(Color.decode("#434759"));
+        // width 200 height 250
+        panelYearlyTotal.setPreferredSize(new Dimension(200, 150));
+        // border padding
+        panelYearlyTotal.setBorder(BorderFactory.createEmptyBorder(10, 50, 50, 50));
+        JLabel yearlyTotal = new JLabel("Yearly Total: ");
         // font size 15
-        yearlyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
-        yearlyTotal.setForeground(Color.decode("#A6ADCE"));
+        yearlyTotal.setFont(new Font("Arial", Font.PLAIN, 15));
+        yearlyTotal.setForeground(Color.WHITE);
         yearlyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
 
         // background color #535870
         weeklyTotal.setBackground(Color.decode("#535870"));
-        w.add(weeklyTotal);
-        panelChartPanel.add(w);
+        panelWeeklyTotal.add(weeklyTotal);
+        panelChartPanel.add(panelWeeklyTotal);
 
         JPanel space1 = new JPanel();
         space1.setBackground(Color.decode("#535870"));
@@ -205,8 +222,8 @@ public class stat extends JPanel implements ActionListener{
 
         // background color #535870
         monthlyTotal.setBackground(Color.decode("#535870"));
-        m.add(monthlyTotal);
-        panelChartPanel.add(m);
+        panelMonthlyTotal.add(monthlyTotal);
+        panelChartPanel.add(panelMonthlyTotal);
 
         JPanel space2 = new JPanel();
         space2.setBackground(Color.decode("#535870"));
@@ -215,8 +232,8 @@ public class stat extends JPanel implements ActionListener{
 
         // background color #535870
         yearlyTotal.setBackground(Color.decode("#535870"));
-        y.add(yearlyTotal);
-        panelChartPanel.add(y);
+        panelYearlyTotal.add(yearlyTotal);
+        panelChartPanel.add(panelYearlyTotal);
 
 
 
@@ -227,7 +244,25 @@ public class stat extends JPanel implements ActionListener{
         //panelChart.add(chartPanel);
         panelChart.add(panelChartPanel);
 
+
+
+
+
         p5.add(panelChart);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //set Icon Image
         ImageIcon i1 = new ImageIcon("/Users/sukwankaroon/Desktop/karaokie/src/main/java/KaraOkie/room.png");
