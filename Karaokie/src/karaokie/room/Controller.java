@@ -23,14 +23,14 @@ public class Controller {
     // Socket
     public static void InFromClient() {
 
-        try (ServerSocket welcomeSocket = new ServerSocket(6789)) {
+        try (ServerSocket welcomeSocket = new ServerSocket(1234)) {
 
             Socket connectionSocket = welcomeSocket.accept();
             ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
 
             // Read the serialized data from the client
-            map = (Map<String, ArrayList<Food>>) oin.readObject();
-            System.out.println("Received map from client: " + map);
+            roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
+            System.out.println("Received map from client: " + roomMenu);
 
             oin.close();
             connectionSocket.close();

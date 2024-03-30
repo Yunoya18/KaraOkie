@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.*;
 import karaokie.Menu.Food;
+import karaokie.Menu.roomMenu;
 public class cartUser extends JPanel implements ActionListener{
     private RoundedPanel out, in;
     private JPanel top, bot, order, blank, blank2;
@@ -28,6 +29,8 @@ public class cartUser extends JPanel implements ActionListener{
     private JScrollPane sc;
     private Box mid;
     protected Map<Food, Integer> map ;
+    private double totalmoney;
+    private roomMenu rom;
     public cartUser(){
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
@@ -100,7 +103,7 @@ public class cartUser extends JPanel implements ActionListener{
         bot.setPreferredSize(new Dimension(930, 50));
         bot.setBackground(Color.decode("#A6ADCE"));
         bot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        total = new JLabel("Total : ");
+        total = new JLabel("Total : "+totalmoney);
         bot.add(total);
         
         in.add(top);
@@ -178,7 +181,7 @@ public class cartUser extends JPanel implements ActionListener{
         order.add(count);
         order.add(blank2);
         order.add(etot);
-        
+        totalmoney += Double.parseDouble(price) * Integer.parseInt(piece);
         mid.add(order);
         
         JButton g[] = new JButton[]{del, co};
@@ -215,7 +218,8 @@ public class cartUser extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(co)){
-            
+            rom = new roomMenu();
+            rom.tranMap("001");
         }
     }
     
