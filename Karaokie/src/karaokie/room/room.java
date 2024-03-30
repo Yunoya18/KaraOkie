@@ -12,9 +12,9 @@ import javax.swing.event.InternalFrameListener;
 
 public abstract class room extends JInternalFrame implements Available, Serializable, ComponentListener, MouseListener{
     private static final long serialVersionUID = 1L;
-    protected int roomNumber;
+    protected final int roomNumber;
 //    protected roomMenu roomMenu;
-    protected String Type;
+    protected final String Type;
     protected int Price;
     protected boolean Avaliable;
     protected int position_x;
@@ -65,14 +65,6 @@ public abstract class room extends JInternalFrame implements Available, Serializ
 
     public void setPrice(int Price) {
         this.Price = Price;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public void setType(String Type) {
-        this.Type = Type;
     }
 
     public String getType() {

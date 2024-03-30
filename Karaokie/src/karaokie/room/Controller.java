@@ -123,6 +123,10 @@ public class Controller {
     public static void CreateBigRoom() {
         addRoom(new big_room(Room_count));
     }
+    
+    public static void CreateBigRoom2() {
+        addRoom(new big_room2(Room_count));
+    }
 
     public static void renew(String name){
         main.renew(name);

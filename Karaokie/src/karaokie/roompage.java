@@ -21,7 +21,7 @@ public class roompage extends JPanel implements ActionListener {
     private CardLayout card;
     private JButton room, order, report, edit, cursor, move, add, delete, refresh;
     private JPanel tablist, down1, down2, down3, wp, tool, cen, leftcom, func, up, editpa, sandbox;
-    private JMenuItem rect1, rect2;
+    private JMenuItem rect1, rect2, rect3;
     private JPopupMenu create;
     private JComboBox type;
     private JTextField search;
@@ -63,15 +63,24 @@ public class roompage extends JPanel implements ActionListener {
         delete = new JButton();
         refresh = new JButton();
         create = new JPopupMenu();
-        rect1 = new JMenuItem("rect1");
-        rect2 = new JMenuItem("rect2");
+        rect1 = new JMenuItem("Small");
+        rect2 = new JMenuItem("Big |");
+        rect3 = new JMenuItem("Big -");
         editpa = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5));
 
         editpa.add(edit);
         editpa.setBackground(Color.decode("#535870"));
 
+        // why!!!???
+        rect1.setPreferredSize(new Dimension(70, 70));
+        rect2.setPreferredSize(new Dimension(70, 70));
+        rect3.setPreferredSize(new Dimension(70, 70));
+        
+        create.setPreferredSize(new Dimension(100, 100));
+        
         create.add(rect1);
         create.add(rect2);
+        create.add(rect3);
         create.setPreferredSize(new Dimension(90, 60));
 
         wp = new JPanel(new BorderLayout(0, 0));
@@ -239,6 +248,22 @@ public class roompage extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Controller.CreateBigRoom();
+                for (room rm : Controller.getArrayRoom()) {
+                    if (rm != null) {
+                        sandbox.add(rm);
+
+                        sandbox.repaint();
+                        loadRoomData((String) type.getSelectedItem());
+                    }
+
+                }
+            }
+        });
+        
+        rect3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Controller.CreateBigRoom2();
                 for (room rm : Controller.getArrayRoom()) {
                     if (rm != null) {
                         sandbox.add(rm);
