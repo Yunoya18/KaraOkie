@@ -9,13 +9,13 @@ import karaokie.room.Controller;
 
 public class ImportMenu {
 
-    public static void main(String argv[]) {
+    public static void imp() {
 
          try {
             Socket socket = new Socket("localhost",6789);
             
             InputStream inputStream = socket.getInputStream();
-            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream("menu.dat"));
+            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream("recave.dat"));
             
             byte[] buffer = new byte[1024];
             int bytesRead;

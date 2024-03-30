@@ -10,7 +10,7 @@ import javax.swing.*;
 import static karaokie.Menu.Menus.map;
 import karaokie.*;
 
-public class Controller {
+public class Controller implements Runnable {
 
     private static int Room_count = 0;
     private static Map<String, ArrayList<Food>> map;
@@ -25,53 +25,59 @@ public class Controller {
 
     // Socket
     public static void InFromClient() {
+        System.out.println("openport 1234");
+        try {
+            ServerSocket welcomeSocket = new ServerSocket(1234);
+            while (true) {
+                Socket connectionSocket = welcomeSocket.accept();
+                ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
 
-        try (ServerSocket welcomeSocket = new ServerSocket(1234)) {
+                // Read the serialized data from the client
+                Map<String, Map<Food, Integer>> temp = (Map<String, Map<Food, Integer>>) oin.readObject();
+                for (String key : temp.keySet()) {
+                    roomMenu.put(key, temp.get(key));
+                }
 
-            Socket connectionSocket = welcomeSocket.accept();
-            ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
+                System.out.println("Received map from client: " + roomMenu);
 
-            // Read the serialized data from the client
-            Map<String, Map<Food, Integer>> temp = (Map<String, Map<Food, Integer>>) oin.readObject();
-            for (String key : temp.keySet()) {
-                roomMenu.put(key, temp.get(key));
+                oin.close();
+                connectionSocket.close();
             }
-
-            System.out.println("Received map from client: " + roomMenu);
-
-            oin.close();
-            connectionSocket.close();
-
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     public static void OutToClient() {
-        try (ServerSocket serverSocket = new ServerSocket(6789)) {
-            Socket socket = serverSocket.accept();
+        System.out.println("openserver 6789");
+        try {
+            ServerSocket serverSocket = new ServerSocket(6789);
+            System.out.println("openserver");
+            while (true) {
+                Socket socket = serverSocket.accept();
 
-            OutputStream ops = socket.getOutputStream();
-            BufferedOutputStream bof = new BufferedOutputStream(ops);
-            ObjectOutputStream oos = new ObjectOutputStream(bof);
+                OutputStream ops = socket.getOutputStream();
+                BufferedOutputStream bof = new BufferedOutputStream(ops);
+                ObjectOutputStream oos = new ObjectOutputStream(bof);
 
-            File file = new File("menu.dat");
-            FileInputStream fin = new FileInputStream(file);
+                File file = new File("menu.dat");
+                FileInputStream fin = new FileInputStream(file);
 
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fin.read(buffer)) != -1) {
-                bof.write(buffer, 0, bytesRead);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = fin.read(buffer)) != -1) {
+                    bof.write(buffer, 0, bytesRead);
+                }
+
+                fin.close();
+
+                oos.close();
+                socket.close();
+                System.out.println("close server");
             }
-
-            fin.close();
-
-            oos.close();
-            socket.close();
         } catch (IOException ex) {
             Logger.getLogger(ImportMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public Controller() {
@@ -150,12 +156,12 @@ public class Controller {
         ts.reOrder();
         for (String key : temp.keySet()) {
             roomMenu.put(key, temp.get(key));
-            
+
             // show Order in transaction
-            ts.addOrder(key);  
+            ts.addOrder(key);
             System.out.println(key);
             for (Map<Food, Integer> f : temp.values()) {
-                count ++;
+                count++;
             }
             Controller.sentOrder(key, temp.get(key), count);
         }
@@ -167,12 +173,12 @@ public class Controller {
 
     public static void sentOrder(String name, Map<Food, Integer> f, int row) {
         rp.loadOrder(new showorder(name, f, row));
-        
+
     }
-    
-    public static int getOrderSize(){
+
+    public static int getOrderSize() {
         int count = 0;
-        for (String key : roomMenu.keySet()){
+        for (String key : roomMenu.keySet()) {
             count += 1;
         }
         return count;
@@ -234,8 +240,8 @@ public class Controller {
         File file = new File("room.dat");
         file.delete();
     }
-
-    public static void main(String[] args) {
+//
+//    public static void main(String[] args) {
 
 //        Thread clientThread = new Thread(() -> {
 //            OutToClient();
@@ -256,6 +262,18 @@ public class Controller {
 //    
 //    Controller.roomMenu = t1;
 //    Controller.saveFile();
+//    }
+    @Override
+    public void run() {
+        Thread outToClientThread = new Thread(() -> {
+            OutToClient();
+        });
+        outToClientThread.start();
+
+        Thread inFromClientThread = new Thread(() -> {
+            InFromClient();
+        });
+        inFromClientThread.start();
     }
 
 }

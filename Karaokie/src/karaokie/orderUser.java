@@ -20,6 +20,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 import karaokie.Menu.Food;
+import karaokie.Menu.ImportMenu;
 import karaokie.Menu.roomMenu;
 public class orderUser extends JPanel implements ActionListener{
     private JButton b1, b2, b3, b4;
@@ -229,6 +230,9 @@ public class orderUser extends JPanel implements ActionListener{
         if(ev.getSource().equals(b1)){
             all.removeAll();
 
+            ImportMenu.imp();
+
+            
             this.loadMap();
             for (String key : map.keySet()) {
                 for (int num = 0; num <= map.get(key).size() - 1; num++) {
