@@ -55,22 +55,22 @@ public class Controller implements Runnable {
             System.out.println("openserver");
             while (true) {
                 Socket socket = serverSocket.accept();
-                
+
                 //loadmap
                 File file = new File("menu.dat");
-            if (file.exists()) {
-            try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-                map = (Map) oin.readObject();
-                System.out.println(map);
-            } catch (IOException | ClassNotFoundException e) {
+                if (file.exists()) {
+                    try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                        map = (Map) oin.readObject();
+                        System.out.println(map);
+                    } catch (IOException | ClassNotFoundException e) {
 
-                e.printStackTrace();
-            }
-        } else {
-            map.put("Food", new ArrayList<Food>());
-            map.put("Snack", new ArrayList<Food>());
-            map.put("Drinks", new ArrayList<Food>());
-        }
+                        e.printStackTrace();
+                    }
+                } else {
+                    map.put("Food", new ArrayList<Food>());
+                    map.put("Snack", new ArrayList<Food>());
+                    map.put("Drinks", new ArrayList<Food>());
+                }
                 //loadmap
                 OutputStream ops = socket.getOutputStream();
                 BufferedOutputStream bof = new BufferedOutputStream(ops);
@@ -88,7 +88,7 @@ public class Controller implements Runnable {
     }
 
     public Controller() {
-        
+
         // File
         File file_room = new File("room.dat");
         File file_roomMenu = new File("roomMenu.dat");
@@ -101,15 +101,15 @@ public class Controller implements Runnable {
                 e.printStackTrace();
             }
         }
-        if (file_roomMenu.exists()) {
-            try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-                roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
-
-            } catch (IOException | ClassNotFoundException e) {
-
-                e.printStackTrace();
-            }
-        }
+//        if (file_roomMenu.exists()) {
+//            try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+//                roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
+//
+//            } catch (IOException | ClassNotFoundException e) {
+//
+//                e.printStackTrace();
+//            }
+//        }
 
     }
 
@@ -160,18 +160,25 @@ public class Controller implements Runnable {
 //
 //        roomMenu.remove(room);
 //        roomMenu.put(room, food);
+        
+
         int count = 0;
         ts.reOrder();
-        for (String key : temp.keySet()) {
-            roomMenu.put(key, temp.get(key));
+        for (String key : roomMenu.keySet()) {
+            roomMenu.put(key, roomMenu.get(key));
 
             // show Order in transaction
             ts.addOrder(key);
-            System.out.println(key);
-            for (Map<Food, Integer> f : temp.values()) {
-                count++;
+
+            for (Map<Food, Integer> f : roomMenu.values()) {
+                for (Integer foodCount : f.values()) {
+                    count += 1;
+                }
             }
-            Controller.sentOrder(key, temp.get(key), count);
+            System.out.println("Count = " + count);
+            sentOrder(key, roomMenu.get(key), count);
+//                rp.loadOrder(new showorder(key, temp.get(key), count));
+
         }
     }
 
@@ -191,8 +198,8 @@ public class Controller implements Runnable {
         }
         return count;
     }
-    
-    public static Map<String, Map<Food, Integer>> getRoomMenuMap(){
+
+    public static Map<String, Map<Food, Integer>> getRoomMenuMap() {
         return roomMenu;
     }
 
@@ -210,14 +217,14 @@ public class Controller implements Runnable {
         }
 
         // roomMenu
-        try (FileOutputStream fout = new FileOutputStream("roomMenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
-
-            oout.writeObject(roomMenu);
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
+//        try (FileOutputStream fout = new FileOutputStream("roomMenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+//
+//            oout.writeObject(roomMenu);
+//
+//        } catch (IOException e) {
+//
+//            e.printStackTrace();
+//        }
     }
 
     public static void openFile() {
@@ -236,17 +243,18 @@ public class Controller implements Runnable {
                 e.printStackTrace();
             }
         }
-        if (file_roomMenu.exists()) {
-            try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
-                roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
-
-            } catch (IOException | ClassNotFoundException e) {
-
-                e.printStackTrace();
-            }
-        }
+//        if (file_roomMenu.exists()) {
+//            try (FileInputStream fin = new FileInputStream("roomMenu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+//                roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
+//
+//            } catch (IOException | ClassNotFoundException e) {
+//
+//                e.printStackTrace();
+//            }
+//        }
     }
-    public void loadMap(){
+
+    public void loadMap() {
         File file = new File("menu.dat");
         if (file.exists()) {
             try (FileInputStream fin = new FileInputStream("menu.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {

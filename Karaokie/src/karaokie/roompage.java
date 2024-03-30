@@ -460,24 +460,24 @@ public class roompage extends JPanel implements ActionListener {
             
             down2.removeAll();
             // test
-            Map<String, Map<Food, Integer>> t1 = new HashMap<>();
-            Map<Food, Integer> f1 = new HashMap<>();
-            Map<Food, Integer> f2 = new HashMap<>();
-            Map<Food, Integer> f3 = new HashMap<>();
-
-            f1.put(new Food("ma", null, 100, "Food"), 3);
-            f1.put(new Food("ma1", null, 100, "Food"), 2);
-
-            f2.put(new Food("ei", null, 100, "Food"), 1);
-            f2.put(new Food("eii1", null, 100, "Food"), 5);
-            
-            f3.put(new Food("ei", null, 100, "Food"), 1);
-            f3.put(new Food("eii1", null, 100, "Food"), 5);
-
-            t1.put("1", f1);
-            t1.put("2", f2);
-            t1.put("4", f3);
-            Controller.setMenu(t1);
+//            Map<String, Map<Food, Integer>> t1 = new HashMap<>();
+//            Map<Food, Integer> f1 = new HashMap<>();
+//            Map<Food, Integer> f2 = new HashMap<>();
+//            Map<Food, Integer> f3 = new HashMap<>();
+//
+//            f1.put(new Food("ma", null, 100, "Food"), 3);
+//            f1.put(new Food("ma1", null, 100, "Food"), 2);
+//
+//            f2.put(new Food("ei", null, 100, "Food"), 1);
+//            f2.put(new Food("eii1", null, 100, "Food"), 5);
+//            
+//            f3.put(new Food("ei", null, 100, "Food"), 1);
+//            f3.put(new Food("eii1", null, 100, "Food"), 5);
+//
+//            t1.put("1", f1);
+//            t1.put("2", f2);
+//            t1.put("4", f3);
+            Controller.setMenu(null);
             
         } else if (e.getSource().equals(report)) {
             card.show(tablist, "tab3");
@@ -568,6 +568,9 @@ public class roompage extends JPanel implements ActionListener {
 
     public void loadOrder(showorder s) {
         down2.add(s);
+        
+        int height2 = 458 * Controller.getOrderSize();
+        down2.setPreferredSize(new Dimension(100, height2));
     }
     
     
