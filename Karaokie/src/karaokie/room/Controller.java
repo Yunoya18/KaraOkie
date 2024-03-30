@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import static karaokie.Menu.Menus.map;
-import karaokie.main;
+import karaokie.*;
 
 public class Controller {
 
@@ -16,8 +16,10 @@ public class Controller {
     private static Map<String, ArrayList<Food>> map;
     private static Map<String, Map<Food, Integer>> roomMenu = new HashMap<>();
     private static ArrayList<room> room = new ArrayList<>();
+    public static roompage rp;
     public static JPanel p = new JPanel();
     public static main main = new main();
+    
     public static boolean del;
 
     // Socket
@@ -149,6 +151,10 @@ public class Controller {
         return (HashMap<Food, Integer>) roomMenu.get(key);
     }
 
+    public static void sentOrder(String name, int row){
+        rp.loadOrder(name, row);
+    }
+    
     // File Save
     public static void saveFile() {
 

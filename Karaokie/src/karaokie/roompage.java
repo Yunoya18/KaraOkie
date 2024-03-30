@@ -36,7 +36,8 @@ public class roompage extends JPanel implements ActionListener {
 //    JLabel box1;
     public roompage() {
         // set up
-
+        Controller.rp = this;
+        
 //        firstp = new Point();
         sandbox = new JPanel();
         search = new JTextField();
@@ -526,4 +527,7 @@ public class roompage extends JPanel implements ActionListener {
         Controller.renew("pg1");
     }
 
+    public void loadOrder(String name, int row){
+        down2.add(new showorder(name, row));
+    }
 }
