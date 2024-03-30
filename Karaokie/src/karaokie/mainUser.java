@@ -35,7 +35,7 @@ public class mainUser extends JPanel implements ActionListener{
         p2 = new JPanel();
         txt1 = new JLabel("page1");
         txt2 = new JLabel("page2");
-        cu = new cartUser();
+        
         orderUser pm = new orderUser();
 
         //set backgroundcolor and foreground color
@@ -77,7 +77,7 @@ public class mainUser extends JPanel implements ActionListener{
         
         //add panel to tab
         tab.add(pm, "pg1");
-        tab.add(cu, "pg2");
+        
         
         //insert button in menu bar
         menu.add(blank);
@@ -166,7 +166,10 @@ public class mainUser extends JPanel implements ActionListener{
            cardlayout.show(tab, "pg1");
         }
         else if(ev.getSource().equals(pg2)){
+            cu = new cartUser();
+            tab.add(cu, "pg2");
            cardlayout.show(tab, "pg2");
+            System.out.println("2");
         }
         else if(ev.getSource().equals(pg3)){
            int resp = JOptionPane.showConfirmDialog(ma, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
