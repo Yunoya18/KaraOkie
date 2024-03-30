@@ -10,6 +10,8 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import java.util.*;
 import javax.swing.*;
 //import javax.swing.border.EmptyBorder;
@@ -35,6 +37,12 @@ public class roompage extends JPanel implements ActionListener {
     private boolean movin = false;
     private boolean del = false;
 
+    // socketalert ssaan
+    private ServerSocket server;
+    private Socket clientSocket;
+    private DataInputStream input;
+    private DataOutputStream output;    
+    
 //    JLabel box1;
     public roompage() {
         // set up
@@ -428,10 +436,16 @@ public class roompage extends JPanel implements ActionListener {
 
 //        down2.add(new showorder("1", 15));
 //        down2.add(new showorder("1", 15));
-        down3.add(new showalert("1"));
-        down3.add(new showalert("2"));
-        down3.add(new showalert("3"));
+        
+        
+        // moved to down (addDown() method)
+//        down3.add(new showalert("1"));
+//        down3.add(new showalert("2"));
+//        down3.add(new showalert("3"));
         Controller.p = sandbox;
+        
+        // socketalert ssaan (moved to karaOkie_main.java)
+//        socketServerFirstSetupConnection();        
     }
 
     @Override
@@ -551,4 +565,52 @@ public class roompage extends JPanel implements ActionListener {
     public void loadOrder(showorder s) {
         down2.add(s);
     }
-}
+    
+    
+    
+    
+    
+    
+    // socketalert ssaan (moved to karaOkie_main.java)
+//    public void socketServerFirstSetupConnection(/*int port*/) {
+//        try {
+//            server = new ServerSocket(/*port*/5000);
+//            System.out.println("Server started. Waiting for a client...");
+//
+//            clientSocket = server.accept();
+//            System.out.println("Client connected.");
+//
+//            input = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+//            output = new DataOutputStream(clientSocket.getOutputStream());
+//
+//            while (true) {
+//                try {
+//                    String message = input.readUTF();
+//                    System.out.println("Received from client: " + message);
+////                    tf.setText("need staff"); //noeysodbookmark --> tf ssaa
+//                    down3.add(new showroom("Room", false));
+//
+//
+//
+//                    // Process the message (e.g., call staff, update UI, etc.)
+//                    // Implement your logic here
+//                } catch (EOFException e) {
+//                    System.out.println("End of stream reached. Client may have disconnected.");
+//                    break; // Exit the loop if EOFException is caught
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }        
+//    }
+    
+    // socketalert ssaan 0000
+    public void addDown() {
+        down3.add(new showalert("1")); // if final change showroom to 
+    }
+
+}    
+

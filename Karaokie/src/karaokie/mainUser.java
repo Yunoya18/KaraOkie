@@ -10,8 +10,11 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 import javax.swing.*;
-import karaokie.alert.SendAlertToStaff;
+
+
 public class mainUser extends JPanel implements ActionListener{
     private JFrame ma;
     private JDesktopPane side;
@@ -21,6 +24,14 @@ public class mainUser extends JPanel implements ActionListener{
     private CardLayout cardlayout;
     private JLabel txt1, txt2;
     private cartUser cu;
+    
+    // socketalert ssaan
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int SERVER_PORT = 5000;
+    
+    private Socket socket;
+    private DataOutputStream out;  
+    
     public mainUser(){
         ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -153,6 +164,9 @@ public class mainUser extends JPanel implements ActionListener{
         pg2.addActionListener(this);
         pg3.addActionListener(this);
         
+        // socketalert ssaan 0000
+        socketClientFirstSetupConnection();
+        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
@@ -175,6 +189,8 @@ public class mainUser extends JPanel implements ActionListener{
            int resp = JOptionPane.showConfirmDialog(ma, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
                // alert the staff
+               // ssaan 0000
+                socketSendAlertToStaff(SERVER_ADDRESS);               
 
            }
         }
@@ -182,6 +198,36 @@ public class mainUser extends JPanel implements ActionListener{
 //    public void sendAlertToStaff() {
 //        
 //    }
+    
+    //== socket alert the staff ssaan 0000 ========================================================================================= \\
+    public void socketClientFirstSetupConnection() {
+        try {
+            socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+            out = new DataOutputStream(socket.getOutputStream());
+            System.out.println("Connected to server.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    
+    }
+    
+    public void socketSendAlertToStaff(String message) { // use with option pane on noeysodbookmark1
+        if (socket != null && socket.isConnected()) {
+            try {
+                // Send the message to the server
+                out.writeUTF(message);
+                out.flush(); // Ensure the message is sent immediately
+                System.out.println("Message sent to server: " + message);
+            } catch (IOException e) {
+                System.out.println("Error sending message to client: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Client socket is closed or not connected.");
+        }        
+    }
+    
+    //========================================================================================= \\
+    
     public static void main(String[] args) {
         new mainUser();
     }

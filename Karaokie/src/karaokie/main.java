@@ -285,6 +285,11 @@ public class main extends JPanel implements ActionListener, WindowListener{
     public static void main(String[] args) {
         new main();
     }
+    
+    // ssaan 0000
+    public void addDown() { // mp.addDown() in karaokie_main
+        pm1.addDown();
+    }     
 
     @Override
     public void windowOpened(WindowEvent e) {
