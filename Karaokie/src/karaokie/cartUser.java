@@ -34,8 +34,10 @@ public class cartUser extends JPanel implements ActionListener{
     protected Map<Food, Integer> map ;
     Map<Food, Integer> mapfortran;
     private double totalmoney;
-    private roomMenu rom;
+    private roomMenu rom; // 0000
     public cartUser(){
+        rom = new roomMenu(); // 9999 (moved here cause getRoomFromCart() have to use it)
+        
         mapfortran = new HashMap<>();
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
@@ -231,7 +233,7 @@ public class cartUser extends JPanel implements ActionListener{
         if(e.getSource().equals(co)){
             int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
-               rom = new roomMenu();
+//               rom = new roomMenu(); // 9999 (moved to default constructor cause getRoomFromCart() have to use it)
          Component[] components = mid.getComponents();
         for (Component component : components) {
             if (component instanceof JPanel) {
@@ -298,9 +300,9 @@ public class cartUser extends JPanel implements ActionListener{
     }
     
     // 0000 wait for final dont delete
-//    public String getRoomFromCart() {
-//        return rom.getroomNumber();
-//    }
+    public String getRoomFromCart() {
+        return rom.getroomNumber();
+    }
 
            
             

@@ -47,6 +47,8 @@ public class mainUser extends JPanel implements ActionListener{
         txt1 = new JLabel("page1");
         txt2 = new JLabel("page2");
         
+        cu = new cartUser();        //9999
+        
         orderUser pm = new orderUser();
 
         //set backgroundcolor and foreground color
@@ -186,7 +188,7 @@ public class mainUser extends JPanel implements ActionListener{
            cardlayout.show(tab, "pg1");
         }
         else if(ev.getSource().equals(pg2)){
-            cu = new cartUser();
+//            cu = new cartUser(); 9999 (moved to default constructor cause other have to use)
             tab.add(cu, "pg2");
            cardlayout.show(tab, "pg2");
             System.out.println("2"); 
@@ -196,14 +198,12 @@ public class mainUser extends JPanel implements ActionListener{
            if(resp == JOptionPane.YES_OPTION){
                // alert the staff
                // ssaan 0000
-                socketSendAlertToStaff(SERVER_ADDRESS);               
+                System.out.println("getRoomFromCart : " + cu.getRoomFromCart()); // 9999
+                socketSendAlertToStaff(SERVER_ADDRESS);        // 2222        
 
            }
         }
     }
-//    public void sendAlertToStaff() {
-//        
-//    }
     
     //== socket alert the staff ssaan 0000 ========================================================================================= \\
     public void socketClientFirstSetupConnection() {
