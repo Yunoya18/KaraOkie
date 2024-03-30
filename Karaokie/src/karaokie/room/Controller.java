@@ -31,7 +31,7 @@ public class Controller {
             ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
 
             // Read the serialized data from the client
-            roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();
+            roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();  
             System.out.println("Received map from client: " + roomMenu);
 
             oin.close();
@@ -169,14 +169,14 @@ public class Controller {
         }
 
         // roomMenu
-        try (FileOutputStream fout = new FileOutputStream("roomMenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
-
-            oout.writeObject(roomMenu);
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
+//        try (FileOutputStream fout = new FileOutputStream("roomMenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+//
+//            oout.writeObject(roomMenu);
+//
+//        } catch (IOException e) {
+//
+//            e.printStackTrace();
+//        }
     }
     
     public static void openFile() {
