@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.swing.*;
 import karaokie.Menu.Food;
+import static karaokie.Menu.Menus.map;
 import karaokie.Menu.roomMenu;
 public class cartUser extends JPanel implements ActionListener{
     private RoundedPanel out, in;
@@ -31,9 +32,11 @@ public class cartUser extends JPanel implements ActionListener{
     private JScrollPane sc;
     private Box mid;
     protected Map<Food, Integer> map ;
+    Map<Food, Integer> mapfortran;
     private double totalmoney;
     private roomMenu rom;
     public cartUser(){
+        mapfortran = new HashMap<>();
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
         
@@ -149,7 +152,7 @@ public class cartUser extends JPanel implements ActionListener{
         del.setFocusPainted(false);
         del.setBackground(Color.decode("#A6ADCE"));
         
-        lis = new JLabel(name);
+        lis = new JLabel("Name:  "+name);
         lis.setForeground(Color.decode("#282B3A"));
         lis.setBackground(Color.decode("#A6ADCE"));
         
@@ -157,7 +160,7 @@ public class cartUser extends JPanel implements ActionListener{
         blank.setPreferredSize(new Dimension(570, 5));
         blank.setBackground(Color.decode("#A6ADCE"));
         
-        epr = new JLabel(price+" x");
+        epr = new JLabel("Price:  "+price+" x");
         epr.setForeground(Color.decode("#282B3A"));
         epr.setBackground(Color.decode("#A6ADCE"));
         
@@ -226,24 +229,63 @@ public class cartUser extends JPanel implements ActionListener{
             int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
                rom = new roomMenu();
-//            rom.tranMap("001");
-            mid.removeAll();
-            try (FileOutputStream fout = new FileOutputStream("ro.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
-//                Map<Food, Integer> mapremove = new HashMap<>();
-                map.clear();
-            oout.writeObject(map);
+         Component[] components = mid.getComponents();
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                JPanel orderPanel = (JPanel) component;
+                String name = "";
+                String price = "";
+                String piece = "";
+            
+                for (Component innerComponent : orderPanel.getComponents()) {
+                    if (innerComponent instanceof JLabel) {
+                        JLabel label = (JLabel) innerComponent;
+                        if (label.getText().startsWith("Name: ")) {
+                            name = label.getText().substring(7);
+                        } else if (label.getText().startsWith("Price: ")) {
+                            price = label.getText().substring(8);
+                        }
+                    } else if (innerComponent instanceof JTextField) {
+                        JTextField countField = (JTextField) innerComponent;
+                        piece = countField.getText();
+                    }
+                }
+                //String name, Icon image, double price, String type 
+                   String priceText = price; 
+                    double priceValue = Double.parseDouble(priceText.replaceAll("[^0-9.]", ""));
+                   mapfortran.put(new Food(name,null,priceValue,"tran"),Integer.valueOf(piece));
+            }
+            
+        }
+        this.saveTranMap();
+               System.out.println(mapfortran);
+        rom.tranMap("1");
+        
+        mid.removeAll();
+        mapfortran.clear();
+        this.saveTranMap();
+        
+    }
+    }
+
+           
+    }
+    public void saveTranMap(){
+        try (FileOutputStream fout = new FileOutputStream("cardusertran.dat");
+            ObjectOutputStream oout = new ObjectOutputStream(fout);){
+            
+            oout.writeObject(mapfortran);
 
         } catch (IOException ex) {
 
             ex.printStackTrace();
         }
-           
     }
 
-           }
+           
             
-        }
-    
+        
+
     
     public static void main(String[] args) {
         new mainUser();

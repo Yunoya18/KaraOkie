@@ -83,9 +83,9 @@ public class roomMenu extends Menus {
     @Override
     public void loadMap(){
          map = new HashMap<>();
-        File file = new File("ro.dat");
+        File file = new File("cardusertran.dat");
         if (file.exists()) {
-            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+            try (FileInputStream fin = new FileInputStream("cardusertran.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 map = (Map) oin.readObject();
 
             } catch (IOException | ClassNotFoundException e) {
