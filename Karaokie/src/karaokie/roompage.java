@@ -378,7 +378,7 @@ public class roompage extends JPanel implements ActionListener {
         down3.setLayout(new FlowLayout(FlowLayout.CENTER));
         
         int height = 120 * Controller.getRoomSize();
-        int height2 = 450 * 2;
+        int height2 = 458 * 2;
         int height3 = 120 * 3;
         
         down1.setPreferredSize(new Dimension(370, height));
