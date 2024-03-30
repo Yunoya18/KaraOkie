@@ -89,8 +89,8 @@ public class cartUser extends JPanel implements ActionListener{
             else{
             String name = food.getName();
             String price = String.valueOf(food.getPrice());
-            String piece = String.valueOf(map.get(food.getName()));
-                System.out.println(map.get(food.getName()));
+            String piece = String.valueOf(map.get(food));
+                System.out.println(name);
             this.addOrder(name, price, piece);
         }
         }
