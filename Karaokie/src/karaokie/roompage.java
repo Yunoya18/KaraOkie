@@ -455,6 +455,7 @@ public class roompage extends JPanel implements ActionListener {
         } else if (e.getSource().equals(order)) {
             card.show(tablist, "tab2");
             
+            down2.removeAll();
             // test
             Map<String, Map<Food, Integer>> t1 = new HashMap<>();
             Map<Food, Integer> f1 = new HashMap<>();

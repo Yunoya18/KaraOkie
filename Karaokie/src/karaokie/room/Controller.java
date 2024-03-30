@@ -183,6 +183,10 @@ public class Controller implements Runnable {
         }
         return count;
     }
+    
+    public static Map<String, Map<Food, Integer>> getRoomMenuMap(){
+        return roomMenu;
+    }
 
     // File Save
     public static void saveFile() {
