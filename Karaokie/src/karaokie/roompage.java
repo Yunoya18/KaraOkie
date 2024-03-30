@@ -12,11 +12,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
-import java.util.*;
+//import java.util.*;
 import javax.swing.*;
 //import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import karaokie.Menu.Food;
+//import karaokie.Menu.Food;
 //import java.util.ArrayList;
 import karaokie.room.*;
 
@@ -618,8 +618,8 @@ public class roompage extends JPanel implements ActionListener {
 //    }
     
     // socketalert ssaan 0000
-    public void addDown() {
-        down3.add(new showalert("1")); // if final change showroom to 
+    public void addDown(String message) {
+        down3.add(new showalert(message)); // if final change showroom to 
     }
 
 }    

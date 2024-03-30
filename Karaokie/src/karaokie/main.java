@@ -287,8 +287,8 @@ public class main extends JPanel implements ActionListener, WindowListener{
     }
     
     // ssaan 0000
-    public void addDown() { // mp.addDown() in karaokie_main
-        pm1.addDown();
+    public void addDown(String message) { // mp.addDown() in karaokie_main
+        pm1.addDown(message);
     }     
 
     @Override

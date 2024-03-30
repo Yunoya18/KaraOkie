@@ -79,17 +79,12 @@ public class karaOkie_main implements WindowListener{
                 try {
                     String message = input.readUTF();
                     System.out.println("Received from client: " + message);
-//                    tf.setText("need staff"); //noeysodbookmark --> tf ssaa
-//                    down3.add(new showroom("Room", false));
-                    mp.addDown(); // !!!
 
+                    mp.addDown(message); // !!!
 
-
-                    // Process the message (e.g., call staff, update UI, etc.)
-                    // Implement your logic here
                 } catch (EOFException e) {
                     System.out.println("End of stream reached. Client may have disconnected.");
-                    break; // Exit the loop if EOFException is caught
+                    break;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

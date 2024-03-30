@@ -174,12 +174,7 @@ public class mainUser extends JPanel implements ActionListener{
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        // 1111
-//        System.out.println(cu.getRoomFromCart());
-        /** wait for final dont delete - get room from cartUser.java that there is roomMenu.java that contains roomNumber
-         * now its null
-         */       
+            
     }
     
     @Override
@@ -199,7 +194,7 @@ public class mainUser extends JPanel implements ActionListener{
                // alert the staff
                // ssaan 0000
                 System.out.println("getRoomFromCart : " + cu.getRoomFromCart()); // 9999
-                socketSendAlertToStaff(SERVER_ADDRESS);        // 2222        
+                socketSendAlertToStaff("" + cu.getRoomFromCart());        // 2222        
 
            }
         }
