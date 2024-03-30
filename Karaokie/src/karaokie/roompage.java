@@ -10,9 +10,11 @@ package karaokie;
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 //import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import karaokie.Menu.Food;
 //import java.util.ArrayList;
 import karaokie.room.*;
 
@@ -37,7 +39,7 @@ public class roompage extends JPanel implements ActionListener {
     public roompage() {
         // set up
         Controller.rp = this;
-        
+
 //        firstp = new Point();
         sandbox = new JPanel();
         search = new JTextField();
@@ -76,9 +78,9 @@ public class roompage extends JPanel implements ActionListener {
         rect1.setPreferredSize(new Dimension(70, 70));
         rect2.setPreferredSize(new Dimension(70, 70));
         rect3.setPreferredSize(new Dimension(70, 70));
-        
+
         create.setPreferredSize(new Dimension(100, 100));
-        
+
         create.add(rect1);
         create.add(rect2);
         create.add(rect3);
@@ -260,7 +262,7 @@ public class roompage extends JPanel implements ActionListener {
                 }
             }
         });
-        
+
         rect3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -354,15 +356,15 @@ public class roompage extends JPanel implements ActionListener {
         down1sc = new JScrollPane(down1);
         down1sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down1sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        
+
         down2sc = new JScrollPane(down2);
         down2sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down2sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        
+
         down3sc = new JScrollPane(down3);
         down3sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down3sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        
+
         tablist.add(down1sc, "tab1");
         tablist.add(down2sc, "tab2");
         tablist.add(down3sc, "tab3");
@@ -371,16 +373,15 @@ public class roompage extends JPanel implements ActionListener {
         down1.setLayout(new FlowLayout(FlowLayout.CENTER));
         down2.setLayout(new FlowLayout(FlowLayout.CENTER));
         down3.setLayout(new FlowLayout(FlowLayout.CENTER));
-        
+
         int height = 120 * Controller.getRoomSize();
-        int height2 = 450 * 2;
+        int height2 = 450 * Controller.getOrderSize();
         int height3 = 120 * 3;
-        
+
         down1.setPreferredSize(new Dimension(370, height));
         down2.setPreferredSize(new Dimension(370, height2));
         down3.setPreferredSize(new Dimension(370, height3));
-        
-        
+
         room.setPreferredSize(new Dimension(100, 100));
         order.setPreferredSize(new Dimension(100, 100));
         report.setPreferredSize(new Dimension(100, 100));
@@ -425,9 +426,8 @@ public class roompage extends JPanel implements ActionListener {
 
         }
 
-        down2.add(new showorder("1", 15));
-        down2.add(new showorder("1", 15));
-        
+//        down2.add(new showorder("1", 15));
+//        down2.add(new showorder("1", 15));
         down3.add(new showalert("1"));
         down3.add(new showalert("2"));
         down3.add(new showalert("3"));
@@ -440,6 +440,27 @@ public class roompage extends JPanel implements ActionListener {
             card.show(tablist, "tab1");
         } else if (e.getSource().equals(order)) {
             card.show(tablist, "tab2");
+            
+            // test
+            Map<String, Map<Food, Integer>> t1 = new HashMap<>();
+            Map<Food, Integer> f1 = new HashMap<>();
+            Map<Food, Integer> f2 = new HashMap<>();
+            Map<Food, Integer> f3 = new HashMap<>();
+
+            f1.put(new Food("ma", null, 100, "Food"), 3);
+            f1.put(new Food("ma1", null, 100, "Food"), 2);
+
+            f2.put(new Food("ei", null, 100, "Food"), 1);
+            f2.put(new Food("eii1", null, 100, "Food"), 5);
+            
+            f3.put(new Food("ei", null, 100, "Food"), 1);
+            f3.put(new Food("eii1", null, 100, "Food"), 5);
+
+            t1.put("1", f1);
+            t1.put("2", f2);
+            t1.put("4", f3);
+            Controller.setMenu(t1);
+            
         } else if (e.getSource().equals(report)) {
             card.show(tablist, "tab3");
         } else if (e.getSource().equals(edit)) {
@@ -506,9 +527,9 @@ public class roompage extends JPanel implements ActionListener {
         repaint();
         int count = 0;
         for (room rm : Controller.getArrayRoom()) {
-            if (rm != null) {           
+            if (rm != null) {
                 if (s.equals("All")) {
-                    
+
                     count++;
                     down1.add(new showroom("Room " + rm.getRoomNumber(), rm.checkAvailable()));
                 } else if (s.equals("Small") && rm.getType().equals("Small")) {
@@ -527,7 +548,7 @@ public class roompage extends JPanel implements ActionListener {
         Controller.renew("pg1");
     }
 
-    public void loadOrder(String name, int row){
-        down2.add(new showorder(name, row));
+    public void loadOrder(showorder s) {
+        down2.add(s);
     }
 }

@@ -17,9 +17,10 @@ public class Controller {
     private static Map<String, Map<Food, Integer>> roomMenu = new HashMap<>();
     private static ArrayList<room> room = new ArrayList<>();
     public static roompage rp;
+    public static transaction ts;
     public static JPanel p = new JPanel();
     public static main main = new main();
-    
+
     public static boolean del;
 
     // Socket
@@ -31,7 +32,11 @@ public class Controller {
             ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
 
             // Read the serialized data from the client
-            roomMenu = (Map<String, Map<Food, Integer>>) oin.readObject();  
+            Map<String, Map<Food, Integer>> temp = (Map<String, Map<Food, Integer>>) oin.readObject();
+            for (String key : temp.keySet()) {
+                roomMenu.put(key, temp.get(key));
+            }
+
             System.out.println("Received map from client: " + roomMenu);
 
             oin.close();
@@ -68,9 +73,6 @@ public class Controller {
         }
 
     }
-   
-    
-    
 
     public Controller() {
         // File
@@ -108,7 +110,6 @@ public class Controller {
         room.set(index, null);
         Controller.renew("pg1");
     }
-    
 
     public static room getRoom(int index) {
         return room.get(index);
@@ -125,36 +126,58 @@ public class Controller {
     public static void CreateBigRoom() {
         addRoom(new big_room(Room_count));
     }
-    
+
     public static void CreateBigRoom2() {
         addRoom(new big_room2(Room_count));
     }
 
-    public static void renew(String name){
+    public static void renew(String name) {
         main.renew(name);
     }
-    
-    public static int getRoomSize(){
+
+    public static int getRoomSize() {
         return room.size();
     }
-    
+
     // Menu Zone
-    public static void setMenu(String room, Food f, int i) {
-        HashMap<Food, Integer> food = new HashMap<>();
-        food.put(f, i);
-        
-        roomMenu.remove(room);
-        roomMenu.put(room, food);
+    public static void setMenu(Map<String, Map<Food, Integer>> temp) {
+//        HashMap<Food, Integer> food = new HashMap<>();
+//        food.put(f, i);
+//
+//        roomMenu.remove(room);
+//        roomMenu.put(room, food);
+        int count = 0;
+        ts.reOrder();
+        for (String key : temp.keySet()) {
+            roomMenu.put(key, temp.get(key));
+            
+            // show Order in transaction
+            ts.addOrder(key);  
+            System.out.println(key);
+            for (Map<Food, Integer> f : temp.values()) {
+                count ++;
+            }
+            Controller.sentOrder(key, temp.get(key), count);
+        }
     }
 
     public static HashMap<Food, Integer> getMenu(String key) {
         return (HashMap<Food, Integer>) roomMenu.get(key);
     }
 
-    public static void sentOrder(String name, int row){
-        rp.loadOrder(name, row);
+    public static void sentOrder(String name, Map<Food, Integer> f, int row) {
+        rp.loadOrder(new showorder(name, f, row));
+        
     }
     
+    public static int getOrderSize(){
+        int count = 0;
+        for (String key : roomMenu.keySet()){
+            count += 1;
+        }
+        return count;
+    }
+
     // File Save
     public static void saveFile() {
 
@@ -169,16 +192,16 @@ public class Controller {
         }
 
         // roomMenu
-//        try (FileOutputStream fout = new FileOutputStream("roomMenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
-//
-//            oout.writeObject(roomMenu);
-//
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//        }
+        try (FileOutputStream fout = new FileOutputStream("roomMenu.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+
+            oout.writeObject(roomMenu);
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
     }
-    
+
     public static void openFile() {
 
         // File
@@ -205,8 +228,8 @@ public class Controller {
             }
         }
     }
-    
-    public static void resetFile(){
+
+    public static void resetFile() {
         roomMenu = new HashMap<>();
         File file = new File("room.dat");
         file.delete();
@@ -214,10 +237,25 @@ public class Controller {
 
     public static void main(String[] args) {
 
-        Thread clientThread = new Thread(() -> {
-            OutToClient();
-        });
-        clientThread.start();
+//        Thread clientThread = new Thread(() -> {
+//            OutToClient();
+//        });
+//        clientThread.start();
+//    Map<String, Map<Food, Integer>> t1 = new HashMap<>();
+//    Map<Food, Integer> f1 = new HashMap<>();
+//    Map<Food, Integer> f2 = new HashMap<>();
+//    
+//    f1.put(new Food("Teen", null, 100, "Food"), 3);
+//    f1.put(new Food("Teen1", null, 100, "Food"), 2);
+//    
+//    f2.put(new Food("ka", null, 100, "Food"), 1);
+//    f2.put(new Food("ka1", null, 100, "Food"), 5);
+//    
+//    t1.put("1", f1);
+//    t1.put("2", f2);
+//    
+//    Controller.roomMenu = t1;
+//    Controller.saveFile();
     }
 
 }

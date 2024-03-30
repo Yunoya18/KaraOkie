@@ -6,14 +6,15 @@ package karaokie;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
+import karaokie.Menu.*;
 
 
 public class showorder extends JPanel{
     private JPanel panel2;
     private JLabel name;
     private JScrollPane sp;
-    // String s, Map<Food>, <Integer> m, int row
-    public showorder(String s, int row){
+    public showorder(String s, Map<Food, Integer> m, int row){
         name = new JLabel("Order : Room " + s);
         setLayout(new BorderLayout());
         
@@ -23,8 +24,8 @@ public class showorder extends JPanel{
         name.setForeground(Color.WHITE);
         
         // SET FOOD NAME
-        for (int i=0;i<row;i++){
-            JLabel tx1 = new JLabel("    teste");
+        for (Food f : m.keySet()){
+            JLabel tx1 = new JLabel("     " + f.getName() + "                              " + m.get(f) + "  each.");
             tx1.setFont(new Font("Arial", Font.PLAIN, 20));
             tx1.setForeground(Color.WHITE);
             panel2.add(tx1);
