@@ -75,62 +75,62 @@ public class stat extends JPanel implements ActionListener{
 
 
 
-        //Page 4
-        String[] column = {"ID", "Name", "Email", "Phone Number"};
-        Object[][] data = new Object[40][4];
-        JTable table = new JTable(data, column);
-        JScrollPane sp = new JScrollPane(table);
-        sp.setPreferredSize(new Dimension(1000, 650));
-        table.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int row = table.rowAtPoint(e.getPoint());
-                int col = table.columnAtPoint(e.getPoint());
-                if (col == 0) {
-                    JPanel panel = new JPanel();
-                    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-                    JLabel name = new JLabel("Name");
-                    JLabel email = new JLabel("Email");
-                    JLabel phone = new JLabel("Phone Number");
-                    // textfield name email phone number
-                    JTextField nameField = new JTextField();
-                    JTextField emailField = new JTextField();
-                    JTextField phoneField = new JTextField();
-                    // add label textfield to panel
-                    panel.add(name);
-                    panel.add(nameField);
-                    panel.add(email);
-                    panel.add(emailField);
-                    panel.add(phone);
-                    panel.add(phoneField);
-                    // button done center panel padding 10
-                    JButton done = new JButton("Done");
-                    done.setAlignmentX(Component.CENTER_ALIGNMENT);
-                    done.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-                    panel.add(done);
-                    // dialog not show button close
-                    Dialog dialog = new Dialog(ma);
-                    dialog.add(panel);
-                    dialog.setSize(200, 200);
-                    dialog.setVisible(true);
-                    // click done button
-                    done.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            // set data to table
-                            table.setValueAt(nameField.getText(), row, 1);
-                            table.setValueAt(emailField.getText(), row, 2);
-                            table.setValueAt(phoneField.getText(), row, 3);
-                            // close dialog
-                            dialog.dispose();
-                        }
-                    });
-
-
-                }
-
-            }
-        });
+//        //Page 4
+//        String[] column = {"ID", "Name", "Email", "Phone Number"};
+//        Object[][] data = new Object[40][4];
+//        JTable table = new JTable(data, column);
+//        JScrollPane sp = new JScrollPane(table);
+//        sp.setPreferredSize(new Dimension(1000, 650));
+//        table.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                int row = table.rowAtPoint(e.getPoint());
+//                int col = table.columnAtPoint(e.getPoint());
+//                if (col == 0) {
+//                    JPanel panel = new JPanel();
+//                    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+//                    JLabel name = new JLabel("Name");
+//                    JLabel email = new JLabel("Email");
+//                    JLabel phone = new JLabel("Phone Number");
+//                    // textfield name email phone number
+//                    JTextField nameField = new JTextField();
+//                    JTextField emailField = new JTextField();
+//                    JTextField phoneField = new JTextField();
+//                    // add label textfield to panel
+//                    panel.add(name);
+//                    panel.add(nameField);
+//                    panel.add(email);
+//                    panel.add(emailField);
+//                    panel.add(phone);
+//                    panel.add(phoneField);
+//                    // button done center panel padding 10
+//                    JButton done = new JButton("Done");
+//                    done.setAlignmentX(Component.CENTER_ALIGNMENT);
+//                    done.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+//                    panel.add(done);
+//                    // dialog not show button close
+//                    Dialog dialog = new Dialog(ma);
+//                    dialog.add(panel);
+//                    dialog.setSize(200, 200);
+//                    dialog.setVisible(true);
+//                    // click done button
+//                    done.addActionListener(new ActionListener() {
+//                        @Override
+//                        public void actionPerformed(ActionEvent e) {
+//                            // set data to table
+//                            table.setValueAt(nameField.getText(), row, 1);
+//                            table.setValueAt(emailField.getText(), row, 2);
+//                            table.setValueAt(phoneField.getText(), row, 3);
+//                            // close dialog
+//                            dialog.dispose();
+//                        }
+//                    });
+//
+//
+//                }
+//
+//            }
+//        });
 
         p4.add(sp);
 
@@ -219,7 +219,7 @@ public class stat extends JPanel implements ActionListener{
         // panel for chart
         JPanel panelChart = new JPanel();
         panelChart.setBackground(Color.decode("#535870"));
-        //panelChart.add(chartPanel);
+        panelChart.add(chartPanel);
         panelChart.add(panelChartPanel);
 
         p5.add(panelChart);
