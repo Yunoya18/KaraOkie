@@ -253,6 +253,20 @@ public class Controller implements Runnable {
 //            e.printStackTrace();
 //        }
     }
+    
+    public static void saveFileNULL() {
+
+        // room
+        try (FileOutputStream fout = new FileOutputStream("room.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+
+            Controller.room = new ArrayList<>();
+            oout.writeObject(room);
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+    }
 
     public static void openFile() {
 

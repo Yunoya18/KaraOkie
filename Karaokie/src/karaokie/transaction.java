@@ -30,6 +30,7 @@ public class transaction extends JPanel implements ActionListener {
     private DefaultTableModel m;
     private JScrollPane sc;
     private String keyRoom;
+    private double total;
 
     public transaction() {
         //Set up
@@ -177,19 +178,19 @@ public class transaction extends JPanel implements ActionListener {
         ImageIcon bl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 30.png");
         Image bill = bl.getImage().getScaledInstance(600, 40, Image.SCALE_SMOOTH);
         Icon billtxt = new ImageIcon(bill);
-        ImageIcon sr = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 13.png");
+        ImageIcon sr = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/ComingSoon.png");
         Image srch = sr.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon search = new ImageIcon(srch);
         ImageIcon cl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 21.png");
         Image cls = cl.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon close = new ImageIcon(cls);
-        ImageIcon cn = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 22.png");
+        ImageIcon cn = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/QR.png");
         Image can = cn.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon cancel = new ImageIcon(can);
-        ImageIcon dl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 24.png");
+        ImageIcon dl = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/ComingSoon.png");
         Image del = dl.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon delete = new ImageIcon(del);
-        ImageIcon ed = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 26.png");
+        ImageIcon ed = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/ComingSoon.png");
         Image edi = ed.getImage().getScaledInstance(120, 100, Image.SCALE_SMOOTH);
         Icon edit = new ImageIcon(edi);
         ImageIcon ca = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 61.png");
@@ -595,6 +596,34 @@ public class transaction extends JPanel implements ActionListener {
         bill_num.setBackground(Color.decode("#A6ADCE"));
         bill_num.setForeground(Color.decode("#A6ADCE"));
 
+        // button lis
+        button_close.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Button Close clicked!"); // For demonstration, print message to console
+
+                Map<String, Map<Food, Integer>> roomMenu = Controller.getRoomMenuMap();
+                roomMenu.remove(keyRoom);
+                Controller.setMenu(null);
+
+                Controller.reCard("tab2", "tab1");
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                int rowCount = model.getRowCount();
+                for (int i = rowCount - 1; i >= 0; i--) {
+                    model.removeRow(i);
+                }
+            }
+        });
+        button_cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JLabel label = new JLabel(new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/QRcode.png"));
+                JScrollPane scrollPane = new JScrollPane(label);
+
+                JOptionPane.showMessageDialog(null, scrollPane, "QR CODE", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+        
         //add button hover cursor
         JButton[] bttn = new JButton[]{button_search, button_member, button_close, button_cancel, button_delete, button_edit,
             buttonOne, buttonTow, buttonThree, buttonFour, buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonTen, buttonDel, buttonX, buttonClear, buttonOk};
@@ -628,24 +657,6 @@ public class transaction extends JPanel implements ActionListener {
 //                        }
                     button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                    // button lis
-                    button_close.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            System.out.println("Button Close clicked!"); // For demonstration, print message to console
-
-                            Map<String, Map<Food, Integer>> roomMenu = Controller.getRoomMenuMap();
-                            roomMenu.remove(keyRoom);
-                            Controller.setMenu(null);
-
-                            Controller.reCard("tab2", "tab1");
-                            DefaultTableModel model = (DefaultTableModel) table.getModel();
-                            int rowCount = model.getRowCount();
-                            for (int i = rowCount - 1; i >= 0; i--) {
-                                model.removeRow(i);
-                            }
-                        }
-                    });
                 }
 
                 @Override
@@ -751,7 +762,7 @@ public class transaction extends JPanel implements ActionListener {
                             DefaultTableModel model = (DefaultTableModel) table.getModel();
                             Map<Food, Integer> temp2 = (Map<Food, Integer>) temp.get(key);
 
-                            double total = 0;
+                            total = 0;
                             for (Food f : temp2.keySet()) {
                                 String name = f.getName();
                                 String amount = temp2.get(f) + "";
@@ -804,6 +815,8 @@ public class transaction extends JPanel implements ActionListener {
 
             }
 
+        } else if (e.getSource().equals(buttonOk)) {
+            JOptionPane.showMessageDialog(null, "Change is " + (total - Integer.parseInt(txt_cash.getText())));
         }
 
     }
@@ -853,8 +866,8 @@ public class transaction extends JPanel implements ActionListener {
 //                f = false;
 //            }
 //        }
-        
-        if (f){
+
+        if (f) {
             bill_num.addItem("Order Room : " + name);
         }
     }

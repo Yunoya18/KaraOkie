@@ -41,8 +41,8 @@ public class roompage extends JPanel implements ActionListener {
     private ServerSocket server;
     private Socket clientSocket;
     private DataInputStream input;
-    private DataOutputStream output;    
-    
+    private DataOutputStream output;
+
 //    JLabel box1;
     public roompage() {
         // set up
@@ -141,7 +141,7 @@ public class roompage extends JPanel implements ActionListener {
         tool.add(move);
         tool.add(add);
         tool.add(delete);
-        tool.add(refresh);
+//        tool.add(refresh);
         tool.setVisible(false);
 
         cursor.setPreferredSize(new Dimension(50, 50));
@@ -369,15 +369,15 @@ public class roompage extends JPanel implements ActionListener {
         down1sc = new JScrollPane(down1);
         down1sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         down1sc.setBorder(BorderFactory.createEmptyBorder());
-        
+
         down2sc = new JScrollPane(down2);
         down2sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         down2sc.setBorder(BorderFactory.createEmptyBorder());
-        
+
         down3sc = new JScrollPane(down3);
         down3sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         down3sc.setBorder(BorderFactory.createEmptyBorder());
-        
+
         tablist.add(down1sc, "tab1");
         tablist.add(down2sc, "tab2");
         tablist.add(down3sc, "tab3");
@@ -441,14 +441,12 @@ public class roompage extends JPanel implements ActionListener {
 
 //        down2.add(new showorder("1", 15));
 //        down2.add(new showorder("1", 15));
-        
-        
         // moved to down (addDown() method)
 //        down3.add(new showalert("1"));
 //        down3.add(new showalert("2"));
 //        down3.add(new showalert("3"));
         Controller.p = sandbox;
-        
+
         // socketalert ssaan (moved to karaOkie_main.java)
 //        socketServerFirstSetupConnection();        
     }
@@ -459,7 +457,7 @@ public class roompage extends JPanel implements ActionListener {
             card.show(tablist, "tab1");
         } else if (e.getSource().equals(order)) {
             card.show(tablist, "tab2");
-            
+
             down2.removeAll();
             // test
 //            Map<String, Map<Food, Integer>> t1 = new HashMap<>();
@@ -480,7 +478,7 @@ public class roompage extends JPanel implements ActionListener {
 //            t1.put("2", f2);
 //            t1.put("4", f3);
             Controller.setMenu(null);
-            
+
         } else if (e.getSource().equals(report)) {
             card.show(tablist, "tab3");
         } else if (e.getSource().equals(edit)) {
@@ -526,14 +524,16 @@ public class roompage extends JPanel implements ActionListener {
                 Controller.del = false;
             }
         } else if (e.getSource().equals(delete)) {
-            if (del) {
-
-            } else {
-                del = true;
-                Controller.del = true;
-                JOptionPane.showMessageDialog(this, "Double Clicked on Room to Delete", "Delete", JOptionPane.INFORMATION_MESSAGE);
+            int x = JOptionPane.showConfirmDialog(null, "You want to delete all room?", "Delete", JOptionPane.YES_NO_OPTION);
+            if (x == JOptionPane.YES_OPTION) {
+                Controller.saveFileNULL();
                 System.out.println("del");
+                JOptionPane.showMessageDialog(null, "Programe Need to Restart", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            } else {
+                
             }
+
         } else if (e.getSource().equals(refresh)) {
             System.out.println("refresh");
             Controller.resetFile();
@@ -570,19 +570,16 @@ public class roompage extends JPanel implements ActionListener {
 
     public void loadOrder(showorder s) {
         down2.add(s);
-        
+
         int height2 = 458 * Controller.getOrderSize();
         down2.setPreferredSize(new Dimension(100, height2));
     }
-    
-    public void reCard(String s, String s2){
+
+    public void reCard(String s, String s2) {
         card.show(tablist, s);
         card.show(tablist, s2);
     }
-    
-    
-    
-    
+
     // socketalert ssaan (moved to karaOkie_main.java)
 //    public void socketServerFirstSetupConnection(/*int port*/) {
 //        try {
@@ -618,11 +615,9 @@ public class roompage extends JPanel implements ActionListener {
 //            e.printStackTrace();
 //        }        
 //    }
-    
     // socketalert ssaan 0000
     public void addDown(String message) {
         down3.add(new showalert(message)); // if final change showroom to 
     }
 
-}    
-
+}
