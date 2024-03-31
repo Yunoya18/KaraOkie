@@ -3,6 +3,8 @@ package database;
 import java.sql.*;
 import java.time.*;
 import java.time.format.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class getConnection {
     private static Connection connect = null;
@@ -11,21 +13,61 @@ public class getConnection {
     private static final String USER = "root";
     private static final String PASSWORD = "karaokie1234";
     private static String sql;
+    private static ResultSet rec;
     public static ResultSet getData(String sql) {
         ResultSet rec = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(URL, USER, PASSWORD);
-            s = connect.createStatement();
-            rec = s.executeQuery(sql);
-        } catch (Exception e) {
+            PreparedStatement ps = connect.prepareStatement(sql);
+            rec = ps.executeQuery(sql);
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return rec;
     }
+    public static double getCost(String date) {
+        double total = 0;
+        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE DATE(time) = '" + date + "'";
+        rec = getData(sql);
+        try {
+            if (rec.next()) {
+                total = rec.getDouble("total_amount");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(getConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    public static double getCost(String start, String end) {
+        double total = 0;
+        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE DATE(time) BETWEEN '" + start + "' AND '" + end + "'";
+        rec = getData(sql);
+        try {
+            if (rec.next()) {
+                total = rec.getDouble("total_amount");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(getConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    public static double getCost(int month) {
+        double total = 0;
+        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE YEAR(time) = YEAR(CURRENT_DATE()) AND MONTH(time) = " + month;
+        rec = getData(sql);
+        try {
+            if (rec.next()) {
+                total = rec.getDouble("total_amount");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(getConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
     public static String getRole(String username, String password) {
         sql = String.format("SELECT * FROM info WHERE id = '%s' AND password = '%s';", username, password);
-        ResultSet rec = getData(sql);
+        rec = getData(sql);
         try {
             while (rec.next()) {
                 return rec.getString("role");
@@ -38,7 +80,7 @@ public class getConnection {
     
     public static void addData(double cost) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        sql = String.format("INSERT INTO stat (time, cost) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
+        sql = String.format("INSERT INTO stat (time, amount) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -47,8 +89,5 @@ public class getConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public static void getHour() {
-        sql = "SELECT * FROM stat WHERE DATE_FORMAT(time, '%H') = HOUR(CURTIME());";
     }
 }
