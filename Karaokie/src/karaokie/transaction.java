@@ -64,9 +64,13 @@ public class transaction extends JPanel implements ActionListener {
         sc = new JScrollPane(table);
         sc.setPreferredSize(new Dimension(1000, 600));
 
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
         panel_main = new JPanel(new BorderLayout());
 
         setLayout(new BorderLayout(0, 0));
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel_left = new JPanel(new BorderLayout());
         panel_right = new JPanel(new GridLayout(2, 1));
         panel_r_on = new JPanel(new BorderLayout());
@@ -199,8 +203,13 @@ public class transaction extends JPanel implements ActionListener {
         ImageIcon cr = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 61.png");
         Image cd = cr.getImage().getScaledInstance(400, 60, Image.SCALE_SMOOTH);
         Icon credit = new ImageIcon(cd);
+
+        
+        int scheight = screenSize.height/2 - 50;
+
+        
         ImageIcon ci = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 34.png");
-        Image cim = ci.getImage().getScaledInstance(400, 300, Image.SCALE_SMOOTH);
+        Image cim = ci.getImage().getScaledInstance(400, scheight, Image.SCALE_SMOOTH);
         Icon calim = new ImageIcon(cim);
 
 //        import img cal
@@ -348,7 +357,8 @@ public class transaction extends JPanel implements ActionListener {
         panel_minimain = new JLabel(minimain);
 
         panel_minimain.setLayout(
-                new FlowLayout(FlowLayout.CENTER, 0, 50));
+                new BorderLayout(0,0));
+        panel_minimain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         left_pa = new JLabel(left);
 
         left_pa.setLayout(
