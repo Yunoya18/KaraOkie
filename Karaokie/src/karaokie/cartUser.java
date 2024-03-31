@@ -37,7 +37,7 @@ public class cartUser extends JPanel implements ActionListener{
     private roomMenu rom; // 0000
     public cartUser(){
         rom = new roomMenu(); // 9999 (moved here cause getRoomFromCart() have to use it)
-        
+         map = new HashMap<>();
         mapfortran = new HashMap<>();
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
@@ -129,7 +129,7 @@ public class cartUser extends JPanel implements ActionListener{
 //        rom.getroomNumber();
     }
     public void loadMap(){
-         map = new HashMap<>();
+        
         File file = new File("ro.dat");
         if (file.exists()) {
             try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
@@ -280,7 +280,9 @@ public class cartUser extends JPanel implements ActionListener{
         }
         this.saveTranMap();
         mid.removeAll();
-        mid.repaint();
+//        mid.repaint();
+        this.updateCartOrder();
+
         
     }
     }
@@ -303,6 +305,24 @@ public class cartUser extends JPanel implements ActionListener{
     public String getRoomFromCart() {
         return rom.getroomNumber();
     }
+    public void updateCartOrder() {
+    mid.removeAll();
+    this.loadMap();
+    Set<Food> foodSet = map.keySet(); 
+    for (Food food : foodSet){
+        if(food.getName().equals("")){
+            System.out.println("e");
+        }
+        else{
+            String name = food.getName();
+            String price = String.valueOf(food.getPrice());
+            String piece = String.valueOf(map.get(food));
+            addOrder(name, price, piece); // ดูเมธอด addOrder ใน cartOrder ว่ามีการสร้างหรือยัง
+        }
+    }
+    mid.revalidate();
+    mid.repaint();
+}
 
            
             

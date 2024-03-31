@@ -20,7 +20,7 @@ public class roomMenu extends Menus {
     protected Map<String, Map<Food, Integer>> map2;
     
     public roomMenu(){
-        map = new HashMap<>();
+        
         map2 = new HashMap<>();
         
         File file = new File("ro.dat");
@@ -40,8 +40,23 @@ public class roomMenu extends Menus {
     }
 
      public void addMenu(Food food, int i) {
+         map = new HashMap<>();
+         File file = new File("ro.dat");
+        if (file.exists()) {
+            try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+                map = (Map) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+       
+        }
+        else{
+            map.put(new Food("",null,0.0,""), 0);
+        }
+    
         map.put(food, i);
-         
         this.saveMap();
         System.out.println("save");
 
