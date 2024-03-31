@@ -25,13 +25,19 @@ public class Loginpage extends JPanel{
     Loginpage(CardLayout cardLayout, Container cardPanel){
         
         setLayout(new BorderLayout());
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
         
         ImageIcon bgimtemp = new ImageIcon(System.getProperty("user.dir") + "/src/karaokie/image/bg.png");
-        Image temp = bgimtemp.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+        Image temp = bgimtemp.getImage().getScaledInstance(screenWidth,screenHeight, Image.SCALE_SMOOTH);
         ImageIcon bgim = new ImageIcon(temp);
         bg = new JLabel(bgim);
-        bg.setPreferredSize(new Dimension(1280, 720));
-        bg.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
+        int bgh = screenHeight/3;
+        // bg.setPreferredSize(new Dimension(1280, 720));
+        bg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, bgh));
         
         pa = new RoundedPanel(20, 20, 500, 330, Color.decode("#11003B"), 0.7f, 20);
         
