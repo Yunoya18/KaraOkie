@@ -816,7 +816,7 @@ public class transaction extends JPanel implements ActionListener {
             }
 
         } else if (e.getSource().equals(buttonOk)) {
-            JOptionPane.showMessageDialog(null, "Change is " + (total - Integer.parseInt(txt_cash.getText())));
+            JOptionPane.showMessageDialog(null, "Change is " + (Integer.parseInt(txt_cash.getText()) - total));
         }
 
     }
