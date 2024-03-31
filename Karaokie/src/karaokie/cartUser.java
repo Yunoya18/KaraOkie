@@ -72,7 +72,7 @@ public class cartUser extends JPanel implements ActionListener {
         JPanel proom = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         proom.setBackground(Color.decode("#A6ADCE"));
 
-        room = new JLabel("Room : ");
+        room = new JLabel("Room : "+Loginpage.nam);
         room.setForeground(Color.decode("#282B3A"));
         room.setBackground(Color.decode("#A6ADCE"));
 
@@ -327,7 +327,7 @@ public class cartUser extends JPanel implements ActionListener {
                 }
                 this.saveTranMap();
                 System.out.println(mapfortran);
-                rom.tranMap("1");
+                rom.tranMap(Loginpage.nam);
 
                 mapfortran.clear();
                 map.clear();

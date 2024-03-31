@@ -18,6 +18,7 @@ public class Loginpage extends JPanel{
     private JButton signin;
     private JLabel bg, user, pass;
     private String namefromdata = null;
+    public static String nam;
     
 //    private String usernameString; // 0000
     
@@ -113,6 +114,7 @@ public class Loginpage extends JPanel{
                     JOptionPane.showMessageDialog(null, "Error");
                 } else if (role.equals("user")){
                     cardLayout.show(cardPanel,"pg3");
+                    nam = username.getText();
                 } else if (role.equals("admin")){
                    cardLayout.show(cardPanel, "pg2");
                 }
