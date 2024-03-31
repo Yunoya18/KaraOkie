@@ -37,7 +37,7 @@ public class cartUser extends JPanel implements ActionListener{
     private roomMenu rom; // 0000
     public cartUser(){
         rom = new roomMenu(); // 9999 (moved here cause getRoomFromCart() have to use it)
-        
+         map = new HashMap<>();
         mapfortran = new HashMap<>();
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER, 27, 27));
@@ -113,8 +113,24 @@ public class cartUser extends JPanel implements ActionListener{
         bot.setPreferredSize(new Dimension(930, 50));
         bot.setBackground(Color.decode("#A6ADCE"));
         bot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        total = new JLabel("Total : "+totalmoney);
+        
+//        this.retotal();
+//        total = new JLabel("Total : "+totalmoney);
+//        bot.add(total);
+        total = new JLabel();
         bot.add(total);
+        new Thread(() -> {
+            while (true) {
+                SwingUtilities.invokeLater(this::retotal);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
+    
+        
         
         in.add(top);
         in.add(sc);
@@ -129,7 +145,7 @@ public class cartUser extends JPanel implements ActionListener{
 //        rom.getroomNumber();
     }
     public void loadMap(){
-         map = new HashMap<>();
+        
         File file = new File("ro.dat");
         if (file.exists()) {
             try (FileInputStream fin = new FileInputStream("ro.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
@@ -280,11 +296,13 @@ public class cartUser extends JPanel implements ActionListener{
         }
         this.saveTranMap();
         mid.removeAll();
-        mid.repaint();
+//        mid.repaint();
+        this.updateCartOrder();
+
         
     }
     }
-
+     
            
     }
     public void saveTranMap(){
@@ -303,6 +321,62 @@ public class cartUser extends JPanel implements ActionListener{
     public String getRoomFromCart() {
         return rom.getroomNumber();
     }
+    public void updateCartOrder() {
+    mid.removeAll();
+    this.loadMap();
+    Set<Food> foodSet = map.keySet(); 
+    for (Food food : foodSet){
+        if(food.getName().equals("")){
+            System.out.println("e");
+        }
+        else{
+            String name = food.getName();
+            String price = String.valueOf(food.getPrice());
+            String piece = String.valueOf(map.get(food));
+            addOrder(name, price, piece); // ดูเมธอด addOrder ใน cartOrder ว่ามีการสร้างหรือยัง
+        }
+    }
+    mid.revalidate();
+    mid.repaint();
+}
+  public void retotal(){
+//       bot.removeAll();
+      Component[] components = mid.getComponents();
+      totalmoney = 0;
+        
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                JPanel orderPanel = (JPanel) component;
+                String name = "";
+                String price = "";
+                String piece = "";
+            
+                for (Component innerComponent : orderPanel.getComponents()) {
+                    if (innerComponent instanceof JLabel) {
+                        JLabel label = (JLabel) innerComponent;
+                        if (label.getText().startsWith("Name: ")) {
+                            name = label.getText().substring(7);
+                        } else if (label.getText().startsWith("Price: ")) {
+                            price = label.getText().substring(8);
+                        }
+                    } else if (innerComponent instanceof JTextField) {
+                        JTextField countField = (JTextField) innerComponent;
+                        piece = countField.getText();
+                    }
+                }
+                //String name, Icon image, double price, String type 
+                   String priceText = price; 
+                    double priceValue = Double.parseDouble(priceText.replaceAll("[^0-9.]", ""));
+                   totalmoney += priceValue * Integer.parseInt(piece);
+            }
+            
+        }
+        System.out.println(totalmoney);
+        
+        total.setText("Total : "+totalmoney);
+        
+        
+  }
 
            
             

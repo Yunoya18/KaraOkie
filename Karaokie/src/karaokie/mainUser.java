@@ -184,6 +184,7 @@ public class mainUser extends JPanel implements ActionListener{
         }
         else if(ev.getSource().equals(pg2)){
 //            cu = new cartUser(); 9999 (moved to default constructor cause other have to use)
+        cu.updateCartOrder();
             tab.add(cu, "pg2");
            cardlayout.show(tab, "pg2");
             System.out.println("2"); 

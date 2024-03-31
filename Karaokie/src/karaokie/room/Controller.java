@@ -33,9 +33,33 @@ public class Controller implements Runnable {
                 ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
 
                 // Read the serialized data from the client
-                Map<String, Map<Food, Integer>> temp = (Map<String, Map<Food, Integer>>) oin.readObject();
-                for (String key : temp.keySet()) {
-                    roomMenu.put(key, temp.get(key));
+                Map<String, Map<Food, Integer>> inmap = (Map<String, Map<Food, Integer>>) oin.readObject();
+
+                for (String key : inmap.keySet()) {
+
+                    // first order
+                    try {
+                        Map<Food, Integer> tempRoom = (HashMap<Food, Integer>) roomMenu.get(key); //do plus                        } catch (NullPointerException e){
+                        Map<Food, Integer> tempinmap = (Map<Food, Integer>) inmap.get(key);
+
+                        for (Food f : tempinmap.keySet()) {
+                            // smart 99%
+                            String tempName = f.getName();
+                            int check = Controller.checkequals(tempName, tempRoom);
+                            if (check != 0) {
+                                tempRoom.put(f, tempinmap.get(f) + check);
+                                tempRoom.remove(Controller.checkequalsClass(tempName, tempRoom));
+                            } else {
+                                tempRoom.put(f, tempinmap.get(f));
+                            }
+
+                        }
+
+                        roomMenu.put(key, tempRoom);
+                    } catch (NullPointerException e) {
+                        roomMenu.put(key, inmap.get(key));
+                    }
+
                 }
 
                 System.out.println("Received map from client: " + roomMenu);
@@ -153,10 +177,10 @@ public class Controller implements Runnable {
         return room.size();
     }
 
-    public static void reCard(String s1, String s2){
+    public static void reCard(String s1, String s2) {
         rp.reCard(s1, s2);
     }
-    
+
     // Menu Zone
     public static void setMenu(Map<String, Map<Food, Integer>> temp) {
 //        HashMap<Food, Integer> food = new HashMap<>();
@@ -164,7 +188,6 @@ public class Controller implements Runnable {
 //
 //        roomMenu.remove(room);
 //        roomMenu.put(room, food);
-        
 
         int count = 0;
         ts.reOrder();
@@ -280,6 +303,25 @@ public class Controller implements Runnable {
         File file = new File("room.dat");
         file.delete();
     }
+    
+    public static int checkequals(String name, Map<Food, Integer> m){
+        for (Food f : m.keySet()){
+            if (f.getName().equals(name)){
+                return m.get(f);
+            }
+        }
+        return 0;
+    }
+    
+    public static Food checkequalsClass(String name, Map<Food, Integer> m){
+        for (Food f : m.keySet()){
+            if (f.getName().equals(name)){
+                return f;
+            }
+        }
+        return null;
+    }
+    
 //
 //    public static void main(String[] args) {
 

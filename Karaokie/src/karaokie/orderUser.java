@@ -222,7 +222,7 @@ public class orderUser extends JPanel implements ActionListener{
         ppic.add(pic);
         pname.add(name);
         pprice.add(price);
-        pbut.add(menub);
+        pbut.add(menubrp);
         
         menu.add(ppic);
         menu.add(pname);

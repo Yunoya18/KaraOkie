@@ -8,13 +8,16 @@ import javax.swing.*;
 
 
 public class showroom extends JPanel implements MouseListener{
-    private JLabel t1,  t2;
+    private JLabel t1, t2;
+    private RoundedPanel rp;
+    private JPanel p;
     public showroom(String room, boolean use){
-        setLayout(new GridLayout(1, 2));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        p = new JPanel(new GridLayout(1, 2));
         
-        t1 = new JLabel("    " + room);
-        t2 = new JLabel("    ");
-        t1.setForeground(Color.WHITE);
+        t1 = new JLabel(room);
+        t2 = new JLabel();
+        t1.setForeground(Color.decode("#A6ADCE"));
         if (use){
             t2.setForeground(Color.GREEN);
             t2.setText("Available");
@@ -23,19 +26,24 @@ public class showroom extends JPanel implements MouseListener{
             t2.setText("Not-Available");
         }
         
+        t1.setFont(new Font("Montserrat", Font.BOLD, 25));
+        t2.setFont(new Font("Montserrat", Font.BOLD, 18));
         
+        p.add(t1);
+        p.add(t2);
         
-        t1.setFont(new Font("Arial", Font.PLAIN, 30));
-        t2.setFont(new Font("Arial", Font.PLAIN, 20));
+        p.setBackground(Color.decode("#282B3A"));
+        p.setPreferredSize(new Dimension(270, 50));
         
-        add(t1);
-        add(t2);
+        p.addMouseListener(this);
         
-        setBackground(Color.BLACK);
-        setPreferredSize(new Dimension(350, 100));
+        rp = new RoundedPanel(20, 20, 310, 100, Color.decode("#282B3A"), 1.0f, 25);
+        rp.add(p);
+        
+        add(rp);
+        setPreferredSize(new Dimension(320, 110));
+        setBackground(Color.decode("#1C1E27"));
         setVisible(true);
-        
-        addMouseListener(this);
     }
 
     @Override

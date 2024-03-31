@@ -51,6 +51,7 @@ public class roompage extends JPanel implements ActionListener {
 //        firstp = new Point();
         sandbox = new JPanel();
         search = new JTextField();
+        search.setFont(new Font("Montserrat", Font.BOLD, 12));
         setLayout(new BorderLayout(0, 0));
         leftcom = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         tool = new JPanel();
@@ -62,6 +63,7 @@ public class roompage extends JPanel implements ActionListener {
         cen = new JPanel(new GridLayout(3, 1));
         String[] roomcat = {"All", "Big", "Small"};
         type = new JComboBox(roomcat);
+        type.setFont(new Font("Montserrat", Font.BOLD, 12));
         down1 = new JPanel();
         down2 = new JPanel();
         down3 = new JPanel();
@@ -365,17 +367,17 @@ public class roompage extends JPanel implements ActionListener {
 
         // change to room order report
         down1sc = new JScrollPane(down1);
-        down1sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down1sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
+        down1sc.setBorder(BorderFactory.createEmptyBorder());
+        
         down2sc = new JScrollPane(down2);
-        down2sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down2sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
+        down2sc.setBorder(BorderFactory.createEmptyBorder());
+        
         down3sc = new JScrollPane(down3);
-        down3sc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         down3sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
+        down3sc.setBorder(BorderFactory.createEmptyBorder());
+        
         tablist.add(down1sc, "tab1");
         tablist.add(down2sc, "tab2");
         tablist.add(down3sc, "tab3");
@@ -561,7 +563,7 @@ public class roompage extends JPanel implements ActionListener {
                 }
             }
         }
-        int height = 120 * count;
+        int height = 123 * count;
         down1.setPreferredSize(new Dimension(100, height));
         Controller.renew("pg1");
     }

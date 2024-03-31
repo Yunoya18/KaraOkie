@@ -36,7 +36,7 @@ public class transaction extends JPanel implements ActionListener {
         Controller.ts = this;
 
         // JTable Setup
-        m = new DefaultTableModel(new Object[]{"Image", "Name", "Amount", "Price"}, 0) {
+        m = new DefaultTableModel(new Object[]{"Name", "Amount", "Price"}, 0) {
             @Override
             public Class<?> getColumnClass(int ci) {
                 return ci == 0 ? ImageIcon.class : Object.class;
@@ -50,20 +50,22 @@ public class transaction extends JPanel implements ActionListener {
 
         // Set row and column size
         table.setRowHeight(100);
-        table.getColumnModel().getColumn(0).setPreferredWidth(100);
-        table.getColumnModel().getColumn(1).setPreferredWidth(500);
+        table.getColumnModel().getColumn(0).setPreferredWidth(500);
+        table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(200);
-        table.getColumnModel().getColumn(3).setPreferredWidth(200);
 
         //t.setEnabled(false);
         table.getTableHeader().setEnabled(false);
+        table.getTableHeader().setFont(new Font("Montserrat", Font.BOLD, 12));
+        table.getTableHeader().setForeground(Color.decode("#A6ADCE"));
+        table.setForeground(Color.decode("#535870"));
+        table.setGridColor(Color.decode("#E5E5E5"));
         sc = new JScrollPane(table);
         sc.setPreferredSize(new Dimension(1000, 600));
 
         panel_main = new JPanel(new BorderLayout());
 
-        setLayout(
-                new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
         panel_left = new JPanel(new BorderLayout());
         panel_right = new JPanel(new GridLayout(2, 1));
         panel_r_on = new JPanel(new BorderLayout());
@@ -86,6 +88,7 @@ public class transaction extends JPanel implements ActionListener {
         panel_bill = new JPanel(new BorderLayout());
         panel_table = new JPanel(new BorderLayout());
         bill_num = new JComboBox<>();
+        bill_num.setFont(new Font("Montserrat", Font.BOLD, 12));
 
         button_search = new JButton();
         button_member = new JButton();
@@ -740,22 +743,24 @@ public class transaction extends JPanel implements ActionListener {
 
                     // Selected item: Order Room : 2
                     for (String key : temp.keySet()) {
-                        System.out.println("Selected item: Order Room : " + key);
-                        System.out.println(selectedItem);
+//                        System.out.println("Selected item: Order Room : " + key);
+//                        System.out.println(selectedItem);
                         if (("Order Room : " + key).equals(selectedItem)) {
                             keyRoom = key;
                             reRow();
                             DefaultTableModel model = (DefaultTableModel) table.getModel();
                             Map<Food, Integer> temp2 = (Map<Food, Integer>) temp.get(key);
 
+                            double total = 0;
                             for (Food f : temp2.keySet()) {
-                                Icon icon5 = f.getImage();
                                 String name = f.getName();
                                 String amount = temp2.get(f) + "";
                                 double price = f.getPrice();
-                                model.addRow(new Object[]{icon5, name, amount, price + " THB"});
-                            }
+                                model.addRow(new Object[]{name, amount, price + " THB"});
 
+                                total += price * Integer.parseInt(amount);
+                            }
+                            txt_credit.setText(total + "");
                         }
                     }
                 }
@@ -789,6 +794,8 @@ public class transaction extends JPanel implements ActionListener {
             txt_cash.setText(txt_cash.getText() + "9");
         } else if (e.getSource().equals(buttonTen)) {
             txt_cash.setText(txt_cash.getText() + "0");
+        } else if (e.getSource().equals(buttonX)) {
+            txt_cash.setText("");
         } else if (e.getSource().equals(buttonClear)) {
             txt_cash.setText("");
         } else if (e.getSource().equals(buttonDel)) {
@@ -820,7 +827,7 @@ public class transaction extends JPanel implements ActionListener {
     public static void addRow(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.addRow(dataRow);
-        System.out.println("e");
+//        System.out.println("e");
 
     }
 
@@ -839,7 +846,17 @@ public class transaction extends JPanel implements ActionListener {
     }
 
     public void addOrder(String name) {
-        bill_num.addItem("Order Room : " + name);
+        boolean f = true;
+//        for (int i = 0; i < bill_num.getItemCount(); i++) {
+//            System.out.println("do doodo");
+//            if (("Order Room : " + name).equals(bill_num.getItemAt(i))){
+//                f = false;
+//            }
+//        }
+        
+        if (f){
+            bill_num.addItem("Order Room : " + name);
+        }
     }
 
     public void reOrder() {
