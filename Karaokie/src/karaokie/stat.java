@@ -219,7 +219,7 @@ public class stat extends JPanel implements ActionListener{
         // panel for chart
         JPanel panelChart = new JPanel();
         panelChart.setBackground(Color.decode("#535870"));
-        //panelChart.add(chartPanel);
+        panelChart.add(chartPanel);
         panelChart.add(panelChartPanel);
 
         p5.add(panelChart);

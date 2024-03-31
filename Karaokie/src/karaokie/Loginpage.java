@@ -11,7 +11,6 @@ package karaokie;
 import database.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 import javax.swing.*;
 public class Loginpage extends JPanel{
     private RoundedPanel pa, u, p, b, userl, passl, signinb;
