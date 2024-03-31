@@ -48,6 +48,10 @@ public class roompage extends JPanel implements ActionListener {
         // set up
         Controller.rp = this;
 
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
+        
 //        firstp = new Point();
         sandbox = new JPanel();
         search = new JTextField();
@@ -134,7 +138,7 @@ public class roompage extends JPanel implements ActionListener {
         add(leftcom, BorderLayout.WEST);
         add(wp, BorderLayout.CENTER);
 
-        tool.setPreferredSize(new Dimension(50, 720));
+        tool.setPreferredSize(new Dimension(50, screenSize.height));
         tool.setBackground(Color.decode("#171925"));
         tool.setLayout(new FlowLayout(FlowLayout.CENTER));
         tool.add(cursor);
