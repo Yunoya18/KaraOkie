@@ -17,10 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.data.category.CategoryDataset;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartPanel;
+//import org.jfree.data.category.CategoryDataset;
 
 public class stat extends JPanel implements ActionListener{
     private JFrame ma;
@@ -154,10 +154,10 @@ public class stat extends JPanel implements ActionListener{
         p5.add(panel);
 
         // JFreeChart
-        JFreeChart chart = ChartFactory.createBarChart("", "dd/mm/yy", "Amount", (CategoryDataset) null);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setBackground(Color.decode("#535870"));
-        chartPanel.setPreferredSize(new Dimension(800, 550));
+//        JFreeChart chart = ChartFactory.createBarChart("", "dd/mm/yy", "Amount", (CategoryDataset) null);
+//        ChartPanel chartPanel = new ChartPanel(chart);
+//        chartPanel.setBackground(Color.decode("#535870"));
+//        chartPanel.setPreferredSize(new Dimension(800, 550));
 
 
         // panel in panel chart

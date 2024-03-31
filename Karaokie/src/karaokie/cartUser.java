@@ -120,16 +120,16 @@ public class cartUser extends JPanel implements ActionListener {
 //        bot.add(total);
         total = new JLabel();
         bot.add(total);
-        new Thread(() -> {
-            while (true) {
-                SwingUtilities.invokeLater(this::retotal);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(() -> {
+//            while (true) {
+//                SwingUtilities.invokeLater(this::retotal);
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }).start();
 
 //        new Thread(() -> {
 //            while (true) {
