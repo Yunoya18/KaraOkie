@@ -129,6 +129,17 @@ public class cartUser extends JPanel implements ActionListener{
                 }
             }
         }).start();
+        
+        new Thread(() -> {
+            while (true) {
+                SwingUtilities.invokeLater(this::remid);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
     
         
         
@@ -375,7 +386,52 @@ public class cartUser extends JPanel implements ActionListener{
         }
         System.out.println(totalmoney);
         total.setText("Total : "+totalmoney);
-        try (FileOutputStream fout = new FileOutputStream("ro.dat");
+//        try (FileOutputStream fout = new FileOutputStream("ro.dat");
+//            ObjectOutputStream oout = new ObjectOutputStream(fout);){
+//            
+//            oout.writeObject(map);
+//
+//        } catch (IOException ex) {
+//
+//            ex.printStackTrace();
+//        }
+        
+        
+  }
+  
+  public synchronized void  remid(){
+      Component[] components = mid.getComponents();
+      totalmoney = 0;
+        
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                JPanel orderPanel = (JPanel) component;
+                String name = "";
+                String price = "";
+                String piece = "";
+            
+                for (Component innerComponent : orderPanel.getComponents()) {
+                    if (innerComponent instanceof JLabel) {
+                        JLabel label = (JLabel) innerComponent;
+                        if (label.getText().startsWith("Name: ")) {
+                            name = label.getText().substring(7);
+                        } else if (label.getText().startsWith("Price: ")) {
+                            price = label.getText().substring(8);
+                        }
+                    } else if (innerComponent instanceof JTextField) {
+                        JTextField countField = (JTextField) innerComponent;
+                        piece = countField.getText();
+                    }
+                }
+                //String name, Icon image, double price, String type 
+                   String priceText = price; 
+                    double priceValue = Double.parseDouble(priceText.replaceAll("[^0-9.]", ""));
+                   totalmoney += priceValue * Integer.parseInt(piece);
+                   map.clear();
+                   map.put(new Food(name,null,priceValue,"tran"),Integer.valueOf(piece));
+            }
+        }
+      try (FileOutputStream fout = new FileOutputStream("ro.dat");
             ObjectOutputStream oout = new ObjectOutputStream(fout);){
             
             oout.writeObject(map);
@@ -384,8 +440,6 @@ public class cartUser extends JPanel implements ActionListener{
 
             ex.printStackTrace();
         }
-        
-        
   }
 
            
