@@ -65,17 +65,19 @@ public class getConnection {
         }
         return total;
     }
-    public static String getRole(String username, String password) {
+    public static String[] getInfo(String username, String password) {
         sql = String.format("SELECT * FROM info WHERE id = '%s' AND password = '%s';", username, password);
         rec = getData(sql);
+        String[] temp = new String[2];
         try {
-            while (rec.next()) {
-                return rec.getString("role");
+            if (rec.next()) {
+                temp[0] = rec.getString("id");
+                temp[1] = rec.getString("role");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return temp;
     }
     
     public static void addData(double cost) {

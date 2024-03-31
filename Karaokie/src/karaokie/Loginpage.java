@@ -11,12 +11,14 @@ package karaokie;
 import database.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
 public class Loginpage extends JPanel{
     private RoundedPanel pa, u, p, b, userl, passl, signinb;
     private JTextField username, password;
     private JButton signin;
     private JLabel bg, user, pass;
+    private String namefromdata = null;
     
 //    private String usernameString; // 0000
     
@@ -99,20 +101,22 @@ public class Loginpage extends JPanel{
             }
              @Override
              public void mouseClicked(MouseEvent e){
-                if(username.getText().equals("1")){
+//                if(username.getText().equals("1")){
+//                    cardLayout.show(cardPanel,"pg3");
+//                }
+//                else{
+//                    cardLayout.show(cardPanel, "pg2");
+//                }
+                String[] info = getConnection.getInfo(username.getText(), password.getText());
+                namefromdata = info[0];
+                String role = info[1];
+                if (role == null) {
+                    JOptionPane.showMessageDialog(null, "Error");
+                } else if (role.equals("user")){
                     cardLayout.show(cardPanel,"pg3");
+                } else if (role.equals("admin")){
+                   cardLayout.show(cardPanel, "pg2");
                 }
-                else{
-                    cardLayout.show(cardPanel, "pg2");
-                }
-                //String role = getConnection.getRole(username.getText(), password.getText());
-                //if (role == null) {
-                //    JOptionPane.showMessageDialog(null, "Error");
-                //} else if (role.equals("user")){
-                //    cardLayout.show(cardPanel,"pg3");
-                //} else if (role.equals("admin")){
-                //   cardLayout.show(cardPanel, "pg2");
-                //}
              }
         });
     }
