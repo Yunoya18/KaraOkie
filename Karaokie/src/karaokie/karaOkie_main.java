@@ -49,7 +49,7 @@ public class karaOkie_main implements WindowListener{
         ma.add(main_panel);
         ma.setSize(screenSize);
         ma.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        ma.setUndecorated(true);
+        
         ma.setVisible(true);
         ma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ma.pack();
