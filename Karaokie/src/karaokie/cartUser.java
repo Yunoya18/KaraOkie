@@ -25,7 +25,7 @@ import static karaokie.Menu.Menus.map;
 import karaokie.Menu.roomMenu;
 public class cartUser extends JPanel implements ActionListener{
     private RoundedPanel out, in, corp;
-    private JPanel top, bot, order, blank, blank2;
+    private JPanel top, bot, order, blank;
     private JLabel id, room, lis, epr, etot, total;
     private JTextField count;
     private JButton co;
@@ -98,7 +98,6 @@ public class cartUser extends JPanel implements ActionListener{
         mid.removeAll();
         mid.setBackground(Color.decode("#A6ADCE"));
         
-        
         sc = new JScrollPane(mid);
         sc.setPreferredSize(new Dimension(930, 370));
         sc.setBorder(BorderFactory.createLineBorder(Color.decode("#A6ADCE")));
@@ -125,16 +124,16 @@ public class cartUser extends JPanel implements ActionListener{
         bot.setPreferredSize(new Dimension(930, 50));
         bot.setBackground(Color.decode("#A6ADCE"));
         bot.setLayout(new FlowLayout(FlowLayout.RIGHT));
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
         
 //        this.retotal();
 //        total = new JLabel("Total : "+totalmoney);
 //        bot.add(total);
         total = new JLabel();
-=======
+//=======
         total = new JLabel("Total : "+totalmoney);
         total.setFont(new Font("Montserrat", Font.BOLD, 12));
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
         bot.add(total);
         new Thread(() -> {
             while (true) {
@@ -197,7 +196,7 @@ public class cartUser extends JPanel implements ActionListener{
         lis.setBackground(Color.decode("#A6ADCE"));
         
         blank = new JPanel();
-        blank.setPreferredSize(new Dimension(520, 5));
+        blank.setPreferredSize(new Dimension(500, 5));
         blank.setBackground(Color.decode("#A6ADCE"));
         
         epr = new JLabel("Price :  "+price+" x");
@@ -214,10 +213,6 @@ public class cartUser extends JPanel implements ActionListener{
         count.setForeground(Color.decode("#282B3A"));
         count.setBackground(Color.decode("#CFD7FA"));
         count.setBorder(BorderFactory.createLineBorder(Color.decode("#A6ADCE")));
-        
-        blank2 = new JPanel();
-        blank2.setPreferredSize(new Dimension(20, 5));
-        blank2.setBackground(Color.decode("#A6ADCE"));
         
         etot = new JLabel(" THB");
         etot.setFont(new Font("Montserrat", Font.BOLD, 12));
@@ -323,14 +318,14 @@ public class cartUser extends JPanel implements ActionListener{
         }
         this.saveTranMap();
         mid.removeAll();
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 //        mid.repaint();
         this.updateCartOrder();
 
-=======
+//=======
         mid.revalidate();
         mid.repaint();
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
         
     }
     }
