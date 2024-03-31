@@ -27,7 +27,7 @@ public class showorder extends JPanel{
         
         // SET FOOD NAME
         for (Food f : m.keySet()){
-            JLabel tx1 = new JLabel("     " + f.getName() + "                              " + m.get(f) + "  each.");
+            JLabel tx1 = new JLabel("     " + f.getName() + "                    " + m.get(f) + "  each.");
             tx1.setFont(new Font("Montserrat", Font.BOLD, 18));
             tx1.setForeground(Color.decode("#A6ADCE"));
             panel2.add(tx1);
