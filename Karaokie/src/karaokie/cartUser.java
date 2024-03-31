@@ -24,7 +24,7 @@ import karaokie.Menu.Food;
 import static karaokie.Menu.Menus.map;
 import karaokie.Menu.roomMenu;
 public class cartUser extends JPanel implements ActionListener{
-    private RoundedPanel out, in;
+    private RoundedPanel out, in, corp;
     private JPanel top, bot, order, blank, blank2;
     private JLabel id, room, lis, epr, etot, total;
     private JTextField count;
@@ -50,6 +50,16 @@ public class cartUser extends JPanel implements ActionListener{
         
 //      button
         co = new JButton("Confirm Order");
+        co.setFont(new Font("Montserrat", Font.BOLD, 12));
+        co.setBackground(Color.decode("#A6ADCE"));
+        co.setForeground(Color.decode("#282B3A"));
+        co.setBorderPainted(false);
+        co.setFocusPainted(false);
+        co.setPreferredSize(new Dimension(125, 25));
+        
+//      button panel
+        corp = new RoundedPanel(20, 20, 135, 30, Color.decode("#A6ADCE"), 1.0f, 2);
+        corp.add(co);
         
 //      top panel
         top = new JPanel();
@@ -61,6 +71,7 @@ public class cartUser extends JPanel implements ActionListener{
         topgrid.setBackground(Color.decode("#A6ADCE"));
         
         id = new JLabel("Order ID : ");
+        id.setFont(new Font("Montserrat", Font.BOLD, 12));
         id.setForeground(Color.decode("#282B3A"));
         id.setBackground(Color.decode("#A6ADCE"));
         
@@ -70,6 +81,7 @@ public class cartUser extends JPanel implements ActionListener{
         proom.setBackground(Color.decode("#A6ADCE"));
         
         room = new JLabel("Room : ");
+        room.setFont(new Font("Montserrat", Font.BOLD, 12));
         room.setForeground(Color.decode("#282B3A"));
         room.setBackground(Color.decode("#A6ADCE"));
         
@@ -113,11 +125,16 @@ public class cartUser extends JPanel implements ActionListener{
         bot.setPreferredSize(new Dimension(930, 50));
         bot.setBackground(Color.decode("#A6ADCE"));
         bot.setLayout(new FlowLayout(FlowLayout.RIGHT));
+<<<<<<< Updated upstream
         
 //        this.retotal();
 //        total = new JLabel("Total : "+totalmoney);
 //        bot.add(total);
         total = new JLabel();
+=======
+        total = new JLabel("Total : "+totalmoney);
+        total.setFont(new Font("Montserrat", Font.BOLD, 12));
+>>>>>>> Stashed changes
         bot.add(total);
         new Thread(() -> {
             while (true) {
@@ -136,7 +153,7 @@ public class cartUser extends JPanel implements ActionListener{
         in.add(sc);
         in.add(bot);
         out.add(in);
-        out.add(co);
+        out.add(corp);
         add(out);
         
         co.addActionListener(this);
@@ -165,28 +182,33 @@ public class cartUser extends JPanel implements ActionListener{
 //    String order, String price, String piece, String total
     public void addOrder(String name, String price, String piece){
         JButton del = new JButton();
-        ImageIcon i = new ImageIcon("D:\\work\\OOP\\Project\\KaraOkie\\src\\Icon\\minus.png");
+        ImageIcon i = new ImageIcon(System.getProperty("user.dir") + "/src/karaokie/image/minus.png");
         Image im = i.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(im);
+        del.setPreferredSize(new Dimension(30, 30));
         del.setIcon(icon);
         del.setBorderPainted(false);
         del.setFocusPainted(false);
         del.setBackground(Color.decode("#A6ADCE"));
         
-        lis = new JLabel("Name:  "+name);
+        lis = new JLabel("Name :  "+name);
+        lis.setFont(new Font("Montserrat", Font.BOLD, 12));
         lis.setForeground(Color.decode("#282B3A"));
         lis.setBackground(Color.decode("#A6ADCE"));
         
         blank = new JPanel();
-        blank.setPreferredSize(new Dimension(570, 5));
+        blank.setPreferredSize(new Dimension(520, 5));
         blank.setBackground(Color.decode("#A6ADCE"));
         
-        epr = new JLabel("Price:  "+price+" x");
+        epr = new JLabel("Price :  "+price+" x");
+        epr.setFont(new Font("Montserrat", Font.BOLD, 12));
         epr.setForeground(Color.decode("#282B3A"));
         epr.setBackground(Color.decode("#A6ADCE"));
         
 //      number of order that can edit
         count = new JTextField();
+        count.setFont(new Font("Montserrat", Font.BOLD, 12));
+        
         count.setText(piece);
         count.setPreferredSize(new Dimension(30, 20));
         count.setForeground(Color.decode("#282B3A"));
@@ -194,12 +216,18 @@ public class cartUser extends JPanel implements ActionListener{
         count.setBorder(BorderFactory.createLineBorder(Color.decode("#A6ADCE")));
         
         blank2 = new JPanel();
-        blank2.setPreferredSize(new Dimension(40, 5));
+        blank2.setPreferredSize(new Dimension(20, 5));
         blank2.setBackground(Color.decode("#A6ADCE"));
         
         etot = new JLabel(" THB");
+        etot.setFont(new Font("Montserrat", Font.BOLD, 12));
         etot.setForeground(Color.decode("#282B3A"));
         etot.setBackground(Color.decode("#A6ADCE"));
+        
+        JPanel etotp = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        etotp.setBackground(Color.decode("#A6ADCE"));
+        etotp.setPreferredSize(new Dimension(140, 30));
+        etotp.add(etot);
         
         order = new JPanel(new FlowLayout(FlowLayout.LEFT));
         order.setBackground(Color.decode("#A6ADCE"));
@@ -208,8 +236,7 @@ public class cartUser extends JPanel implements ActionListener{
         order.add(blank);
         order.add(epr);
         order.add(count);
-        order.add(blank2);
-        order.add(etot);
+        order.add(etotp);
         totalmoney += Double.parseDouble(price) * Integer.parseInt(piece);
         mid.add(order);
         
@@ -296,9 +323,14 @@ public class cartUser extends JPanel implements ActionListener{
         }
         this.saveTranMap();
         mid.removeAll();
+<<<<<<< Updated upstream
 //        mid.repaint();
         this.updateCartOrder();
 
+=======
+        mid.revalidate();
+        mid.repaint();
+>>>>>>> Stashed changes
         
     }
     }

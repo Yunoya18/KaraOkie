@@ -57,13 +57,16 @@ public class transaction extends JPanel implements ActionListener {
 
         //t.setEnabled(false);
         table.getTableHeader().setEnabled(false);
+        table.getTableHeader().setFont(new Font("Montserrat", Font.BOLD, 12));
+        table.getTableHeader().setForeground(Color.decode("#A6ADCE"));
+        table.setForeground(Color.decode("#535870"));
+        table.setGridColor(Color.decode("#E5E5E5"));
         sc = new JScrollPane(table);
         sc.setPreferredSize(new Dimension(1000, 600));
 
         panel_main = new JPanel(new BorderLayout());
 
-        setLayout(
-                new BorderLayout(0, 0));
+        setLayout(new BorderLayout(0, 0));
         panel_left = new JPanel(new BorderLayout());
         panel_right = new JPanel(new GridLayout(2, 1));
         panel_r_on = new JPanel(new BorderLayout());
@@ -86,6 +89,7 @@ public class transaction extends JPanel implements ActionListener {
         panel_bill = new JPanel(new BorderLayout());
         panel_table = new JPanel(new BorderLayout());
         bill_num = new JComboBox<>();
+        bill_num.setFont(new Font("Montserrat", Font.BOLD, 12));
 
         button_search = new JButton();
         button_member = new JButton();
