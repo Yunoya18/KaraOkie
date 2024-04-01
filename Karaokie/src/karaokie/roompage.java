@@ -206,7 +206,7 @@ public class roompage extends JPanel implements ActionListener {
         func.setLayout(new BorderLayout(0, 0));
         func.add(up, BorderLayout.NORTH);
         func.add(tablist, BorderLayout.CENTER);
-        func.setPreferredSize(new Dimension(370, 720));
+        func.setPreferredSize(new Dimension(370, screenSize.height));
 
         //add up
         up.add(search, BorderLayout.NORTH);
@@ -408,6 +408,8 @@ public class roompage extends JPanel implements ActionListener {
         down1.setPreferredSize(new Dimension(370, height));
         down2.setPreferredSize(new Dimension(370, height2));
         down3.setPreferredSize(new Dimension(370, height3));
+        
+        
 
         room.setPreferredSize(new Dimension(100, 100));
         order.setPreferredSize(new Dimension(100, 100));

@@ -45,6 +45,9 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
         }
         //menu and food
         menu = new Menus();
+        
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize(); 
 
         setBackground(Color.decode("#535870"));
         setLayout(new BorderLayout());
@@ -126,8 +129,10 @@ public class addFood extends JPanel implements ActionListener, WindowListener {
         t.setForeground(Color.decode("#535870"));
         t.setGridColor(Color.decode("#E5E5E5"));
         
+        int sch = screenSize.height- (screenSize.height/6);
+        
         sc = new JScrollPane(t);
-        sc.setPreferredSize(new Dimension(1000, 600));
+        sc.setPreferredSize(new Dimension(1000, sch));
         p1.add(b);
         p1.add(b2);
         p2.add(sc);
