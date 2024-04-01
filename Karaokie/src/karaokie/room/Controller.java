@@ -22,12 +22,11 @@ public class Controller implements Runnable {
     public static main main = new main();
 
     public static boolean del;
-    
+
     // socket noeysod
     private ServerSocket server;
     private Socket clientSocket;
-    private DataInputStream input;
-    private DataOutputStream output;            
+    private DataOutputStream output;
 
     // Socket
     public static void InFromClient() {
@@ -129,41 +128,34 @@ public class Controller implements Runnable {
                 System.out.println("close server");
             }
         } catch (IOException ex) {
-            Logger.getLogger(ImportMenu.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(ImportMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     // socket noeysod
     public void socketServerFirstSetupConnection(/*int port*/) {
-        try {
-            server = new ServerSocket(/*port*/5000);
-            System.out.println("Server started. Waiting for a client...");
-
-            clientSocket = server.accept();
-            System.out.println("Client connected.");
-
-            input = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-            output = new DataOutputStream(clientSocket.getOutputStream());
+        System.out.println("openport 5000");
+        try (ServerSocket serverSocket = new ServerSocket(6996)) {
+            System.out.println("Server is running and waiting for client connection...");
 
             while (true) {
-                try {
-                    String message = input.readUTF();
-                    System.out.println("Received from client: " + message);
+                Socket clientSocket = serverSocket.accept();
 
-                    main.addDown(message); // !!!
+                BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                } catch (EOFException e) {
-                    System.out.println("End of stream reached. Client may have disconnected.");
-                    break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String message = reader.readLine();
+                System.out.println("Received message from client: " + message);
+                rp.addDown(message);
+
+                clientSocket.close();
+                System.out.println("Connection closed.");
+
             }
-
         } catch (IOException e) {
             e.printStackTrace();
-        }        
-    }    
+        }
+
+    }
 
     public Controller() {
 
@@ -234,8 +226,8 @@ public class Controller implements Runnable {
     public static void reCard(String s1, String s2) {
         rp.reCard(s1, s2);
     }
-    
-    public static void removeDown3(JPanel p){
+
+    public static void removeDown3(JPanel p) {
         rp.removeDown(p);
     }
 
@@ -438,12 +430,11 @@ public class Controller implements Runnable {
             InFromClient();
         });
         inFromClientThread.start();
-        
+
         Thread socketServerFirstSetupConnection = new Thread(() -> {
             socketServerFirstSetupConnection();
         });
-        socketServerFirstSetupConnection.start();        
+        socketServerFirstSetupConnection.start();
     }
-    
 
 }

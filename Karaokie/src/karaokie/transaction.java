@@ -619,6 +619,7 @@ public class transaction extends JPanel implements ActionListener {
                 for (int i = rowCount - 1; i >= 0; i--) {
                     model.removeRow(i);
                 }
+                Controller.setMenu(null);
             }
         });
         button_cancel.addActionListener(new ActionListener() {
