@@ -19,10 +19,10 @@ import karaokie.room.Controller;
 public class main extends JPanel implements ActionListener, WindowListener{
     private JFrame ma;
     private JDesktopPane side;
-    private JPanel menu, blank, p1, p2, p3, p4, p5, tab;
-    private JButton pg1, pg2, pg3, pg4, pg5;
+    private JPanel menu, blank, tab;
+    private JButton pg1, pg2, pg3, pg5;
     private CardLayout cardlayout;
-    private JLabel txt1, txt2, txt3, txt4, txt5;
+   
     private roompage pm1;
     private addFood pm2;
     private transaction pm3;
@@ -44,13 +44,13 @@ public class main extends JPanel implements ActionListener, WindowListener{
         blank = new JPanel();
         pg2 = new JButton();
         pg3 = new JButton();
-        pg4 = new JButton();
+        
         pg5 = new JButton();
         pg1 = new JButton();
         p1 = new JPanel();
         p2 = new JPanel();
         p3 = new JPanel();
-        p4 = new JPanel();
+        
         p5 = new JPanel();
         txt1 = new JLabel("page1");
         txt2 = new JLabel("page2");
@@ -71,23 +71,23 @@ public class main extends JPanel implements ActionListener, WindowListener{
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
         p3.setBackground(Color.decode("#535870"));
-        p4.setBackground(Color.decode("#535870"));
+        // p4.setBackground(Color.decode("#535870"));
         p5.setBackground(Color.decode("#535870"));
         tab.setBackground(Color.decode("#535870"));
         menu.setBackground(Color.decode("#282B3A"));
         blank.setBackground(Color.decode("#282B3A"));
-        txt1.setForeground(Color.WHITE);
-        txt2.setForeground(Color.WHITE);
-        txt3.setForeground(Color.WHITE);
-        txt4.setForeground(Color.WHITE);
-        txt5.setForeground(Color.WHITE);
+        // txt1.setForeground(Color.WHITE);
+        // txt2.setForeground(Color.WHITE);
+        // txt3.setForeground(Color.WHITE);
+        // txt4.setForeground(Color.WHITE);
+        // txt5.setForeground(Color.WHITE);
         
         //test changing page
-        p1.add(txt1);
-        p2.add(txt2);
-        p3.add(txt3);
-        p4.add(txt4);
-        p5.add(txt5);
+        // p1.add(txt1);
+        // p2.add(txt2);
+        // p3.add(txt3);
+        // p4.add(txt4);
+        // p5.add(txt5);
         
         //set Icon Image
         ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/room.png");
@@ -108,7 +108,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         pg1.setIcon(icon1);
         pg2.setIcon(icon2);
         pg3.setIcon(icon3);
-        pg4.setIcon(icon4);
+        // pg4.setIcon(icon4);
         pg5.setIcon(icon5);
         
         //set mainframe background
@@ -128,7 +128,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         tab.add(pm1 ,"pg1");
         tab.add(pm2, "pg2");
         tab.add(pm3, "pg3");
-        tab.add(p4, "pg4");
+        // tab.add(p4, "pg4");
         tab.add(pm5, "pg5");
         
         //insert button in menu bar
@@ -144,7 +144,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         pg1.setPreferredSize(new Dimension(50, 50));
         pg2.setPreferredSize(new Dimension(50, 50));
         pg3.setPreferredSize(new Dimension(50, 50));
-        pg4.setPreferredSize(new Dimension(50, 50));
+        // pg4.setPreferredSize(new Dimension(50, 50));
         pg5.setPreferredSize(new Dimension(50, 50));
         pg1.setBackground(Color.decode("#282B3A"));
         pg2.setBackground(Color.decode("#282B3A"));
@@ -160,8 +160,8 @@ public class main extends JPanel implements ActionListener, WindowListener{
         pg2.setFocusPainted(false);
         pg3.setBorderPainted(false);
         pg3.setFocusPainted(false);
-        pg4.setBorderPainted(false);
-        pg4.setFocusPainted(false);
+        // pg4.setBorderPainted(false);
+        // pg4.setFocusPainted(false);
         pg5.setBorderPainted(false);
         pg5.setFocusPainted(false);
         
@@ -241,7 +241,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         pg1.addActionListener(this);
         pg2.addActionListener(this);
         pg3.addActionListener(this);
-        pg4.addActionListener(this);
+        // pg4.addActionListener(this);
         pg5.addActionListener(this);
         
 //        setResizable(false);
@@ -260,9 +260,9 @@ public class main extends JPanel implements ActionListener, WindowListener{
         else if(ev.getSource().equals(pg3)){
            cardlayout.show(tab, "pg3");
         }
-        else if(ev.getSource().equals(pg4)){
-           cardlayout.show(tab, "pg4");
-        }
+        // else if(ev.getSource().equals(pg4)){
+        //    cardlayout.show(tab, "pg4");
+        // }
         else if(ev.getSource().equals(pg5)){
            cardlayout.show(tab, "pg5");
         }
