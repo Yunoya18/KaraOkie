@@ -25,7 +25,7 @@ import static karaokie.Menu.Menus.map;
 import karaokie.Menu.roomMenu;
 public class cartUser extends JPanel implements ActionListener {
     private RoundedPanel out, in, corp, countrp;
-    private JPanel top, bot, order, blank, etotp;
+    private JPanel top, bot, order, blank, etotp, lisp, eprp;
     private JLabel id, room, lis, epr, etot, total;
     private JTextField count;
     private JButton co;
@@ -200,14 +200,20 @@ public class cartUser extends JPanel implements ActionListener {
         lis.setForeground(Color.decode("#282B3A"));
         lis.setBackground(Color.decode("#A6ADCE"));
 
-        blank = new JPanel();
-        blank.setPreferredSize(new Dimension(500, 5));
-        blank.setBackground(Color.decode("#A6ADCE"));
+        lisp = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        lisp.setBackground(Color.decode("#A6ADCE"));
+        lisp.setPreferredSize(new Dimension(600, 30));
+        lisp.add(lis);
 
         epr = new JLabel("Price:  " + price + " x");
         epr.setFont(new Font("Montserrat", Font.BOLD, 12));
         epr.setForeground(Color.decode("#282B3A"));
         epr.setBackground(Color.decode("#A6ADCE"));
+        
+        eprp = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        eprp.setBackground(Color.decode("#A6ADCE"));
+        eprp.setPreferredSize(new Dimension(100, 30));
+        eprp.add(epr);
 
 //      number of order that can edit
         count = new JTextField();
@@ -234,9 +240,8 @@ public class cartUser extends JPanel implements ActionListener {
         order = new JPanel(new FlowLayout(FlowLayout.LEFT));
         order.setBackground(Color.decode("#A6ADCE"));
         order.add(del);
-        order.add(lis);
-        order.add(blank);
-        order.add(epr);
+        order.add(lisp);
+        order.add(eprp);
         order.add(countrp);
         order.add(etotp);
         totalmoney += Double.parseDouble(price) * Integer.parseInt(piece);
