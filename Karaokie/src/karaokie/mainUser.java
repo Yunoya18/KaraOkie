@@ -207,6 +207,8 @@ public class mainUser extends JPanel implements ActionListener{
         else if(ev.getSource().equals(pg3)){
            int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
+                setDefaultText<String, String> txt = new setDefaultText<>("Alert", Loginpage.nam);
+                JOptionPane.showMessageDialog(null, txt);
                // alert the staff
                // ssaan 0000
                 System.out.println("getRoomFromCart : " + cu.getRoomFromCart()); // 9999

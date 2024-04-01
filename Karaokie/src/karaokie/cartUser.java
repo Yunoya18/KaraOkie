@@ -300,6 +300,8 @@ public class cartUser extends JPanel implements ActionListener {
         if (e.getSource().equals(co)) {
             int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
+                setDefaultText<String, String> txt = new setDefaultText<>("Order", Loginpage.nam);
+                JOptionPane.showMessageDialog(null, txt);
 //               rom = new roomMenu(); // 9999 (moved to default constructor cause getRoomFromCart() have to use it)
                 Component[] components = mid.getComponents();
                 for (Component component : components) {
