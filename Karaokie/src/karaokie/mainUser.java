@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import javax.swing.*;
 
 
@@ -209,7 +210,7 @@ public class mainUser extends JPanel implements ActionListener{
                // alert the staff
                // ssaan 0000
                 System.out.println("getRoomFromCart : " + cu.getRoomFromCart()); // 9999
-                socketSendAlertToStaff("" + cu.getRoomFromCart());        // 2222        
+                socketSendAlertToStaff("" + Loginpage.nam);        // 2222        
 
            }
         }
@@ -225,22 +226,22 @@ public class mainUser extends JPanel implements ActionListener{
             e.printStackTrace();
         }    
     }
+      
     
-    public void socketSendAlertToStaff(String message) { // use with option pane on noeysodbookmark1
-        if (socket != null && socket.isConnected()) {
-            try {
-                // Send the message to the server
-                out.writeUTF(message);
-                out.flush(); // Ensure the message is sent immediately
-                System.out.println("Message sent to server: " + message);
-            } catch (IOException e) {
-                System.out.println("Error sending message to client: " + e.getMessage());
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Client socket is closed or not connected.");
-        }        
-    }
+    public void socketSendAlertToStaff(String message) { 
+        try (Socket clientSocket = new Socket("26.26.134.224", 6996);
+             OutputStream outputStream = clientSocket.getOutputStream();
+             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
+
+
+            outputStreamWriter.write(message);
+            outputStreamWriter.flush(); 
+
+            System.out.println("Message sent successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }    
     
     //========================================================================================= \\
     
