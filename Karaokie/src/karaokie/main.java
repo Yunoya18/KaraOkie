@@ -52,11 +52,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         p3 = new JPanel();
         
         p5 = new JPanel();
-        txt1 = new JLabel("page1");
-        txt2 = new JLabel("page2");
-        txt3 = new JLabel("page3");
-        txt4 = new JLabel("page4");
-        txt5 = new JLabel("page5");
+        //  
         
         //set page
         Controller.main = this;
