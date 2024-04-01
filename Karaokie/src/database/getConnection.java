@@ -3,6 +3,7 @@ package database;
 import java.sql.*;
 import java.time.*;
 import java.time.format.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,54 +15,74 @@ public class getConnection {
     private static final String PASSWORD = "karaokie1234";
     private static String sql;
     private static ResultSet rec;
+    //oneline statement
     public static ResultSet getData(String sql) {
         ResultSet rec = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connect = DriverManager.getConnection(URL, USER, PASSWORD);
             PreparedStatement ps = connect.prepareStatement(sql);
-            rec = ps.executeQuery(sql);
+            rec = ps.executeQuery();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return rec;
     }
-    public static double getCost(String date) {
-        double total = 0;
-        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE DATE(time) = '" + date + "'";
-        rec = getData(sql);
+    //prepared statement
+    public static ResultSet getData(PreparedStatement ps) {
+        ResultSet rec = null;
         try {
-            if (rec.next()) {
-                total = rec.getDouble("total_amount");
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            rec = ps.executeQuery();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return rec;
+    }
+    //day
+    public static ArrayList<Double> getCostWeekly(ArrayList<String> allDate) throws SQLException {
+        ArrayList<Double> total = new ArrayList<>();
+        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE DATE(time) = ?";
+        connect = DriverManager.getConnection(URL, USER, PASSWORD);
+        PreparedStatement ps = connect.prepareStatement(sql);
+        for (String date : allDate) {
+            ps.setString(1, date);
+            rec = getData(ps);
+            while (rec.next()) {
+                total.add(rec.getDouble("total_amount"));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(getConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
     }
-    public static double getCost(String start, String end) {
-        double total = 0;
-        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE DATE(time) BETWEEN '" + start + "' AND '" + end + "'";
-        rec = getData(sql);
-        try {
-            if (rec.next()) {
-                total = rec.getDouble("total_amount");
+    //week
+    public static ArrayList<Double> getCostMonthly(ArrayList<String> allDate) throws SQLException {
+        ArrayList<Double> total = new ArrayList<>();
+        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE DATE(time) BETWEEN ? AND ?";
+        connect = DriverManager.getConnection(URL, USER, PASSWORD);
+        PreparedStatement ps = connect.prepareStatement(sql);
+        for (int i = 0; i < (allDate.size()/2); i+=2) {
+            ps.setString(1, allDate.get(i));
+            ps.setString(2, allDate.get(i+1));
+            rec = getData(ps);
+            while (rec.next()) {
+                total.add(rec.getDouble("total_amount"));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(getConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
     }
-    public static double getCost(int month) {
-        double total = 0;
-        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE YEAR(time) = YEAR(CURRENT_DATE()) AND MONTH(time) = " + month;
-        rec = getData(sql);
-        try {
-            if (rec.next()) {
-                total = rec.getDouble("total_amount");
+    //month
+    public static ArrayList<Double> getCostYearly() throws SQLException {
+        ArrayList<Double> total = new ArrayList<>();
+        sql = "SELECT SUM(amount) AS total_amount FROM stat WHERE YEAR(time) = YEAR(CURRENT_DATE()) AND MONTH(time) = ?";
+        connect = DriverManager.getConnection(URL, USER, PASSWORD);
+        PreparedStatement ps = connect.prepareStatement(sql);
+        for (int i = 1; i <= 12; i++) {
+            ps.setString(1, String.valueOf(i));
+            rec = getData(ps);
+            while (rec.next()) {
+                total.add(rec.getDouble("total_amount"));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(getConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return total;
     }
@@ -79,17 +100,17 @@ public class getConnection {
         }
         return temp;
     }
-    
-    public static void addData(double cost) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        sql = String.format("INSERT INTO stat (time, amount) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connect = DriverManager.getConnection(URL, USER, PASSWORD);
-            s = connect.createStatement();
-            s.executeUpdate(sql);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    
+//    public static void addData(double cost) {
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        sql = String.format("INSERT INTO stat (time, amount) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            connect = DriverManager.getConnection(URL, USER, PASSWORD);
+//            s = connect.createStatement();
+//            s.executeUpdate(sql);
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
