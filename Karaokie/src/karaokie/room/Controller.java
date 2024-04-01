@@ -196,6 +196,10 @@ public class Controller implements Runnable {
     public static void reCard(String s1, String s2) {
         rp.reCard(s1, s2);
     }
+    
+    public static void removeDown3(JPanel p){
+        rp.removeDown(p);
+    }
 
     // Menu Zone
     public static void setMenu(Map<String, Map<Food, Integer>> temp) {
