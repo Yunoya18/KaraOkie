@@ -10,5 +10,6 @@ package karaokie.room;
  */
 public interface Available {
     public abstract boolean checkAvailable();
+    public abstract room getRoom();
     public abstract void setAvaliable(boolean b);
 }

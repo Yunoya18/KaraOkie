@@ -92,6 +92,11 @@ public abstract class room extends JInternalFrame implements Available, Serializ
     }
     
     @Override
+    public room getRoom(){
+        return this;
+    }
+    
+    @Override
     public void componentResized(ComponentEvent e) {
     }
 

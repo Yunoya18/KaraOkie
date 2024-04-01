@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import static karaokie.Menu.Menus.map;
 import karaokie.*;
+import karaokie.room.*;
 
 public class Controller implements Runnable {
 
@@ -16,6 +17,7 @@ public class Controller implements Runnable {
     private static Map<String, ArrayList<Food>> map;
     private static Map<String, Map<Food, Integer>> roomMenu = new HashMap<>();
     private static ArrayList<room> room = new ArrayList<>();
+    public static Available available[] = new Available[100];
     public static roompage rp;
     public static transaction ts;
     public static JPanel p = new JPanel();
@@ -52,7 +54,6 @@ public class Controller implements Runnable {
                     }
 
 //                    roomMenu.put(key, tempRoom);
-
                     // Smart 100%
                     for (Food f : tempRoom.keySet()) {
                         for (Food f1 : tempinmap.keySet()) {
@@ -162,6 +163,8 @@ public class Controller implements Runnable {
         // File
         File file_room = new File("room.dat");
         File file_roomMenu = new File("roomMenu.dat");
+        File file_available = new File("available.dat");
+        
         if (file_room.exists()) {
             try (FileInputStream fin = new FileInputStream("room.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
                 room = (ArrayList<room>) oin.readObject();
@@ -181,11 +184,22 @@ public class Controller implements Runnable {
 //            }
 //        }
 
+        if (file_available.exists()) {
+            try (FileInputStream fin = new FileInputStream("available.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+
+                available = (Available[]) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+        }
     }
 
     // Room Zone
     public static void addRoom(room r) {
         room.add(r);
+        available[Room_count] = r;
         Room_count++;
     }
 
@@ -229,6 +243,25 @@ public class Controller implements Runnable {
 
     public static void removeDown3(JPanel p) {
         rp.removeDown(p);
+    }
+
+    public static void setavailable(showroom r) {
+        for (room r1 : room) {
+
+            String stemp = r.getRoom();
+            String[] parts = stemp.split(" ");
+            String number = parts[1];
+
+            if ((r1.getRoomNumber() + "").equals(number)) {
+                if (r1.checkAvailable()) {
+                    r1.setAvaliable(false);
+                } else {
+                    r1.setAvaliable(true);
+                }
+                System.out.println(r1.checkAvailable() + "");
+                break;
+            }
+        }
     }
 
     // Menu Zone
@@ -302,6 +335,14 @@ public class Controller implements Runnable {
 //
 //            e.printStackTrace();
 //        }
+        try (FileOutputStream fout = new FileOutputStream("available.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+
+            oout.writeObject(available);
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
     }
 
     public static void saveFileNULL() {
@@ -323,6 +364,8 @@ public class Controller implements Runnable {
         // File
         File file_room = new File("room.dat");
         File file_roomMenu = new File("roomMenu.dat");
+        File file_available = new File("available.dat");
+        
         if (file_room.exists()) {
             try (FileInputStream fin = new FileInputStream("room.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
 
@@ -343,6 +386,17 @@ public class Controller implements Runnable {
 //                e.printStackTrace();
 //            }
 //        }
+
+        if (file_available.exists()) {
+            try (FileInputStream fin = new FileInputStream("available.dat"); ObjectInputStream oin = new ObjectInputStream(fin);) {
+
+                available = (Available[]) oin.readObject();
+
+            } catch (IOException | ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+        }
     }
 
     public void loadMap() {

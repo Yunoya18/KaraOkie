@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 //import java.util.ArrayList;
 import karaokie.room.*;
 
+
 public class roompage extends JPanel implements ActionListener {
 
     private CardLayout card;
@@ -74,7 +75,7 @@ public class roompage extends JPanel implements ActionListener {
         order = new JButton();
         report = new JButton();
         cen = new JPanel(new GridLayout(3, 1));
-        String[] roomcat = {"All", "Big", "Small"};
+        String[] roomcat = {"All", "Big", "Small", "Available"};
         type = new JComboBox(roomcat);
         type.setFont(new Font("Montserrat", Font.BOLD, 12));
         down1 = new JPanel();
@@ -561,7 +562,11 @@ public class roompage extends JPanel implements ActionListener {
         int count = 0;
         for (room rm : Controller.getArrayRoom()) {
             if (rm != null) {
-                if (s.equals("All")) {
+                if (s.equals("Available")){
+                    
+                    showAvailableRoom(Controller.available);
+                    break;
+                } else if (s.equals("All")) {
 
                     count++;
                     down1.add(new showroom("Room " + rm.getRoomNumber(), rm.checkAvailable()));
@@ -591,6 +596,27 @@ public class roompage extends JPanel implements ActionListener {
     public void reCard(String s, String s2) {
         card.show(tablist, s);
         card.show(tablist, s2);
+    }
+    
+    
+    public void showAvailableRoom(Available[] available){
+        int count = 0;
+        System.out.println(available);
+        for (Available avali : available){
+            System.out.println(avali);
+            if (avali == null){
+                break;
+            }
+            
+            if (avali.checkAvailable()){
+                room r = (avali.getRoom());
+                down1.add(new showroom("Room " + r.getRoomNumber(), r.checkAvailable()));
+                count += 1;
+            }
+        }
+        int height = 123 * count;
+        down1.setPreferredSize(new Dimension(100, height));
+        Controller.renew("pg1");
     }
 
     // socketalert ssaan (moved to karaOkie_main.java)

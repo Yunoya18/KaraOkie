@@ -5,13 +5,16 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.Set;
 import javax.swing.*;
+import karaokie.room.Controller;
 
 
 public class showroom extends JPanel implements MouseListener{
     private JLabel t1, t2;
     private RoundedPanel rp;
     private JPanel p;
+    private final String room;
     public showroom(String room, boolean use){
         //       font
         try{
@@ -22,6 +25,9 @@ public class showroom extends JPanel implements MouseListener{
         catch (Exception e){
             e.printStackTrace();
         }
+        
+        this.room = room;
+        
         setLayout(new FlowLayout(FlowLayout.CENTER));
         p = new JPanel(new GridLayout(1, 2));
         
@@ -63,9 +69,11 @@ public class showroom extends JPanel implements MouseListener{
             if (t2.getText().equals("Available")) {
                 t2.setText("Not-Available");
                 t2.setForeground(Color.RED);
+                Controller.setavailable(this);
             } else {
                 t2.setText("Available");
                 t2.setForeground(Color.GREEN);
+                Controller.setavailable(this);
             }
         }
     }
@@ -88,5 +96,7 @@ public class showroom extends JPanel implements MouseListener{
         t2.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
     
-
+    public String getRoom(){
+        return room;
+    }
 }
