@@ -30,6 +30,15 @@ public class fillFood extends JFrame implements ActionListener{
     private JComboBox cb;
     private RoundedPanel tf1rp, cbrp, tf2rp, brp;
     public fillFood(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         //menu and food
         menu = new Menus();
 

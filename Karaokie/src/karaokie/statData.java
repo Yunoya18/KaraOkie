@@ -61,7 +61,13 @@ public class statData {
             Logger.getLogger(statData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args) {
-        new statData();
+    public ArrayList<Double> getCurrentWeek() {
+        return this.currentWeek;
+    }
+    public ArrayList<Double> getCurrentMonth() {
+        return this.currentMonth;
+    }
+    public ArrayList<Double> getCurrentYear() {
+        return this.currentYear;
     }
 }

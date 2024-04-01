@@ -100,17 +100,17 @@ public class getConnection {
         }
         return temp;
     }
-//    
-//    public static void addData(double cost) {
-//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//        sql = String.format("INSERT INTO stat (time, amount) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            connect = DriverManager.getConnection(URL, USER, PASSWORD);
-//            s = connect.createStatement();
-//            s.executeUpdate(sql);
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    //add total from customer
+    public static void addAmount(double cost) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        sql = String.format("INSERT INTO stat (time, amount) VALUES ('%s', '%s');", dtf.format(LocalDateTime.now()), cost);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = DriverManager.getConnection(URL, USER, PASSWORD);
+            s = connect.createStatement();
+            s.executeUpdate(sql);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

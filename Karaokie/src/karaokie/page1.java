@@ -2,6 +2,7 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 
 /* description by noeysod 
@@ -18,6 +19,15 @@ public class page1 implements ActionListener{
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
     public page1(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();

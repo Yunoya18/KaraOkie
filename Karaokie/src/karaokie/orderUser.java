@@ -35,6 +35,15 @@ public class orderUser extends JPanel implements ActionListener{
     private Map<String, ArrayList<Food>> map;
     private roomMenu room;
     public orderUser(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         ImportMenu.imp();
         room = new roomMenu();
         setBackground(Color.decode("#535870"));

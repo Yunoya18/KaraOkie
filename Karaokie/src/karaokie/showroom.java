@@ -4,6 +4,7 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import javax.swing.*;
 
 
@@ -12,6 +13,15 @@ public class showroom extends JPanel implements MouseListener{
     private RoundedPanel rp;
     private JPanel p;
     public showroom(String room, boolean use){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         setLayout(new FlowLayout(FlowLayout.CENTER));
         p = new JPanel(new GridLayout(1, 2));
         
@@ -70,10 +80,12 @@ public class showroom extends JPanel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        t2.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        t2.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
     
 

@@ -30,6 +30,15 @@ public class karaOkie_main implements WindowListener{
     private DataOutputStream output;        
 
     karaOkie_main(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         ma = new JFrame();
         cd = new CardLayout();
         main_panel = new JPanel(cd);
@@ -115,7 +124,7 @@ public class karaOkie_main implements WindowListener{
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Open");
-       Controller controller = new Controller();
+        Controller controller = new Controller();
         Thread controllerThread = new Thread(controller);
         controllerThread.start();
     

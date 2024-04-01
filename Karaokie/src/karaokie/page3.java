@@ -3,6 +3,7 @@ package karaokie;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 public class page3 extends JPanel {
 
     private JPanel  panel_main, panel_left, panel_right, panel_r_on, panel_r_down, panel_bn_on, panel_bn_down, panel_bn1, panelcal, panelcal2 
@@ -15,7 +16,15 @@ public class page3 extends JPanel {
                     buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonTen, buttonX, buttonClear, buttonOk, buttonJud, buttonDel;
   
     public page3(){
-        
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         
         panel_main = new JPanel(new BorderLayout());
         setLayout(new BorderLayout(0,0));

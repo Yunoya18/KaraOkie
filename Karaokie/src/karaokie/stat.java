@@ -17,10 +17,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.util.ArrayList;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class stat extends JPanel implements ActionListener{
     private JFrame ma;
@@ -30,7 +35,22 @@ public class stat extends JPanel implements ActionListener{
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
     private RoundedPanel w, m, y;
+    private JComboBox<String> dropdown;
+    private DefaultCategoryDataset dataset, dataset1, dataset2, dataset3;
+    private JFreeChart chart;
+    private ChartPanel chartPanel;
+    private statData data;
+    private double weekTotal, monthTotal, yearTotal;
     public stat(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         //ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();
@@ -52,7 +72,8 @@ public class stat extends JPanel implements ActionListener{
         txt4 = new JLabel("page4");
         txt5 = new JLabel("page5");
 
-        //data pm5 = new data();
+        data = new statData();
+
         //set backgroundcolor and foreground color
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
@@ -137,7 +158,7 @@ public class stat extends JPanel implements ActionListener{
         //Page 5 background
         p5.setLayout(new BoxLayout(p5, BoxLayout.Y_AXIS));
 
-        JComboBox<String> dropdown = new JComboBox<>();
+        dropdown = new JComboBox<>();
         dropdown.setFont(new Font("Montserrat", Font.BOLD, 12));
         dropdown.setForeground(Color.decode("#282B3A"));
         dropdown.addItem("Weekly");
@@ -152,13 +173,39 @@ public class stat extends JPanel implements ActionListener{
         panel.setBackground(Color.decode("#535870"));
         panel.add(dropdown);
         p5.add(panel);
-
+        
+        //dataset
+        dataset1 = new DefaultCategoryDataset();
+        ArrayList<Double> weekInfo = data.getCurrentWeek();
+        for (int i = 1; i < weekInfo.size()+1; i++) {
+            dataset1.addValue(weekInfo.get(i - 1), "Weekly", DayOfWeek.of(i));
+        }
+        for (double num : weekInfo) {
+            weekTotal += num;
+        }
+        dataset2 = new DefaultCategoryDataset();
+        ArrayList<Double> monthInfo = data.getCurrentWeek();
+        for (int i = 1; i < monthInfo.size()+1; i++) {
+            dataset2.addValue(monthInfo.get(i - 1), "Weekly", "Week " + i);
+        }
+        for (double num : monthInfo) {
+            monthTotal += num;
+        }
+        dataset3 = new DefaultCategoryDataset();
+        ArrayList<Double> yearInfo = data.getCurrentWeek();
+        for (int i = 1; i < weekInfo.size()+1; i++) {
+            dataset3.addValue(yearInfo.get(i - 1), "Weekly", Month.of(i));
+        }
+        for (double num : yearInfo) {
+            yearTotal += num;
+        }
+        
+        this.dataset = dataset1;
         // JFreeChart
-        JFreeChart chart = ChartFactory.createBarChart("", "dd/mm/yy", "Amount", (CategoryDataset) null);
-        ChartPanel chartPanel = new ChartPanel(chart);
+        chart = ChartFactory.createLineChart("", "dd/mm/yy", "Amount", dataset);
+        chartPanel = new ChartPanel(chart);
         chartPanel.setBackground(Color.decode("#535870"));
         chartPanel.setPreferredSize(new Dimension(800, 550));
-
 
         // panel in panel chart
         JPanel panelChartPanel = new JPanel();
@@ -169,31 +216,50 @@ public class stat extends JPanel implements ActionListener{
         // panel weekly total
         w = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
         JLabel weeklyTotal = new JLabel("Weekly Total: ");
+        JLabel totalW = new JLabel(String.valueOf(weekTotal));
+        totalW.setHorizontalAlignment(SwingConstants.CENTER);
+        totalW.setFont(new Font("Montserrat", Font.BOLD, 30));
+        totalW.setForeground(Color.decode("#A6ADCE"));
         // font size 15
         weeklyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
         weeklyTotal.setForeground(Color.decode("#A6ADCE"));
-        weeklyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        weeklyTotal.setHorizontalAlignment(SwingConstants.CENTER);
 
 
         // panel for monthly total
         m = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
         JLabel monthlyTotal = new JLabel("Monthly Total : ");
+        JLabel totalM = new JLabel(String.valueOf(monthTotal));
+        totalM.setHorizontalAlignment(SwingConstants.CENTER);
+        totalM.setFont(new Font("Montserrat", Font.BOLD, 30));
+        totalM.setForeground(Color.decode("#A6ADCE"));
+        
         // font size 15
         monthlyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
         monthlyTotal.setForeground(Color.decode("#A6ADCE"));
         monthlyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        monthlyTotal.setHorizontalAlignment(SwingConstants.CENTER);
+        
 
         // panel for yearly total
         y = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
         JLabel yearlyTotal = new JLabel("Yearly Total : ");
+        JLabel totalY = new JLabel(String.valueOf(yearTotal));
+        totalY.setHorizontalAlignment(SwingConstants.CENTER);
+        totalY.setFont(new Font("Montserrat", Font.BOLD, 30));
+        totalY.setForeground(Color.decode("#A6ADCE"));
+
         // font size 15
         yearlyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
         yearlyTotal.setForeground(Color.decode("#A6ADCE"));
         yearlyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        yearlyTotal.setHorizontalAlignment(SwingConstants.CENTER);
 
         // background color #535870
         weeklyTotal.setBackground(Color.decode("#535870"));
-        w.add(weeklyTotal);
+        w.setLayout(new BorderLayout());
+        w.add(weeklyTotal, BorderLayout.NORTH);
+        w.add(totalW, BorderLayout.CENTER);
         panelChartPanel.add(w);
 
         JPanel space1 = new JPanel();
@@ -203,7 +269,10 @@ public class stat extends JPanel implements ActionListener{
 
         // background color #535870
         monthlyTotal.setBackground(Color.decode("#535870"));
-        m.add(monthlyTotal);
+        m.setLayout(new BorderLayout());
+        m.add(monthlyTotal, BorderLayout.NORTH);
+        m.add(totalM, BorderLayout.CENTER);
+        
         panelChartPanel.add(m);
 
         JPanel space2 = new JPanel();
@@ -213,7 +282,10 @@ public class stat extends JPanel implements ActionListener{
 
         // background color #535870
         yearlyTotal.setBackground(Color.decode("#535870"));
-        y.add(yearlyTotal);
+        y.setLayout(new BorderLayout());
+        y.add(yearlyTotal, BorderLayout.NORTH);
+        y.add(totalY, BorderLayout.CENTER);
+        
         panelChartPanel.add(y);
         
         // panel for chart
@@ -360,6 +432,8 @@ public class stat extends JPanel implements ActionListener{
         pg3.addActionListener(this);
         pg4.addActionListener(this);
         pg5.addActionListener(this);
+        
+        dropdown.addActionListener(this);
     }
 
     @Override
@@ -378,6 +452,19 @@ public class stat extends JPanel implements ActionListener{
         }
         else if(ev.getSource().equals(pg5)){
            cardlayout.show(tab, "pg5");
+        }
+        else if (ev.getSource().equals(dropdown)) {
+            DefaultCategoryDataset newDataset = null;
+            if (dropdown.getSelectedItem().equals("Weekly")) {
+                newDataset = dataset1;
+            } else if (dropdown.getSelectedItem().equals("Monthly")) {
+                newDataset = dataset2;
+            } else if (dropdown.getSelectedItem().equals("Yearly")) {
+                newDataset = dataset3;
+            }
+            this.dataset = newDataset;
+            chart.getCategoryPlot().setDataset(newDataset);
+            chartPanel.repaint();
         }
     }
     public static void main(String[] args) {

@@ -11,19 +11,27 @@ package karaokie;
 import database.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 public class Loginpage extends JPanel{
     private RoundedPanel pa, u, p, b, userl, passl, signinb;
     private JTextField username, password;
     private JButton signin;
     private JLabel bg, user, pass;
-    private String namefromdata = null;
     public static String nam;
     
 //    private String usernameString; // 0000
     
     Loginpage(CardLayout cardLayout, Container cardPanel){
-        
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Bold.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         setLayout(new BorderLayout());
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -114,13 +122,12 @@ public class Loginpage extends JPanel{
 //                    cardLayout.show(cardPanel, "pg2");
 //                }
                 String[] info = getConnection.getInfo(username.getText(), password.getText());
-                namefromdata = info[0];
+                nam = info[0];
                 String role = info[1];
                 if (role == null) {
                     JOptionPane.showMessageDialog(null, "Error");
                 } else if (role.equals("user")){
                     cardLayout.show(cardPanel,"pg3");
-                    nam = username.getText();
                 } else if (role.equals("admin")){
                    cardLayout.show(cardPanel, "pg2");
                 }
