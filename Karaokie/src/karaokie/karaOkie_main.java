@@ -115,7 +115,7 @@ public class karaOkie_main implements WindowListener{
     @Override
     public void windowOpened(WindowEvent e) {
         System.out.println("Open");
-       Controller controller = new Controller();
+        Controller controller = new Controller();
         Thread controllerThread = new Thread(controller);
         controllerThread.start();
     

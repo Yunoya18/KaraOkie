@@ -19,9 +19,9 @@ import karaokie.addFood.ImageRenderer;
 import karaokie.room.*;
 
 public class transaction extends JPanel implements ActionListener {
-
-    private JPanel panel_main, panel_left, panel_right, panel_r_on, panel_r_down, panel_bn_on, panel_bn_down, panel_bn1, panelcal, panelcal2, panel_empty, panel_empty2, panel_empty3, panel_empty4, panel_empty5, panel_empty6, panel_empty7, panel_empty8, panel_bill, panel_table, panelcal2_on;
-    private JLabel panel_minimain, left_pa, txt_bill, cal_img, cash_img, credit_img, txt_cash, txt_credit;
+    private RoundedPanel panel_left, cash_img, credit_img;
+    private JPanel panel_main, panel_right, panel_r_on, panel_r_down, panel_bn_on, panel_bn_down, panel_bn1, panelcal, panelcal2, panel_empty, panel_empty2, panel_empty3, panel_empty4, panel_empty5, panel_empty6, panel_empty7, panel_empty8, panelcal2_on;
+    private JLabel panel_minimain, left_pa, cal_img, txt_cash, txt_credit;
 //    private JTextField  txt_cash, txt_credit;
     private static JTable table;
     private JComboBox<String> bill_num;
@@ -62,7 +62,7 @@ public class transaction extends JPanel implements ActionListener {
         table.setForeground(Color.decode("#535870"));
         table.setGridColor(Color.decode("#E5E5E5"));
         sc = new JScrollPane(table);
-        sc.setPreferredSize(new Dimension(1000, 600));
+        sc.setPreferredSize(new Dimension(700, 560));
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
@@ -71,12 +71,13 @@ public class transaction extends JPanel implements ActionListener {
 
         setLayout(new BorderLayout(0, 0));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel_left = new JPanel(new BorderLayout());
+        panel_left = new RoundedPanel(20, 20, 700, 500, Color.decode("#282B3A"), 1.0f, 10);
         panel_right = new JPanel(new GridLayout(2, 1));
         panel_r_on = new JPanel(new BorderLayout());
         panel_r_down = new JPanel(new BorderLayout());
         panel_bn_on = new JPanel(new BorderLayout());
-        panel_bn_down = new JPanel(new GridLayout(2, 1));
+        panel_bn_down = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        panel_bn_down.setPreferredSize(new Dimension(400, 130));
         panel_bn1 = new JPanel(new GridLayout(2, 3));
 
         panelcal = new JPanel(new GridLayout(4, 3));
@@ -90,8 +91,6 @@ public class transaction extends JPanel implements ActionListener {
         panel_empty6 = new JPanel();
         panel_empty7 = new JPanel();
         panel_empty8 = new JPanel();
-        panel_bill = new JPanel(new BorderLayout());
-        panel_table = new JPanel(new BorderLayout());
         bill_num = new JComboBox<>();
         bill_num.setFont(new Font("Montserrat", Font.BOLD, 12));
 
@@ -162,13 +161,11 @@ public class transaction extends JPanel implements ActionListener {
 
         panelcal2.add(buttonOk);
 
-        txt_cash = new JLabel("");
-        txt_credit = new JLabel("");
+        txt_cash = new JLabel();
+        txt_credit = new JLabel();
+        txt_cash.setFont(new Font("Montserrat", Font.BOLD, 12));
+        txt_credit.setFont(new Font("Montserrat", Font.BOLD, 12));
 
-        panel_bill.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel_table.add(sc, BorderLayout.CENTER);
-
-        panel_table.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 //        setBorder
 //        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -209,54 +206,54 @@ public class transaction extends JPanel implements ActionListener {
 
         
         ImageIcon ci = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Rectangle 34.png");
-        Image cim = ci.getImage().getScaledInstance(400, scheight, Image.SCALE_SMOOTH);
+        Image cim = ci.getImage().getScaledInstance(380, scheight, Image.SCALE_SMOOTH);
         Icon calim = new ImageIcon(cim);
 
 //        import img cal
         ImageIcon ze = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 38.png");
-        Image zr = ze.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image zr = ze.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon zero = new ImageIcon(zr);
         ImageIcon on = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 39.png");
-        Image oon = on.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image oon = on.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon one = new ImageIcon(oon);
         ImageIcon tt = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 44.png");
-        Image tw = tt.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image tw = tt.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon two = new ImageIcon(tw);
         ImageIcon the = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 35.png");
-        Image th = the.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image th = the.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon three = new ImageIcon(th);
         ImageIcon fo = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 40.png");
-        Image foo = fo.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image foo = fo.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon four = new ImageIcon(foo);
         ImageIcon fi = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 43.png");
-        Image fii = fi.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image fii = fi.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon five = new ImageIcon(fii);
         ImageIcon ss = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 34.png");
-        Image si = ss.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image si = ss.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon six = new ImageIcon(si);
         ImageIcon sv = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 41.png");
-        Image se = sv.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image se = sv.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon seven = new ImageIcon(se);
         ImageIcon eg = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 42.png");
-        Image ei = eg.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image ei = eg.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon eight = new ImageIcon(ei);
         ImageIcon ni = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 33.png");
-        Image ne = ni.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image ne = ni.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon nine = new ImageIcon(ne);
         ImageIcon jd = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 37.png");
-        Image jj = jd.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image jj = jd.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon judd = new ImageIcon(jj);
         ImageIcon cc = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 36.png");
-        Image ccc = cc.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image ccc = cc.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon cccc = new ImageIcon(ccc);
         ImageIcon xx = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 31.png");
-        Image xxx = xx.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image xxx = xx.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon xxxx = new ImageIcon(xxx);
         ImageIcon bc = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 29.png");
-        Image bac = bc.getImage().getScaledInstance(80, 70, Image.SCALE_SMOOTH);
+        Image bac = bc.getImage().getScaledInstance(70, 60, Image.SCALE_SMOOTH);
         Icon back = new ImageIcon(bac);
         ImageIcon oo = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/Group 32.png");
-        Image kk = oo.getImage().getScaledInstance(80, 140, Image.SCALE_SMOOTH);
+        Image kk = oo.getImage().getScaledInstance(70, 130, Image.SCALE_SMOOTH);
         Icon okk = new ImageIcon(kk);
 
 //        miport img
@@ -344,16 +341,9 @@ public class transaction extends JPanel implements ActionListener {
 //        Image kk = oo.getImage().getScaledInstance(80, 140, Image.SCALE_SMOOTH);
 //        Icon okk = new ImageIcon(kk);
 //        bill_num.setBorder(BorderFactory.createEmptyBorder(10, 20, 0, 0));
-        txt_bill = new JLabel(billtxt);
+        
 
-        txt_bill.add(bill_num);
-
-        bill_num.setPreferredSize(
-                new Dimension(570, 30));
-
-        txt_bill.setLayout(
-                new FlowLayout(FlowLayout.CENTER));
-//        txt_bill.setText("Bill number...");
+        bill_num.setPreferredSize(new Dimension(700, 30));
         panel_minimain = new JLabel(minimain);
 
         panel_minimain.setLayout(
@@ -361,32 +351,31 @@ public class transaction extends JPanel implements ActionListener {
         panel_minimain.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         left_pa = new JLabel(left);
 
-        left_pa.setLayout(
-                new BorderLayout());
+        left_pa.setLayout(new BorderLayout());
+        
         add(panel_minimain, BorderLayout.CENTER);
 
         left_pa.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         cal_img = new JLabel(calim);
 
-        cal_img.setLayout(
-                new BorderLayout(0, 0));
-        cal_img.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        cash_img = new JLabel(cash);
+        cal_img.setLayout(new BorderLayout(0, 0));
+        cal_img.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cash_img = new RoundedPanel(20, 20, 370, 50, Color.decode("#171925"), 1.0f, 10);
+        credit_img = new RoundedPanel(20, 20, 370, 50, Color.decode("#171925"), 1.0f, 10);
+        JPanel c2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 8));
+        JPanel cr2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 8));
+        c2.setPreferredSize(new Dimension(350, 40));
+        cr2.setPreferredSize(new Dimension(350, 40));
+        c2.setBackground(Color.decode("#171925"));
+        cr2.setBackground(Color.decode("#171925"));
+        c2.add(txt_cash);
+        cr2.add(txt_credit);
+        
+        cash_img.add(c2);
+        credit_img.add(cr2);
 
-        cash_img.setLayout(
-                new BorderLayout(0, 0));
-        cash_img.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        credit_img = new JLabel(credit);
-
-        credit_img.setLayout(
-                new BorderLayout(0, 0));
-        credit_img.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        cash_img.add(txt_cash);
-
-        credit_img.add(txt_credit);
-
-        txt_cash.setBackground(Color.decode("#1E1E1E"));
-        txt_credit.setBackground(Color.decode("#1E1E1E"));
+        txt_cash.setBackground(Color.decode("#171925"));
+        txt_credit.setBackground(Color.decode("#171925"));
         txt_cash.setBorder(BorderFactory.createEmptyBorder());
         txt_credit.setBorder(BorderFactory.createEmptyBorder());
 
@@ -402,9 +391,6 @@ public class transaction extends JPanel implements ActionListener {
         panel_bn_on.setBackground(Color.decode("#282B3A"));
         panel_bn_down.setBackground(Color.decode("#282B3A"));
         panel_bn1.setBackground(Color.decode("#282B3A"));
-        panel_bill.setBackground(Color.decode("#171925"));
-        panel_table.setBackground(Color.decode("#171925"));
-        txt_bill.setBackground(Color.decode("#A6ADCE"));
         button_search.setBackground(Color.decode("#282B3A"));
         button_member.setBackground(Color.decode("#282B3A"));
         button_cancel.setBackground(Color.decode("#282B3A"));
@@ -422,11 +408,9 @@ public class transaction extends JPanel implements ActionListener {
 
         panel_bn_down.add(credit_img);
 
-        panel_bill.add(txt_bill, BorderLayout.CENTER);
+        panel_left.add(bill_num);
 
-        panel_left.add(panel_bill, BorderLayout.NORTH);
-
-        panel_left.add(panel_table, BorderLayout.CENTER);
+        panel_left.add(sc);
 
         panel_r_on.add(panel_bn_on, BorderLayout.CENTER);
 
@@ -748,10 +732,7 @@ public class transaction extends JPanel implements ActionListener {
         panel_right.setPreferredSize(
                 new Dimension(400, 0));
 //        panelcal.setPreferredSize(new Dimension(300,0));
-        txt_bill.setPreferredSize(
-                new Dimension(600, 40));
-        setVisible(
-                true);
+        setVisible(true);
 
         // comboBox Zone
         bill_num.addItemListener(new ItemListener() {
