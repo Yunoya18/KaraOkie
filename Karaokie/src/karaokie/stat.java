@@ -40,6 +40,7 @@ public class stat extends JPanel implements ActionListener{
     private JFreeChart chart;
     private ChartPanel chartPanel;
     private statData data;
+    private double weekTotal, monthTotal, yearTotal;
     public stat(){
         //       font
         try{
@@ -179,15 +180,24 @@ public class stat extends JPanel implements ActionListener{
         for (int i = 1; i < weekInfo.size()+1; i++) {
             dataset1.addValue(weekInfo.get(i - 1), "Weekly", DayOfWeek.of(i));
         }
+        for (double num : weekInfo) {
+            weekTotal += num;
+        }
         dataset2 = new DefaultCategoryDataset();
         ArrayList<Double> monthInfo = data.getCurrentWeek();
         for (int i = 1; i < monthInfo.size()+1; i++) {
             dataset2.addValue(monthInfo.get(i - 1), "Weekly", "Week " + i);
         }
+        for (double num : monthInfo) {
+            monthTotal += num;
+        }
         dataset3 = new DefaultCategoryDataset();
         ArrayList<Double> yearInfo = data.getCurrentWeek();
         for (int i = 1; i < weekInfo.size()+1; i++) {
             dataset3.addValue(yearInfo.get(i - 1), "Weekly", Month.of(i));
+        }
+        for (double num : yearInfo) {
+            yearTotal += num;
         }
         
         this.dataset = dataset1;
@@ -206,31 +216,50 @@ public class stat extends JPanel implements ActionListener{
         // panel weekly total
         w = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
         JLabel weeklyTotal = new JLabel("Weekly Total: ");
+        JLabel totalW = new JLabel(String.valueOf(weekTotal));
+        totalW.setHorizontalAlignment(SwingConstants.CENTER);
+        totalW.setFont(new Font("Montserrat", Font.BOLD, 30));
+        totalW.setForeground(Color.decode("#A6ADCE"));
         // font size 15
         weeklyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
         weeklyTotal.setForeground(Color.decode("#A6ADCE"));
-        weeklyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        weeklyTotal.setHorizontalAlignment(SwingConstants.CENTER);
 
 
         // panel for monthly total
         m = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
         JLabel monthlyTotal = new JLabel("Monthly Total : ");
+        JLabel totalM = new JLabel(String.valueOf(monthTotal));
+        totalM.setHorizontalAlignment(SwingConstants.CENTER);
+        totalM.setFont(new Font("Montserrat", Font.BOLD, 30));
+        totalM.setForeground(Color.decode("#A6ADCE"));
+        
         // font size 15
         monthlyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
         monthlyTotal.setForeground(Color.decode("#A6ADCE"));
         monthlyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        monthlyTotal.setHorizontalAlignment(SwingConstants.CENTER);
+        
 
         // panel for yearly total
         y = new RoundedPanel(20, 20, 200, 150, Color.decode("#282B3A"), 1.0f, 10);
         JLabel yearlyTotal = new JLabel("Yearly Total : ");
+        JLabel totalY = new JLabel(String.valueOf(yearTotal));
+        totalY.setHorizontalAlignment(SwingConstants.CENTER);
+        totalY.setFont(new Font("Montserrat", Font.BOLD, 30));
+        totalY.setForeground(Color.decode("#A6ADCE"));
+
         // font size 15
         yearlyTotal.setFont(new Font("Montserrat", Font.BOLD, 15));
         yearlyTotal.setForeground(Color.decode("#A6ADCE"));
         yearlyTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        yearlyTotal.setHorizontalAlignment(SwingConstants.CENTER);
 
         // background color #535870
         weeklyTotal.setBackground(Color.decode("#535870"));
-        w.add(weeklyTotal);
+        w.setLayout(new BorderLayout());
+        w.add(weeklyTotal, BorderLayout.NORTH);
+        w.add(totalW, BorderLayout.CENTER);
         panelChartPanel.add(w);
 
         JPanel space1 = new JPanel();
@@ -240,7 +269,10 @@ public class stat extends JPanel implements ActionListener{
 
         // background color #535870
         monthlyTotal.setBackground(Color.decode("#535870"));
-        m.add(monthlyTotal);
+        m.setLayout(new BorderLayout());
+        m.add(monthlyTotal, BorderLayout.NORTH);
+        m.add(totalM, BorderLayout.CENTER);
+        
         panelChartPanel.add(m);
 
         JPanel space2 = new JPanel();
@@ -250,7 +282,10 @@ public class stat extends JPanel implements ActionListener{
 
         // background color #535870
         yearlyTotal.setBackground(Color.decode("#535870"));
-        y.add(yearlyTotal);
+        y.setLayout(new BorderLayout());
+        y.add(yearlyTotal, BorderLayout.NORTH);
+        y.add(totalY, BorderLayout.CENTER);
+        
         panelChartPanel.add(y);
         
         // panel for chart
