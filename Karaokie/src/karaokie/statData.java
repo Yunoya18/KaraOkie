@@ -25,6 +25,7 @@ public class statData {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public statData() {
         getDayInWeek();
+        getWeekInMonth();
         getMonthInYear();
     }
     public void getDayInWeek() {
@@ -38,6 +39,7 @@ public class statData {
         } catch (SQLException ex) {
             Logger.getLogger(statData.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("1");
     }
     public void getWeekInMonth() {
         ArrayList<String> temp = new ArrayList<String>();
@@ -53,6 +55,7 @@ public class statData {
         } catch (SQLException ex) {
             Logger.getLogger(statData.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("2");
     }
     public void getMonthInYear() {
         try {
@@ -60,6 +63,7 @@ public class statData {
         } catch (SQLException ex) {
             Logger.getLogger(statData.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("3");
     }
     public ArrayList<Double> getCurrentWeek() {
         return this.currentWeek;
@@ -69,5 +73,8 @@ public class statData {
     }
     public ArrayList<Double> getCurrentYear() {
         return this.currentYear;
+    }
+    public static void main(String[] args) {
+        new statData();
     }
 }

@@ -184,7 +184,7 @@ public class stat extends JPanel implements ActionListener{
             weekTotal += num;
         }
         dataset2 = new DefaultCategoryDataset();
-        ArrayList<Double> monthInfo = data.getCurrentWeek();
+        ArrayList<Double> monthInfo = data.getCurrentMonth();
         for (int i = 1; i < monthInfo.size()+1; i++) {
             dataset2.addValue(monthInfo.get(i - 1), "Weekly", "Week " + i);
         }
@@ -192,8 +192,8 @@ public class stat extends JPanel implements ActionListener{
             monthTotal += num;
         }
         dataset3 = new DefaultCategoryDataset();
-        ArrayList<Double> yearInfo = data.getCurrentWeek();
-        for (int i = 1; i < weekInfo.size()+1; i++) {
+        ArrayList<Double> yearInfo = data.getCurrentYear();
+        for (int i = 1; i < yearInfo.size()+1; i++) {
             dataset3.addValue(yearInfo.get(i - 1), "Weekly", Month.of(i));
         }
         for (double num : yearInfo) {
