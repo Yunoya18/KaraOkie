@@ -24,10 +24,10 @@ public class karaOkie_main implements WindowListener{
     private mainUser mu;
     
     // socketalert ssaan
-    private ServerSocket server;
-    private Socket clientSocket;
-    private DataInputStream input;
-    private DataOutputStream output;        
+//    private ServerSocket server;
+//    private Socket clientSocket;
+//    private DataInputStream input;
+//    private DataOutputStream output;        
 
     karaOkie_main(){
         //       font
@@ -73,41 +73,41 @@ public class karaOkie_main implements WindowListener{
         
 ////////////////////////////////socket ssaan
         // socketalert ssaan 0000
-        socketServerFirstSetupConnection();
+//        socketServerFirstSetupConnection(); 8888
 ////////////////////////////////        
     }
     
-    // socketalert ssaan 0000
-    public void socketServerFirstSetupConnection(/*int port*/) {
-        try {
-            server = new ServerSocket(/*port*/5000);
-            System.out.println("Server started. Waiting for a client...");
-
-            clientSocket = server.accept();
-            System.out.println("Client connected.");
-
-            input = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-            output = new DataOutputStream(clientSocket.getOutputStream());
-
-            while (true) {
-                try {
-                    String message = input.readUTF();
-                    System.out.println("Received from client: " + message);
-
-                    mp.addDown(message); // !!!
-
-                } catch (EOFException e) {
-                    System.out.println("End of stream reached. Client may have disconnected.");
-                    break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }        
-    }    
+    // socketalert ssaan 0000 8888
+//    public void socketServerFirstSetupConnection(/*int port*/) {
+//        try {
+//            server = new ServerSocket(/*port*/5000);
+//            System.out.println("Server started. Waiting for a client...");
+//
+//            clientSocket = server.accept();
+//            System.out.println("Client connected.");
+//
+//            input = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+//            output = new DataOutputStream(clientSocket.getOutputStream());
+//
+//            while (true) {
+//                try {
+//                    String message = input.readUTF();
+//                    System.out.println("Received from client: " + message);
+//
+//                    mp.addDown(message); // !!!
+//
+//                } catch (EOFException e) {
+//                    System.out.println("End of stream reached. Client may have disconnected.");
+//                    break;
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }        
+//    }    
 ////////////////////////////////    
 
     public static void main(String[] args) {

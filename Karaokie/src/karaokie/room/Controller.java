@@ -22,6 +22,12 @@ public class Controller implements Runnable {
     public static main main = new main();
 
     public static boolean del;
+    
+    // socket noeysod
+    private ServerSocket server;
+    private Socket clientSocket;
+    private DataInputStream input;
+    private DataOutputStream output;            
 
     // Socket
     public static void InFromClient() {
@@ -126,6 +132,38 @@ public class Controller implements Runnable {
             Logger.getLogger(ImportMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    // socket noeysod
+    public void socketServerFirstSetupConnection(/*int port*/) {
+        try {
+            server = new ServerSocket(/*port*/5000);
+            System.out.println("Server started. Waiting for a client...");
+
+            clientSocket = server.accept();
+            System.out.println("Client connected.");
+
+            input = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+            output = new DataOutputStream(clientSocket.getOutputStream());
+
+            while (true) {
+                try {
+                    String message = input.readUTF();
+                    System.out.println("Received from client: " + message);
+
+                    main.addDown(message); // !!!
+
+                } catch (EOFException e) {
+                    System.out.println("End of stream reached. Client may have disconnected.");
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+    }    
 
     public Controller() {
 
@@ -400,6 +438,12 @@ public class Controller implements Runnable {
             InFromClient();
         });
         inFromClientThread.start();
+        
+        Thread socketServerFirstSetupConnection = new Thread(() -> {
+            socketServerFirstSetupConnection();
+        });
+        socketServerFirstSetupConnection.start();        
     }
+    
 
 }

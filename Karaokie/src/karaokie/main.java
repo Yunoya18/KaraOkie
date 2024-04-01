@@ -47,15 +47,15 @@ public class main extends JPanel implements ActionListener, WindowListener{
         
         pg5 = new JButton();
         pg1 = new JButton();
-        p1 = new JPanel();
-        p2 = new JPanel();
-        p3 = new JPanel();
+//        p1 = new JPanel();
+//        p2 = new JPanel();
+//        p3 = new JPanel();
         
-        p5 = new JPanel();
+//        p5 = new JPanel();
         //  
         
         //set page
-        Controller.main = this;
+//        Controller.main = this;
         pm1 = new roompage();
         pm2 = new addFood();
         pm3 = new transaction();
@@ -64,11 +64,11 @@ public class main extends JPanel implements ActionListener, WindowListener{
         
         
         //set backgroundcolor and foreground color
-        p1.setBackground(Color.decode("#535870"));
-        p2.setBackground(Color.decode("#535870"));
-        p3.setBackground(Color.decode("#535870"));
+//        p1.setBackground(Color.decode("#535870"));
+//        p2.setBackground(Color.decode("#535870"));
+//        p3.setBackground(Color.decode("#535870"));
         // p4.setBackground(Color.decode("#535870"));
-        p5.setBackground(Color.decode("#535870"));
+//        p5.setBackground(Color.decode("#535870"));
         tab.setBackground(Color.decode("#535870"));
         menu.setBackground(Color.decode("#282B3A"));
         blank.setBackground(Color.decode("#282B3A"));
@@ -132,7 +132,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         menu.add(pg1);
         menu.add(pg2);
         menu.add(pg3);
-        menu.add(pg4);
+//        menu.add(pg4);
         menu.add(pg5);
         blank.setPreferredSize(new Dimension(30, 30));
         
@@ -145,7 +145,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         pg1.setBackground(Color.decode("#282B3A"));
         pg2.setBackground(Color.decode("#282B3A"));
         pg3.setBackground(Color.decode("#282B3A"));
-        pg4.setBackground(Color.decode("#282B3A"));
+//        pg4.setBackground(Color.decode("#282B3A"));
         pg5.setBackground(Color.decode("#282B3A"));
         
         
@@ -162,7 +162,7 @@ public class main extends JPanel implements ActionListener, WindowListener{
         pg5.setFocusPainted(false);
         
         //button array for configured use
-        JButton[] group = new JButton[]{pg1, pg2, pg3, pg4, pg5};
+        JButton[] group = new JButton[]{pg1, pg2, pg3, /*pg4,*/ pg5};
         
         //change cursor and make icon bigger when hover
         for(JButton button : group){
@@ -185,10 +185,10 @@ public class main extends JPanel implements ActionListener, WindowListener{
                             ImageIcon hoverIcon = new ImageIcon(i3.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
                             button.setIcon(hoverIcon);
                         }
-                        else if(e.getSource().equals(pg4)){
-                            ImageIcon hoverIcon = new ImageIcon(i4.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
-                            button.setIcon(hoverIcon);
-                        }
+//                        else if(e.getSource().equals(pg4)){
+//                            ImageIcon hoverIcon = new ImageIcon(i4.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
+//                            button.setIcon(hoverIcon);
+//                        }
                         else if(e.getSource().equals(pg5)){
                             ImageIcon hoverIcon = new ImageIcon(i5.getImage().getScaledInstance(40,40, Image.SCALE_SMOOTH));
                             button.setIcon(hoverIcon);
@@ -210,9 +210,9 @@ public class main extends JPanel implements ActionListener, WindowListener{
                         else if(e.getSource().equals(pg3)){
                             button.setIcon(icon3);
                         }
-                        else if(e.getSource().equals(pg4)){
-                            button.setIcon(icon4);
-                        }
+//                        else if(e.getSource().equals(pg4)){
+//                            button.setIcon(icon4);
+//                        }
                         else if(e.getSource().equals(pg5)){
                             button.setIcon(icon5);
                         }
