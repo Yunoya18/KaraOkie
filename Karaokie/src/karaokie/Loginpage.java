@@ -11,6 +11,7 @@ package karaokie;
 import database.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 public class Loginpage extends JPanel{
     private RoundedPanel pa, u, p, b, userl, passl, signinb;
@@ -22,7 +23,15 @@ public class Loginpage extends JPanel{
 //    private String usernameString; // 0000
     
     Loginpage(CardLayout cardLayout, Container cardPanel){
-        
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         setLayout(new BorderLayout());
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();

@@ -33,6 +33,15 @@ public class mainUser extends JPanel implements ActionListener{
     private DataOutputStream out;  
      
     public mainUser(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();

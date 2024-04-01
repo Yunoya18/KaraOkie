@@ -6,6 +6,7 @@ package karaokie;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 import karaokie.Menu.*;
 
@@ -16,6 +17,15 @@ public class showorder extends JPanel{
     private JScrollPane sp;
     private RoundedPanel rp;
     public showorder(String s, Map<Food, Integer> m, int row){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         setLayout(new FlowLayout(FlowLayout.CENTER));
         name = new JLabel("Order : Room " + s);
         p = new JPanel(new BorderLayout());

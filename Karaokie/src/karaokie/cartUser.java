@@ -37,6 +37,15 @@ public class cartUser extends JPanel implements ActionListener {
     private roomMenu rom; // 0000
 
     public cartUser() {
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         rom = new roomMenu(); // 9999 (moved here cause getRoomFromCart() have to use it)
         map = new HashMap<>();
         mapfortran = new HashMap<>();

@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.time.DayOfWeek;
 import java.time.Month;
 import java.util.ArrayList;
@@ -40,6 +41,15 @@ public class stat extends JPanel implements ActionListener{
     private ChartPanel chartPanel;
     private statData data;
     public stat(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         //ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();

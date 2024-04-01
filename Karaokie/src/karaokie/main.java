@@ -12,6 +12,7 @@ package karaokie;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 import karaokie.room.Controller;
 
@@ -27,6 +28,15 @@ public class main extends JPanel implements ActionListener, WindowListener{
     private transaction pm3;
     private stat pm5;
     public main(){
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();

@@ -12,6 +12,7 @@ import database.getConnection;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Map;
 import javax.swing.table.*;
@@ -34,6 +35,16 @@ public class transaction extends JPanel implements ActionListener {
     private double total;
 
     public transaction() {
+//       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        
         //Set up
         Controller.ts = this;
 

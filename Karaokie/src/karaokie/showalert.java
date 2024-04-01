@@ -3,6 +3,7 @@ package karaokie;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import javax.swing.*;
 import karaokie.room.Controller;
 
@@ -13,6 +14,15 @@ public class showalert extends JPanel implements MouseListener {
     private JPanel p;
 
     public showalert(String room) {
+        //       font
+        try{
+            Font Montserrat = Font.createFont(Font.TRUETYPE_FONT, new File(System.getProperty("user.dir") + "/src/karaokie/font/Montserrat-Regular.ttf")).deriveFont(Font.PLAIN, 12);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Montserrat);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         setLayout(new FlowLayout(FlowLayout.CENTER));
         p = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
