@@ -181,7 +181,10 @@ public class orderUser extends JPanel implements ActionListener{
         pbut.setBackground(Color.decode("#282B3A"));
 
         pic = new JLabel();
-        pic.setIcon(i);
+        Image img = i.getImage();
+        Image newImg = img.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(newImg);
+        pic.setIcon(resizedIcon);
         pic.setPreferredSize(new Dimension(300, 300));
         pic.setBorder(BorderFactory.createLineBorder(Color.decode("#535870")));
         
