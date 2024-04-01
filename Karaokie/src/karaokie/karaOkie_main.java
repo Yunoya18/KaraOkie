@@ -33,6 +33,9 @@ public class karaOkie_main implements WindowListener{
         ma = new JFrame();
         cd = new CardLayout();
         main_panel = new JPanel(cd);
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
         
         mp = new main(); 
         CardLayout cardLayout = (CardLayout) main_panel.getLayout();
@@ -44,7 +47,9 @@ public class karaOkie_main implements WindowListener{
         
         
         ma.add(main_panel);
-        ma.setPreferredSize(new Dimension(1280,720));
+        ma.setSize(screenSize);
+        ma.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ma.setUndecorated(true);
         ma.setVisible(true);
         ma.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ma.pack();

@@ -40,7 +40,6 @@ public class orderUser extends JPanel implements ActionListener{
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER));
         b1 = new JButton("All");
-        // these button will setvisible(true) when the column categories in the table from addfood has them, if not these button will setvisible(false)
         b2 = new JButton("Food");
         b3 = new JButton("Snack");
         b4 = new JButton("Drinks");
@@ -121,28 +120,28 @@ public class orderUser extends JPanel implements ActionListener{
         but.add(b4);
 
 //      each type
-        all = new JPanel(new FlowLayout(FlowLayout.CENTER, 13, 13));
+        all = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         all.setBackground(Color.decode("#535870"));
         sc = new JScrollPane(all);
-        sc.setPreferredSize(new Dimension(1050, 60));
+        sc.setPreferredSize(new Dimension(1085, 60));
         sc.setBorder(BorderFactory.createLineBorder(Color.decode("#535870")));
         p1.add(sc, "all");
         
-        fo = new JPanel();
+        fo = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         fo.setBackground(Color.decode("#535870"));
         sc2 = new JScrollPane(fo);
         sc2.setPreferredSize(new Dimension(1085, 60));
         sc2.setBorder(BorderFactory.createLineBorder(Color.decode("#535870")));
         p1.add(sc2, "food");
         
-        sn = new JPanel();
+        sn = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         sn.setBackground(Color.decode("#535870"));
         sc3 = new JScrollPane(sn);
         sc3.setPreferredSize(new Dimension(1085, 60));
         sc3.setBorder(BorderFactory.createLineBorder(Color.decode("#535870")));
         p1.add(sc3, "snack");
         
-        dr = new JPanel();
+        dr = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         dr.setBackground(Color.decode("#535870"));
         sc4 = new JScrollPane(dr);
         sc4.setPreferredSize(new Dimension(1085, 60));

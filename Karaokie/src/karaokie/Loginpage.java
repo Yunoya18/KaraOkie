@@ -17,19 +17,27 @@ public class Loginpage extends JPanel{
     private JTextField username, password;
     private JButton signin;
     private JLabel bg, user, pass;
+    private String namefromdata = null;
+    public static String nam;
     
 //    private String usernameString; // 0000
     
     Loginpage(CardLayout cardLayout, Container cardPanel){
         
         setLayout(new BorderLayout());
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
         
         ImageIcon bgimtemp = new ImageIcon(System.getProperty("user.dir") + "/src/karaokie/image/bg.png");
-        Image temp = bgimtemp.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+        Image temp = bgimtemp.getImage().getScaledInstance(screenWidth,screenHeight, Image.SCALE_SMOOTH);
         ImageIcon bgim = new ImageIcon(temp);
         bg = new JLabel(bgim);
-        bg.setPreferredSize(new Dimension(1280, 720));
-        bg.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 200));
+        int bgh = screenHeight/3;
+        // bg.setPreferredSize(new Dimension(1280, 720));
+        bg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, bgh));
         
         pa = new RoundedPanel(20, 20, 500, 330, Color.decode("#11003B"), 0.7f, 20);
         
@@ -99,20 +107,23 @@ public class Loginpage extends JPanel{
             }
              @Override
              public void mouseClicked(MouseEvent e){
-                if(username.getText().equals("1")){
+//                if(username.getText().equals("1")){
+//                    cardLayout.show(cardPanel,"pg3");
+//                }
+//                else{
+//                    cardLayout.show(cardPanel, "pg2");
+//                }
+                String[] info = getConnection.getInfo(username.getText(), password.getText());
+                namefromdata = info[0];
+                String role = info[1];
+                if (role == null) {
+                    JOptionPane.showMessageDialog(null, "Error");
+                } else if (role.equals("user")){
                     cardLayout.show(cardPanel,"pg3");
+                    nam = username.getText();
+                } else if (role.equals("admin")){
+                   cardLayout.show(cardPanel, "pg2");
                 }
-                else{
-                    cardLayout.show(cardPanel, "pg2");
-                }
-                //String role = getConnection.getRole(username.getText(), password.getText());
-                //if (role == null) {
-                //    JOptionPane.showMessageDialog(null, "Error");
-                //} else if (role.equals("user")){
-                //    cardLayout.show(cardPanel,"pg3");
-                //} else if (role.equals("admin")){
-                //   cardLayout.show(cardPanel, "pg2");
-                //}
              }
         });
     }

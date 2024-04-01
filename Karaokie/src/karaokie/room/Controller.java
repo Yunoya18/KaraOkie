@@ -35,31 +35,47 @@ public class Controller implements Runnable {
                 // Read the serialized data from the client
                 Map<String, Map<Food, Integer>> inmap = (Map<String, Map<Food, Integer>>) oin.readObject();
 
+                System.out.println(inmap + "deafaaw sforom svcerve");
                 for (String key : inmap.keySet()) {
 
                     // first order
-                    try {
-                        Map<Food, Integer> tempRoom = (HashMap<Food, Integer>) roomMenu.get(key); //do plus                        } catch (NullPointerException e){
-                        Map<Food, Integer> tempinmap = (Map<Food, Integer>) inmap.get(key);
+                    Map<Food, Integer> tempRoom = (HashMap<Food, Integer>) roomMenu.get(key); //do plus                        } catch (NullPointerException e){
+                    Map<Food, Integer> tempinmap = (Map<Food, Integer>) inmap.get(key);
 
-                        for (Food f : tempinmap.keySet()) {
-                            // smart 99%
-                            String tempName = f.getName();
-                            int check = Controller.checkequals(tempName, tempRoom);
-                            if (check != 0) {
-                                tempRoom.put(f, tempinmap.get(f) + check);
-                                tempRoom.remove(Controller.checkequalsClass(tempName, tempRoom));
-                            } else {
-                                tempRoom.put(f, tempinmap.get(f));
-                            }
-
-                        }
-
-                        roomMenu.put(key, tempRoom);
-                    } catch (NullPointerException e) {
-                        roomMenu.put(key, inmap.get(key));
+                    if (tempRoom == null) {
+                        tempRoom = new HashMap<>();
                     }
 
+//                    roomMenu.put(key, tempRoom);
+
+                    // Smart 100%
+                    for (Food f : tempRoom.keySet()) {
+                        for (Food f1 : tempinmap.keySet()) {
+                            System.out.println(f.getName() + "       " + f1.getName());
+                            if (f.getName().equals(f1.getName())) {
+
+                                tempRoom.put(f, tempRoom.get(f) + tempinmap.get(f1));
+//                                tempinmap.remove(f1);
+                            }
+                        }
+                    }
+
+                    for (Food f1 : tempinmap.keySet()) {
+                        boolean make = true;
+                        for (Food f : tempRoom.keySet()) {
+                            if (f1.getName().equals(f.getName())) {
+                                make = false;
+                            }
+                        }
+                        if (make) {
+                            tempRoom.put(f1, tempinmap.get(f1));
+                        }
+
+                    }
+
+                    // Delete equals data
+//                    checkequalsClass(tempRoom, tempinmap);
+                    roomMenu.put(key, tempRoom);
                 }
 
                 System.out.println("Received map from client: " + roomMenu);
@@ -180,6 +196,10 @@ public class Controller implements Runnable {
     public static void reCard(String s1, String s2) {
         rp.reCard(s1, s2);
     }
+    
+    public static void removeDown3(JPanel p){
+        rp.removeDown(p);
+    }
 
     // Menu Zone
     public static void setMenu(Map<String, Map<Food, Integer>> temp) {
@@ -254,6 +274,20 @@ public class Controller implements Runnable {
 //        }
     }
 
+    public static void saveFileNULL() {
+
+        // room
+        try (FileOutputStream fout = new FileOutputStream("room.dat"); ObjectOutputStream oout = new ObjectOutputStream(fout);) {
+
+            Controller.room = new ArrayList<>();
+            oout.writeObject(room);
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+    }
+
     public static void openFile() {
 
         // File
@@ -303,28 +337,38 @@ public class Controller implements Runnable {
         File file = new File("room.dat");
         file.delete();
     }
-    
-    public static int checkequals(String name, Map<Food, Integer> m){
-        for (Food f : m.keySet()){
-            if (f.getName().equals(name)){
-                return m.get(f);
+
+    public static int checkequals(String name, Map<Food, Integer> m) {
+        try {
+            for (Food f : m.keySet()) {
+                if (f.getName().equals(name)) {
+                    return m.get(f);
+                }
+            }
+            return 0;
+        } catch (NullPointerException e) {
+            return 0;
+        }
+
+    }
+
+    public static void checkequalsClass(Map<Food, Integer> tempRoom, Map<Food, Integer> tempinmap) {
+        for (Food f : tempRoom.keySet()) {
+            for (Food f1 : tempRoom.keySet()) {
+                if (f.getName().equals(f1.getName())) {
+
+                    if (tempRoom.get(f) > tempRoom.get(f1)) {
+                        tempRoom.remove(f1);
+                    } else if (tempRoom.get(f) < tempRoom.get(f1)) {
+                        tempRoom.remove(f);
+                    }
+                }
             }
         }
-        return 0;
     }
-    
-    public static Food checkequalsClass(String name, Map<Food, Integer> m){
-        for (Food f : m.keySet()){
-            if (f.getName().equals(name)){
-                return f;
-            }
-        }
-        return null;
-    }
-    
+
 //
 //    public static void main(String[] args) {
-
 //        Thread clientThread = new Thread(() -> {
 //            OutToClient();
 //        });
