@@ -446,9 +446,9 @@ public class roompage extends JPanel implements ActionListener {
 //        down2.add(new showorder("1", 15));
 //        down2.add(new showorder("1", 15));
         // moved to down (addDown() method)
-//        down3.add(new showalert("1"));
-//        down3.add(new showalert("2"));
-//        down3.add(new showalert("3"));
+        down3.add(new showalert("1"));
+        down3.add(new showalert("2"));
+        down3.add(new showalert("3"));
         Controller.p = sandbox;
 
         // socketalert ssaan (moved to karaOkie_main.java)
@@ -622,6 +622,11 @@ public class roompage extends JPanel implements ActionListener {
     // socketalert ssaan 0000
     public void addDown(String message) {
         down3.add(new showalert(message)); // if final change showroom to 
+    }
+    
+    public void removeDown(JPanel p){
+        down3.remove(p);
+        reCard("tab1", "tab3");
     }
 
 }
