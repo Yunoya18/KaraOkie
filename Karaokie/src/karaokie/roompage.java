@@ -545,6 +545,7 @@ public class roompage extends JPanel implements ActionListener {
                 Controller.saveFileNULL();
                 System.out.println("del");
                 JOptionPane.showMessageDialog(null, "Program need to restart", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                Controller.available = new Available[100];
                 System.exit(0);
             } else {
                 

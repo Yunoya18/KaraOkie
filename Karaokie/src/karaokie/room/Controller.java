@@ -266,11 +266,6 @@ public class Controller implements Runnable {
 
     // Menu Zone
     public static void setMenu(Map<String, Map<Food, Integer>> temp) {
-//        HashMap<Food, Integer> food = new HashMap<>();
-//        food.put(f, i);
-//
-//        roomMenu.remove(room);
-//        roomMenu.put(room, food);
 
         int count = 0;
         ts.reOrder();
@@ -287,8 +282,6 @@ public class Controller implements Runnable {
             }
             System.out.println("Count = " + count);
             sentOrder(key, roomMenu.get(key), count);
-//                rp.loadOrder(new showorder(key, temp.get(key), count));
-
         }
     }
 
