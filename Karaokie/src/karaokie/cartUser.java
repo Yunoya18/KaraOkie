@@ -319,7 +319,7 @@ public class cartUser extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(co)) {
-            int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
+            int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to confirm order", "Confirmation", JOptionPane.YES_NO_OPTION);
             if (resp == JOptionPane.YES_OPTION) {
 //               rom = new roomMenu(); // 9999 (moved to default constructor cause getRoomFromCart() have to use it)
                 Component[] components = mid.getComponents();
