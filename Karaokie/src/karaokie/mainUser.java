@@ -16,7 +16,7 @@ import javax.swing.*;
 
 
 public class mainUser extends JPanel implements ActionListener{
-    private JFrame ma;
+    // private JFrame ma;
     private JDesktopPane side;
     private JInternalFrame inf;
     private JPanel menu, blank, blank2, p1, p2, tab;
@@ -42,7 +42,12 @@ public class mainUser extends JPanel implements ActionListener{
         catch (Exception e){
             e.printStackTrace();
         }
-        ma = new JFrame("karaOkie");
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
+        
+        // ma = new JFrame("karaOkie");
         menu = new JPanel();
         cardlayout = new CardLayout();
         tab = new JPanel(cardlayout);
@@ -94,8 +99,8 @@ public class mainUser extends JPanel implements ActionListener{
         menu.setPreferredSize(new Dimension(50, 190));
         menu.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
         //add components to mainframe
-        ma.add(menu, BorderLayout.WEST); 
-        ma.add(tab, BorderLayout.CENTER);
+        add(menu, BorderLayout.WEST); 
+        add(tab, BorderLayout.CENTER);
         
         //add panel to tab
         tab.add(pm, "pg1");
@@ -166,8 +171,8 @@ public class mainUser extends JPanel implements ActionListener{
         //configured button not to have white filter when pressing
         UIManager.getLookAndFeelDefaults().put("Button.select", new Color(0, 0, 0, 0));
         
-        ma.setSize(1280, 720);
-        ma.setVisible(true);
+        setPreferredSize(new Dimension(screenSize.width, screenSize.height));
+        // setVisible(true);
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //button action
@@ -199,7 +204,7 @@ public class mainUser extends JPanel implements ActionListener{
             System.out.println("2"); 
         }
         else if(ev.getSource().equals(pg3)){
-           int resp = JOptionPane.showConfirmDialog(ma, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
+           int resp = JOptionPane.showConfirmDialog(this, "Are you sure that you want to ask for staff assistance?", "Confirmation", JOptionPane.YES_NO_OPTION);
            if(resp == JOptionPane.YES_OPTION){
                // alert the staff
                // ssaan 0000
