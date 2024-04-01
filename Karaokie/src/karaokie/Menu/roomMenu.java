@@ -77,7 +77,7 @@ public class roomMenu extends Menus {
         this.loadMap();
         map2.put(nameroom, map);
         
-        try (Socket clientSocket = new Socket("localhost", 1234); ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
+        try (Socket clientSocket = new Socket("26.26.134.224", 1234); ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream())) {
             objectOutputStream.writeObject(map2);
             System.out.println(map2);
         } catch (IOException e) {

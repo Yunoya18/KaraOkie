@@ -19,7 +19,7 @@ public class ImportMenu {
     public static void imp() {
 
         try {
-            Socket socket = new Socket("localhost", 6789);
+            Socket socket = new Socket("26.26.134.224", 6789);
 
             InputStream inputStream = socket.getInputStream();
             BufferedInputStream bis = new BufferedInputStream(inputStream);

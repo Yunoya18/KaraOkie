@@ -26,7 +26,7 @@ public class mainUser extends JPanel implements ActionListener{
     private cartUser cu;
     
     // socketalert ssaan
-    private static final String SERVER_ADDRESS = "localhost";
+    private static final String SERVER_ADDRESS = "26.26.134.224";
     private static final int SERVER_PORT = 5000;
     
     private Socket socket;

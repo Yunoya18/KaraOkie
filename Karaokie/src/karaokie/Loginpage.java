@@ -122,11 +122,12 @@ public class Loginpage extends JPanel{
 //                    cardLayout.show(cardPanel, "pg2");
 //                }
                 String[] info = getConnection.getInfo(username.getText(), password.getText());
-                nam = info[0];
+//                nam = info[0];
                 String role = info[1];
                 if (role == null) {
                     JOptionPane.showMessageDialog(null, "Error");
                 } else if (role.equals("user")){
+                    nam = username.getText();
                     cardLayout.show(cardPanel,"pg3");
                 } else if (role.equals("admin")){
                    cardLayout.show(cardPanel, "pg2");
