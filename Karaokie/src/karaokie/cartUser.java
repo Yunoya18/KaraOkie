@@ -104,6 +104,7 @@ public class cartUser extends JPanel implements ActionListener {
         sc.setBorder(BorderFactory.createLineBorder(Color.decode("#A6ADCE")));
         sc.setBackground(Color.decode("#A6ADCE"));
         sc.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.decode("#282B3A")));
+        sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         this.loadMap();
         Set<Food> foodSet = map.keySet();
@@ -202,7 +203,7 @@ public class cartUser extends JPanel implements ActionListener {
 
         lisp = new JPanel(new FlowLayout(FlowLayout.LEFT));
         lisp.setBackground(Color.decode("#A6ADCE"));
-        lisp.setPreferredSize(new Dimension(600, 30));
+        lisp.setPreferredSize(new Dimension(580, 30));
         lisp.add(lis);
 
         epr = new JLabel("Price:  " + price + " x");

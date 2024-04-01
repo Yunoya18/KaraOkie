@@ -40,7 +40,6 @@ public class orderUser extends JPanel implements ActionListener{
         setBackground(Color.decode("#535870"));
         setLayout(new FlowLayout(FlowLayout.CENTER));
         b1 = new JButton("All");
-        // these button will setvisible(true) when the column categories in the table from addfood has them, if not these button will setvisible(false)
         b2 = new JButton("Food");
         b3 = new JButton("Snack");
         b4 = new JButton("Drinks");
