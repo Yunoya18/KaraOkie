@@ -528,11 +528,11 @@ public class roompage extends JPanel implements ActionListener {
                 Controller.del = false;
             }
         } else if (e.getSource().equals(delete)) {
-            int x = JOptionPane.showConfirmDialog(null, "You want to delete all room?", "Delete", JOptionPane.YES_NO_OPTION);
+            int x = JOptionPane.showConfirmDialog(null, "Are you sure that you want to delete all room?", "Delete", JOptionPane.YES_NO_OPTION);
             if (x == JOptionPane.YES_OPTION) {
                 Controller.saveFileNULL();
                 System.out.println("del");
-                JOptionPane.showMessageDialog(null, "Programe Need to Restart", "Alert", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Program need to restart", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
             } else {
                 
