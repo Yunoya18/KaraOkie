@@ -74,7 +74,4 @@ public class statData {
     public ArrayList<Double> getCurrentYear() {
         return this.currentYear;
     }
-    public static void main(String[] args) {
-        new statData();
-    }
 }
