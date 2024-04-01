@@ -8,6 +8,7 @@ package karaokie;
  *
  * @author mansu
  */
+import database.getConnection;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -595,6 +596,7 @@ public class transaction extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Button Close clicked!"); // For demonstration, print message to console
+                getConnection.addAmount(total);
 
                 Map<String, Map<Food, Integer>> roomMenu = Controller.getRoomMenuMap();
                 roomMenu.remove(keyRoom);

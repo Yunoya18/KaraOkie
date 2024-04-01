@@ -17,10 +17,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.util.ArrayList;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class stat extends JPanel implements ActionListener{
     private JFrame ma;
@@ -30,6 +34,11 @@ public class stat extends JPanel implements ActionListener{
     private CardLayout cardlayout;
     private JLabel txt1, txt2, txt3, txt4, txt5;
     private RoundedPanel w, m, y;
+    private JComboBox<String> dropdown;
+    private DefaultCategoryDataset dataset, dataset1, dataset2, dataset3;
+    private JFreeChart chart;
+    private ChartPanel chartPanel;
+    private statData data;
     public stat(){
         //ma = new JFrame("karaOkie");
         menu = new JPanel();
@@ -52,7 +61,8 @@ public class stat extends JPanel implements ActionListener{
         txt4 = new JLabel("page4");
         txt5 = new JLabel("page5");
 
-        //data pm5 = new data();
+        data = new statData();
+
         //set backgroundcolor and foreground color
         p1.setBackground(Color.decode("#535870"));
         p2.setBackground(Color.decode("#535870"));
@@ -137,7 +147,7 @@ public class stat extends JPanel implements ActionListener{
         //Page 5 background
         p5.setLayout(new BoxLayout(p5, BoxLayout.Y_AXIS));
 
-        JComboBox<String> dropdown = new JComboBox<>();
+        dropdown = new JComboBox<>();
         dropdown.setFont(new Font("Montserrat", Font.BOLD, 12));
         dropdown.setForeground(Color.decode("#282B3A"));
         dropdown.addItem("Weekly");
@@ -152,13 +162,30 @@ public class stat extends JPanel implements ActionListener{
         panel.setBackground(Color.decode("#535870"));
         panel.add(dropdown);
         p5.add(panel);
-
+        
+        //dataset
+        dataset1 = new DefaultCategoryDataset();
+        ArrayList<Double> weekInfo = data.getCurrentWeek();
+        for (int i = 1; i < weekInfo.size()+1; i++) {
+            dataset1.addValue(weekInfo.get(i - 1), "Weekly", DayOfWeek.of(i));
+        }
+        dataset2 = new DefaultCategoryDataset();
+        ArrayList<Double> monthInfo = data.getCurrentWeek();
+        for (int i = 1; i < monthInfo.size()+1; i++) {
+            dataset2.addValue(monthInfo.get(i - 1), "Weekly", "Week " + i);
+        }
+        dataset3 = new DefaultCategoryDataset();
+        ArrayList<Double> yearInfo = data.getCurrentWeek();
+        for (int i = 1; i < weekInfo.size()+1; i++) {
+            dataset3.addValue(yearInfo.get(i - 1), "Weekly", Month.of(i));
+        }
+        
+        this.dataset = dataset1;
         // JFreeChart
-        JFreeChart chart = ChartFactory.createBarChart("", "dd/mm/yy", "Amount", (CategoryDataset) null);
-        ChartPanel chartPanel = new ChartPanel(chart);
+        chart = ChartFactory.createLineChart("", "dd/mm/yy", "Amount", dataset);
+        chartPanel = new ChartPanel(chart);
         chartPanel.setBackground(Color.decode("#535870"));
         chartPanel.setPreferredSize(new Dimension(800, 550));
-
 
         // panel in panel chart
         JPanel panelChartPanel = new JPanel();
@@ -360,6 +387,8 @@ public class stat extends JPanel implements ActionListener{
         pg3.addActionListener(this);
         pg4.addActionListener(this);
         pg5.addActionListener(this);
+        
+        dropdown.addActionListener(this);
     }
 
     @Override
@@ -378,6 +407,19 @@ public class stat extends JPanel implements ActionListener{
         }
         else if(ev.getSource().equals(pg5)){
            cardlayout.show(tab, "pg5");
+        }
+        else if (ev.getSource().equals(dropdown)) {
+            DefaultCategoryDataset newDataset = null;
+            if (dropdown.getSelectedItem().equals("Weekly")) {
+                newDataset = dataset1;
+            } else if (dropdown.getSelectedItem().equals("Monthly")) {
+                newDataset = dataset2;
+            } else if (dropdown.getSelectedItem().equals("Yearly")) {
+                newDataset = dataset3;
+            }
+            this.dataset = newDataset;
+            chart.getCategoryPlot().setDataset(newDataset);
+            chartPanel.repaint();
         }
     }
     public static void main(String[] args) {
