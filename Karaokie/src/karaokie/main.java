@@ -14,11 +14,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
-import karaokie.room.Controller;
 
 public class main extends JPanel implements ActionListener, WindowListener{
     private JFrame ma;
-    private JDesktopPane side;
+//    private JDesktopPane side;
     private JPanel menu, blank, tab;
     private JButton pg1, pg2, pg3, pg5;
     private CardLayout cardlayout;
@@ -47,12 +46,6 @@ public class main extends JPanel implements ActionListener, WindowListener{
         
         pg5 = new JButton();
         pg1 = new JButton();
-//        p1 = new JPanel();
-//        p2 = new JPanel();
-//        p3 = new JPanel();
-        
-//        p5 = new JPanel();
-        //  
         
         //set page
 //        Controller.main = this;
@@ -64,26 +57,11 @@ public class main extends JPanel implements ActionListener, WindowListener{
         
         
         //set backgroundcolor and foreground color
-//        p1.setBackground(Color.decode("#535870"));
-//        p2.setBackground(Color.decode("#535870"));
-//        p3.setBackground(Color.decode("#535870"));
-        // p4.setBackground(Color.decode("#535870"));
-//        p5.setBackground(Color.decode("#535870"));
         tab.setBackground(Color.decode("#535870"));
         menu.setBackground(Color.decode("#282B3A"));
         blank.setBackground(Color.decode("#282B3A"));
-        // txt1.setForeground(Color.WHITE);
-        // txt2.setForeground(Color.WHITE);
-        // txt3.setForeground(Color.WHITE);
-        // txt4.setForeground(Color.WHITE);
-        // txt5.setForeground(Color.WHITE);
         
         //test changing page
-        // p1.add(txt1);
-        // p2.add(txt2);
-        // p3.add(txt3);
-        // p4.add(txt4);
-        // p5.add(txt5);
         
         //set Icon Image
         ImageIcon i1 = new ImageIcon(System.getProperty("user.dir") + "/src/Karaokie/image/room.png");

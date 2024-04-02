@@ -20,8 +20,6 @@ public class Loginpage extends JPanel{
     private JLabel bg, user, pass;
     public static String nam;
     
-//    private String usernameString; // 0000
-    
     Loginpage(CardLayout cardLayout, Container cardPanel){
         //       font
         try{
