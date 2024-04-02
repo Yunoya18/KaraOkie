@@ -1,10 +1,8 @@
 package karaokie.Menu;
 
 
-import java.awt.Image;
 import java.io.Serializable;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 public class Food implements Serializable {
     private String name;

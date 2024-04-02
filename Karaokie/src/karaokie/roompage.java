@@ -515,7 +515,7 @@ public class roompage extends JPanel implements ActionListener {
                 edit.setIcon(back);
             }
 
-        } else if (e.getSource().equals(add)) {
+        } else if (e.getSource().equals(add)) { // create room
             if (create.isVisible()) {
                 create.setVisible(false);
             } else {

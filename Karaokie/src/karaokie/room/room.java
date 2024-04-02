@@ -1,19 +1,14 @@
 
 package karaokie.room;
 
-import karaokie.Menu.*;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
 
 public abstract class room extends JInternalFrame implements Available, Serializable, ComponentListener, MouseListener{
     private static final long serialVersionUID = 1L;
     protected final int roomNumber;
-//    protected roomMenu roomMenu;
     protected final String Type;
     protected int Price;
     protected boolean Avaliable;

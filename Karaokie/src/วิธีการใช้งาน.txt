@@ -1,0 +1,15 @@
+วิธีการใช้งานคือ
+1. run karaOkie_main.java ใน karaokie package
+
+2. กรอก username และ password 
+เช่น หากต้องการเป็น admin ให้กรอก username ของadmin
+
+=================================
+รหัสเข้าใช้งาน admin
+username : testadmin
+password : test1234
+
+รหัสเข้าใช้งาน user
+username : เลข 1 ถึง 49 
+เช่น ห้องที่ 1 ให้กรอก username ว่า 1
+password : test1234 (เหมือนกันทุกห้อง)
