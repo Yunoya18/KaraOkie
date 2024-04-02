@@ -17,7 +17,7 @@ public class Controller implements Runnable {
     private static Map<String, ArrayList<Food>> map;
     private static Map<String, Map<Food, Integer>> roomMenu = new HashMap<>();
     private static ArrayList<room> room = new ArrayList<>();
-    public static Available available[] = new Available[100];
+    public static Available available[] = new Available[100];                       
     public static roompage rp;
     public static transaction ts;
     public static JPanel p = new JPanel();
@@ -25,6 +25,8 @@ public class Controller implements Runnable {
 
     public static boolean del;
 
+    public static final int port1234 = 1234;
+    
     // socket noeysod
     private ServerSocket server;
     private Socket clientSocket;
@@ -34,7 +36,7 @@ public class Controller implements Runnable {
     public static void InFromClient() {
         System.out.println("openport 1234");
         try {
-            ServerSocket welcomeSocket = new ServerSocket(1234);
+            ServerSocket welcomeSocket = new ServerSocket(Controller.port1234);
             while (true) {
                 Socket connectionSocket = welcomeSocket.accept();
                 ObjectInputStream oin = new ObjectInputStream(connectionSocket.getInputStream());
@@ -52,20 +54,14 @@ public class Controller implements Runnable {
                     if (tempRoom == null) {
                         tempRoom = new HashMap<>();
                     }
-
-//                    roomMenu.put(key, tempRoom);
-                    // Smart 100%
                     for (Food f : tempRoom.keySet()) {
                         for (Food f1 : tempinmap.keySet()) {
                             System.out.println(f.getName() + "       " + f1.getName());
                             if (f.getName().equals(f1.getName())) {
-
                                 tempRoom.put(f, tempRoom.get(f) + tempinmap.get(f1));
-//                                tempinmap.remove(f1);
                             }
                         }
                     }
-
                     for (Food f1 : tempinmap.keySet()) {
                         boolean make = true;
                         for (Food f : tempRoom.keySet()) {
@@ -135,7 +131,7 @@ public class Controller implements Runnable {
 
     // socket noeysod
     public void socketServerFirstSetupConnection(/*int port*/) {
-        System.out.println("openport 5000");
+        System.out.println("openport 6996");
         try (ServerSocket serverSocket = new ServerSocket(6996)) {
             System.out.println("Server is running and waiting for client connection...");
 
